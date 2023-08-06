@@ -1,10 +1,10 @@
-function App() {
+import { Suspense, ReactNode } from 'react'
+
+function App({ children }: { children: ReactNode }) {
   return (
-    <div className='App'>
-      <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
-        Learn React
-      </a>
-    </div>
+    <>
+      <Suspense fallback={<>...loading</>}>{children}</Suspense>
+    </>
   )
 }
 
