@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { lazy } from 'react'
+import Login from '~/pages/Login'
+import Register from '~/pages/Register'
 
 const MainLayout = lazy(() => import('~/layouts/main'))
 const Home = lazy(() => import('~/pages/Home'))
@@ -11,11 +13,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>
+        element: <Home />
       },
       {
         path: '/event-page',
-        element: <Event></Event>
+        element: <Event />
+      },
+      {
+        path: '/login',
+        element: <Login />
+      },
+      {
+        path: '/register',
+        element: <Register />
       }
     ]
   }
