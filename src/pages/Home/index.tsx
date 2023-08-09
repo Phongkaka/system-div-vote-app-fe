@@ -1,4 +1,4 @@
-import Banner from '~/components/Banner'
+import Carousel from '~/components/Banner'
 import Events from './components/EventEnd/Events'
 import Container from '~/components/Container'
 
@@ -7,8 +7,8 @@ function Home() {
     <Container>
       <div className='home--page'>
         {/*  */}
-        <h3 className='pb-5'>開催予定・開催中のイベント</h3>
-        <Banner />
+        <Carousel title='開催予定・開催中のイベント' />
+        <Carousel title='最近終了したイベント' />
         {/*  */}
 
         <Events></Events>

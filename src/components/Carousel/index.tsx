@@ -1,19 +1,21 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-interface Props {
-  title?: string | undefined
-}
+import Item from './item'
 import { Pagination, Autoplay, Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
-import Item from '../Carousel/item'
+
+interface Props {
+  title?: string | undefined
+  class?: string | undefined
+}
 
 function Carousel({ title }: Props) {
   return (
     <>
       <h3 className='pb-5'>{title}</h3>
-      <div className='slider w-11/12 m-auto'>
+      <div className='slider w-11/12 m-auto ${class}'>
         <Swiper
           modules={[Pagination, Autoplay, Navigation]}
           slidesPerView={1}
