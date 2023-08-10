@@ -49,16 +49,16 @@ export default function Header() {
             }`}
           >
             <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
-              <li className='text-gray-600 hover:text-blue-600'>
+              <li className='text-gray-600'>
                 <Link to='javascript:void(0)'>Term of service</Link>
               </li>
-              <li className='text-gray-600 hover:text-blue-600'>
+              <li className='text-gray-600'>
                 <Link to='javascript:void(0)'>Contact</Link>
               </li>
-              <li className='text-gray-600 hover:text-blue-600'>
+              <li className='text-gray-600'>
                 <Link to='javascript:void(0)'>Sign Up</Link>
               </li>
-              <li className='text-gray-600 hover:text-blue-600'>
+              <li className='text-gray-600'>
                 <Link to='javascript:void(0)'>Login</Link>
               </li>
             </ul>
