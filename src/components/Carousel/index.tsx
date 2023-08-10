@@ -8,7 +8,6 @@ import 'swiper/css/autoplay'
 
 interface Props {
   title?: string | undefined
-  class?: string | undefined
 }
 
 function Carousel({ title }: Props) {

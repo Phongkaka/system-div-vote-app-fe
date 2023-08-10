@@ -1,4 +1,4 @@
-import Carousel from '~/components/Banner'
+import Carousel from '~/components/Carousel'
 import Events from './components/EventEnd/Events'
 import Container from '~/components/Container'
 
