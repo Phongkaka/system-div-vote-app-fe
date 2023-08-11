@@ -10,7 +10,7 @@ export default function Header() {
       <div className='justify-between px-4 mx-auto lg:max-w-8xl md:items-center md:flex md:px-8'>
         <div>
           <div className='flex items-center justify-between py-3 md:py-3 md:block'>
-            <Link to='javascript:void(0)' className='w-[374px] block'>
+            <Link to='#' className='w-[374px] block'>
               <img src={logo} alt='logo' />
             </Link>
             <div className='md:hidden'>
@@ -50,16 +50,16 @@ export default function Header() {
           >
             <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
               <li className='text-gray-600'>
-                <Link to='javascript:void(0)'>Term of service</Link>
+                <Link to='#'>Term of service</Link>
               </li>
               <li className='text-gray-600'>
-                <Link to='javascript:void(0)'>Contact</Link>
+                <Link to='#'>Contact</Link>
               </li>
               <li className='text-gray-600'>
-                <Link to='javascript:void(0)'>Sign Up</Link>
+                <Link to='#'>Sign Up</Link>
               </li>
               <li className='text-gray-600'>
-                <Link to='javascript:void(0)'>Login</Link>
+                <Link to='#'>Login</Link>
               </li>
             </ul>
           </div>

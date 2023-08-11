@@ -35,8 +35,8 @@ function Carousel({ title, data, status }: Props) {
           className='mySwiper'
         >
           {data && data.filter(item => item.status === status).map((item: EventItem) => (
-            <SwiperSlide>
-              <Item img={item.banner} key={item.id} />
+            <SwiperSlide key={item.id}>
+              <Item img={item.banner} />
             </SwiperSlide>
         ))}
         </Swiper>
