@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { lazy } from 'react'
-import Login from '~/pages/Login'
-import Register from '~/pages/Register'
-import RegisterLayout from '~/layouts/RegisterLayout'
 
 const MainLayout = lazy(() => import('~/layouts/main'))
 const Home = lazy(() => import('~/pages/Home'))
 const Event = lazy(() => import('~/pages/Event'))
+const Login = lazy(() => import('~/pages/Login'))
+const Register = lazy(() => import('~/pages/Register'))
+const UpcomingEvent = lazy(() => import('~/pages/UpcomingEvent'))
 
 const router = createBrowserRouter([
   {
@@ -23,14 +23,16 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
-          <RegisterLayout>
-            <Login />
-          </RegisterLayout>
+          <Login />
         )
       },
       {
         path: '/register',
         element: <Register />
+      },
+      {
+        path: '/upcoming-event',
+        element: <UpcomingEvent />
       }
     ]
   }
