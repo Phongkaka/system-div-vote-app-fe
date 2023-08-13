@@ -10,7 +10,7 @@ const UpcomingEvent = lazy(() => import('~/pages/UpcomingEvent'))
 
 const router = createBrowserRouter([
   {
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
       {
         path: '/',

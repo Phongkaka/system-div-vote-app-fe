@@ -1,40 +1,10 @@
-import { UseMutationResult, useMutation } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { Flowise } from "~/models/auth";
+import { http } from "~/utils/https";
 
-import { AxiosResponse } from 'axios';
-import { useSetRecoilState } from 'recoil';
-import Swal from 'sweetalert2';
+const login = async(params: Flowise.ILogin) => {
+  const data = await http.post('/pos/login', params);
 
-import { http } from '~/utils/https';
-import { loading } from '~/recoil/atom';
-import { ILogin } from '~/models/auth';
+  return data;
+}
 
-const useQueryLogin = (): UseMutationResult<AxiosResponse, string, ILogin, string> => {
-  const navigate = useNavigate();
-  const setLoading = useSetRecoilState(loading);
-  return useMutation(
-    async (params: ILogin) => {
-      setLoading(true);
-      const data = await http.post('/pos/login', params);
-
-      return data;
-    },
-    {
-      onSuccess: () => {
-        setLoading(false);
-        navigate('/#');
-      },
-      onError: () => {
-        setLoading(false);
-        Swal.fire({
-          title: 'Error !',
-          text: 'Password or email not correct',
-          icon: 'error',
-          confirmButtonText: 'Ok',
-        });
-      },
-    }
-  );
-};
-
-export { useQueryLogin };
+export {login}
