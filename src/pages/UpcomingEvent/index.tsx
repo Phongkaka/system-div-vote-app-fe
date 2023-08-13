@@ -1,8 +1,8 @@
-import Banner from "~/components/Banner"
-import bannerImg from "~/assets/images/event-02.jpg"
-import Container from "~/components/Container"
+import bannerImg from "~/common/assets/images/event-02.jpg"
 import { Link } from "react-router-dom"
 import ScheduleEvent from "./ScheduleEvent"
+import Container from "~/layouts/components/Container"
+import Banner from "~/layouts/components/Banner"
 
 function UpcomingEvent() {
   return (

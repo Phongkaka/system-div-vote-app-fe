@@ -1,6 +1,6 @@
-import Carousel from '~/components/Carousel'
+import Container from '~/layouts/components/Container'
 import Events from './components/EventEnd/Events'
-import Container from '~/components/Container'
+import Carousel from '~/layouts/components/Carousel'
 const dataFake = [
   {
   createdAt: "2023-08-10T03:25:06.132Z",
