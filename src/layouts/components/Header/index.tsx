@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '~/assets/images/logo.svg'
+import logo from '~/common/assets/images/logo.svg'
 
 export default function Header() {
   const [navbar, setNavbar] = useState(false)
