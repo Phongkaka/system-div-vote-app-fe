@@ -1,0 +1,14 @@
+.tabs__rank {
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    border: 2px solid blue;
+    cursor: pointer;
+    .btn__tabs {
+      &.active {
+        background: yellow;
+      }
+    }
+    
+  }
+}
