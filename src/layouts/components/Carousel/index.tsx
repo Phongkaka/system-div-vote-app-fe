@@ -10,7 +10,7 @@ import 'swiper/css/autoplay'
 
 interface Props {
   title?: string | undefined
-  data: Events 
+  data: Events
   status?: string | undefined
 }
 
@@ -20,7 +20,7 @@ function Carousel({ title, data, status }: Props) {
       <h3 className='pb-5'>{title}</h3>
       <div className='slider m-auto'>
         <Swiper
-          modules={[Pagination, Navigation, Autoplay ]}
+          modules={[Pagination, Navigation, Autoplay]}
           slidesPerView={1}
           spaceBetween={30}
           centeredSlides
@@ -34,11 +34,14 @@ function Carousel({ title, data, status }: Props) {
           }}
           className='mySwiper'
         >
-          {data && data.filter(item => item.status === status).map((item: EventItem) => (
-            <SwiperSlide key={item.id}>
-              <Item img={item.banner} />
-            </SwiperSlide>
-        ))}
+          {data &&
+            data
+              .filter((item) => item.status === status)
+              .map((item: EventItem) => (
+                <SwiperSlide key={item.id}>
+                  <Item img={item.banner} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </>

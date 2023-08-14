@@ -1,17 +1,15 @@
-
 import { atom } from 'recoil'
 import { Flowise } from '~/models/auth'
 
 export const countState = atom({
   key: 'count',
-  default: 0,
+  default: 0
 })
 
 export const listPosSate = atom({
   key: 'listPos',
-  default: [] as Flowise.IPost[],
+  default: [] as Flowise.IPost[]
 })
-
 
 export const loading = atom({
   key: 'loading',

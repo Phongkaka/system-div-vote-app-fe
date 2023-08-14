@@ -2,9 +2,9 @@
   font-size: 14px;
   color: #d9534f;
   margin-top: 5px;
-  
+
   &:before {
-    content: "!";
+    content: '!';
     display: inline-block;
     margin-right: 5px;
     font-size: 18px;
@@ -12,11 +12,11 @@
     color: #d9534f;
     transform: translateY(2px);
   }
-  
+
   &:focus {
     outline: none;
   }
-  
+
   &.error {
     border-color: #d9534f;
   }

@@ -1,4 +1,4 @@
-export declare namespace Flowise { 
+export declare namespace Flowise {
   interface UserFormLoginData {
     email?: string
     password?: string

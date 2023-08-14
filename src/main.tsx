@@ -1,10 +1,10 @@
 import React from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { RouterProvider } from 'react-router-dom'
 import router from './routers/index.tsx'
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot } from 'recoil'
 import './index.scss'
 
 const queryClient = new QueryClient({
@@ -14,11 +14,10 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       retry: false,
-      staleTime: 86400000,
-    },
-  },
-});
-
+      staleTime: 86400000
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -29,6 +28,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </App>
       </QueryClientProvider>
     </RecoilRoot>
-      
   </React.StrictMode>
 )

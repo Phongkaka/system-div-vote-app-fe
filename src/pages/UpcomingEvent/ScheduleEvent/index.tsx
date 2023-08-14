@@ -5,10 +5,10 @@ interface Props {
 }
 const ScheduleEvent = ({ name, time, note }: Props) => {
   return (
-    <div className="schedule__item pb-6">
-      <span className="name-event block text-base font-bold">{name}</span>
-      <span className="time-event text-[#473a3a] block">{time}</span>
-      <span className="time-event text-[#473a3a] block">{note}</span>
+    <div className='schedule__item pb-6'>
+      <span className='name-event block text-base font-bold'>{name}</span>
+      <span className='time-event block text-[#473a3a]'>{time}</span>
+      <span className='time-event block text-[#473a3a]'>{note}</span>
     </div>
   )
 }

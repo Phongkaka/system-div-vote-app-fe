@@ -1,6 +1,6 @@
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 export const numberProduct = atom({
   key: 'countProduct',
-  default: 0,
-});
+  default: 0
+})

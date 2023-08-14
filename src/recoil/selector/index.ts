@@ -1,5 +1,5 @@
-import { selector } from 'recoil';
-import { countState } from '../atom';
+import { selector } from 'recoil'
+import { countState } from '../atom'
 
 export const incrementCount = selector({
   key: 'incrementCount',
