@@ -1,7 +1,9 @@
 import Banner from '~/layouts/components/Banner'
 import Container from '~/layouts/components/Container'
 import BannerVote from '~/common/assets/images/event-01.jpg'
-import CountDown from './CountDown'
+import Countdown from './components/CountDown'
+import VotingFlow from './components/VotingFlow'
+import { TabsVote } from './components/TabsVote'
 
 function Vote() {
   const targetDate = new Date('2023-12-31T23:59:59')
@@ -21,9 +23,11 @@ function Vote() {
             <p className='text-center text-2xl'>
               <span className='border-b border-[#fc2e9e] text-[#fc2e9e]'>WEB投票終了まであと</span>
             </p>
-            <CountDown targetDate={targetDate} />
+            <Countdown targetDate={targetDate} />
           </div>
         </div>
+        <VotingFlow />
+        <TabsVote />
       </div>
     </Container>
   )
