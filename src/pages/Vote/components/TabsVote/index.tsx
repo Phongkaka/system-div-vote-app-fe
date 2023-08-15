@@ -1,6 +1,6 @@
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react'
 import BlockRank from './components/BlockRank'
-import Candidate from './components/Candidate'
+import SearchCandidate from './components/SearchCandidate'
 import './style.scss'
 
 export function TabsVote() {
@@ -13,14 +13,14 @@ export function TabsVote() {
     {
       label: '候補者を検索',
       value: 'candidate',
-      component: <Candidate />
+      component: <SearchCandidate />
     }
   ]
 
   return (
     <Tabs value='ranking' className='w-[100%]'>
       <TabsHeader
-        className='flex justify-around tabs__voting'
+        className='tabs__voting flex justify-around'
         indicatorProps={{
           className: 'bg-blue-500 text-white z-0'
         }}
