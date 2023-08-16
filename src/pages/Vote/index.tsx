@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Banner from '~/layouts/components/Banner'
 import Container from '~/layouts/components/Container'
 import BannerVote from '~/common/assets/images/event-01.jpg'
@@ -8,8 +9,14 @@ import MenuBonus from './components/MenuBonus'
 import Title from './components/Title'
 import ShoppingCart from './components/ShoppingCart'
 
+const targetDate = new Date('2023-12-31T23:59:59')
+
 function Vote() {
-  const targetDate = new Date('2023-12-31T23:59:59')
+  const [isCartVisible, setIsCartVisible] = useState(false)
+
+  const toggleCart = () => {
+    setIsCartVisible(!isCartVisible)
+  }
 
   return (
     <>
@@ -55,8 +62,11 @@ function Vote() {
             </ul>
           </div>
         </div>
+        <button className='fixed right-0 top-1/2 bg-blue-500' onClick={toggleCart}>
+          click me
+        </button>
       </Container>
-      <ShoppingCart />
+      {isCartVisible && <ShoppingCart toggleCart={toggleCart} />}
     </>
   )
 }

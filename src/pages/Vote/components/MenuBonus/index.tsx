@@ -1,9 +1,6 @@
 import item_menu from '~/common/assets/images/item_01.webp'
-interface Props {
-  title?: string | undefined
-}
 
-const MenuBonus = ({ title }: Props) => {
+const MenuBonus = () => {
   return (
     <div className='mb-12 flex justify-center'>
       <div className='flex flex-wrap justify-center'>
