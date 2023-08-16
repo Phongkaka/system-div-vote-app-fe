@@ -41,10 +41,10 @@ const Candidate = ({
         </p>
         <div className='rank__cadidate mb-4 flex'>
           <span className='mr-4 border-y border-[#fc2e9e] px-5 py-1 font-semibold italic text-[#fc2e9e]'>
-            <i>{numRank}</i>位
+            <i className='mr-1'>{numRank}</i>位
           </span>
           <span className='border-y border-[#5a5a5a] px-5 py-1 font-bold text-[#473a3a]'>
-            <i>{numberVote}</i>票
+            <i className='mr-1'>{numberVote}</i>票
           </span>
         </div>
         <span className='mb-4 block text-xl font-semibold text-[#473a3a]'>

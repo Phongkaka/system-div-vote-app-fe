@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 
 import { loading } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
-import { login } from '~/api/login'
+import { login } from '~/utils/api'
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
   const navigate = useNavigate()
