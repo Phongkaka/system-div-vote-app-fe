@@ -47,16 +47,16 @@ function Vote() {
               <li className='flex justify-center '>
                 <MenuBonus />
               </li>
-              <li className='flex justify-center '>
+              <li className='flex justify-center'>
                 <MenuBonus />
               </li>
-              <li className='flex justify-center '>
+              <li className='flex justify-center'>
                 <MenuBonus />
               </li>
-              <li className='flex justify-center '>
+              <li className='flex justify-center'>
                 <MenuBonus />
               </li>
-              <li className='flex justify-center '>
+              <li className='flex justify-center'>
                 <MenuBonus />
               </li>
             </ul>

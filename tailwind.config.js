@@ -2,7 +2,11 @@
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
-    extend: {}
+    extend: {
+      lineHeight: {
+        1.8: '1.8'
+      }
+    }
   },
   plugins: []
 }

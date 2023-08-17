@@ -4,7 +4,7 @@ import ScheduleEvent from './ScheduleEvent'
 import Container from '~/layouts/components/Container'
 import Banner from '~/layouts/components/Banner'
 
-function UpcomingEvent() {
+function AboutEvent() {
   return (
     <Container>
       <div className='upcoming__event--page'>
@@ -107,4 +107,4 @@ function UpcomingEvent() {
   )
 }
 
-export default UpcomingEvent
+export default AboutEvent

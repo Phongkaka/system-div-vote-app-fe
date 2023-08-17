@@ -37,6 +37,7 @@ function TabsVoteChild() {
     <>
       <div className='slider m-auto'>
         <Swiper
+          simulateTouch={false}
           modules={[Navigation]}
           slidesPerView={slidesPerView}
           spaceBetween={52}

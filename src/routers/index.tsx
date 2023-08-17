@@ -6,8 +6,11 @@ const Home = lazy(() => import('~/pages/Home'))
 const Event = lazy(() => import('~/pages/Vote'))
 const Login = lazy(() => import('~/pages/Login'))
 const Register = lazy(() => import('~/pages/Register'))
-const UpcomingEvent = lazy(() => import('~/pages/UpcomingEvent'))
+const AboutEvent = lazy(() => import('~/pages/AboutEvent'))
+const VoteResult = lazy(() => import('~/pages/VoteResult'))
 const Vote = lazy(() => import('~/pages/Vote'))
+
+const voteResult = true
 
 const router = createBrowserRouter([
   {
@@ -34,8 +37,8 @@ const router = createBrowserRouter([
         element: <Register />
       },
       {
-        path: '/upcoming-event',
-        element: <UpcomingEvent />
+        path: '/about-event',
+        element: voteResult ? <VoteResult /> : <AboutEvent />
       }
     ]
   }
