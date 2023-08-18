@@ -10,7 +10,7 @@ const AboutEvent = lazy(() => import('~/pages/AboutEvent'))
 const VoteResult = lazy(() => import('~/pages/VoteResult'))
 const Vote = lazy(() => import('~/pages/Vote'))
 
-const voteResult = true
+const voteResult = false
 
 const router = createBrowserRouter([
   {

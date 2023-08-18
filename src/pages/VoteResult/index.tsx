@@ -1,5 +1,4 @@
 import bannerImg from '~/common/assets/images/event-02.jpg'
-import Container from '~/layouts/components/Container'
 import Banner from '~/layouts/components/Banner'
 import CadidateEvent from './CadidateEvent'
 import Title from './Title'
@@ -7,12 +6,12 @@ import InforResult from './InforResult'
 
 function AboutEvent() {
   return (
-    <Container>
+    <>
       <div className='upcoming__event--page'>
         <Banner img={bannerImg} />
         <div className='border-b border-[#ccc] pb-8'>
           <Title title='投票結果発表' />
-          <p className='leading-1.8 mx-auto my-auto w-11/12 xl:w-[1024px]'>
+          <p className='mx-auto my-auto w-11/12 leading-1.8 xl:w-[1024px]'>
             「ミスモデルプレス ミスターモデルプレスオーディション 2023
             SUMMERを応援いただきありがとうございました。
             投票の結果、以下、候補者がオンライン最終面談に進出いたしました。
@@ -63,7 +62,7 @@ function AboutEvent() {
         </div>
         <InforResult />
       </div>
-    </Container>
+    </>
   )
 }
 

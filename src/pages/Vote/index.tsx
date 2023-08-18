@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Banner from '~/layouts/components/Banner'
-import Container from '~/layouts/components/Container'
 import BannerVote from '~/common/assets/images/event-01.jpg'
 import Countdown from './components/CountDown'
 import VotingFlow from './components/VotingFlow'
@@ -20,7 +19,7 @@ function Vote() {
 
   return (
     <>
-      <Container>
+      <div>
         <div className='vote--page'>
           <Banner img={BannerVote} />
           <div className='time__vote'>
@@ -65,7 +64,7 @@ function Vote() {
         <button className='fixed right-0 top-1/2 bg-blue-500' onClick={toggleCart}>
           click me
         </button>
-      </Container>
+      </div>
       {isCartVisible && <ShoppingCart toggleCart={toggleCart} />}
     </>
   )

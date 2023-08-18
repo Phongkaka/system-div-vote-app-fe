@@ -3,8 +3,8 @@ interface Props {
 }
 function Banner({ img }: Props) {
   return (
-    <div className='banner mb-10'>
-      <img src={img} alt='banner' />
+    <div className='banner m-auto mb-10'>
+      <img className='w-full' src={img} alt='banner' />
     </div>
   )
 }

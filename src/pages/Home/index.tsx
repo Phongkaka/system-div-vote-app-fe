@@ -1,6 +1,8 @@
-import Container from '~/layouts/components/Container'
 import Events from './components/EventEnd/Events'
 import Carousel from '~/layouts/components/Carousel'
+import Container from '~/layouts/components/Container'
+import Header from './components/Header'
+import Footer from './components/Footer'
 const dataFake = [
   {
     createdAt: '2023-08-10T03:25:06.132Z',
@@ -110,16 +112,20 @@ const dataFake = [
 
 function Home() {
   return (
-    <Container>
-      <div className='home--page'>
-        {/*  */}
-        <Carousel status='1' data={dataFake} title='開催予定・開催中のイベント' />
-        <Carousel status='2' data={dataFake} title='最近終了したイベント' />
-        {/*  */}
+    <>
+      <Header />
+      <Container>
+        <div className='home--page'>
+          {/*  */}
+          <Carousel status='1' data={dataFake} title='開催予定・開催中のイベント' />
+          <Carousel status='2' data={dataFake} title='最近終了したイベント' />
+          {/*  */}
 
-        <Events></Events>
-      </div>
-    </Container>
+          <Events></Events>
+        </div>
+      </Container>
+      <Footer />
+    </>
   )
 }
 
