@@ -8,10 +8,10 @@ import Swal from 'sweetalert2'
 import { loading } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
 import { login } from '~/utils/api'
-import { setUserLocalStorage } from '~/utils/userStorage'
+import useLocalStorageState from './useLocalStorageState'
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
-  const navigate = useNavigate()
+  const [_, setUser] = useLocalStorageState<Flowise.IUser>('access_token', {} as Flowise.IUser)
   const setLoading = useSetRecoilState(loading)
   return useMutation(
     async (params: Flowise.ILogin) => {
@@ -19,10 +19,17 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
       return await login(params)
     },
     {
-      onSuccess: (response) => {
-        setUserLocalStorage(response)
+      onSuccess: (response: any) => {
+        const infoUser = {
+          data: {
+            id: response.data.id,
+            name: response.data.name,
+            email: response.data.email
+          },
+          access_token: response.access_token
+        }
+        setUser(infoUser)
         setLoading(false)
-        navigate('/#')
       },
       onError: () => {
         setLoading(false)

@@ -6,32 +6,30 @@ import { Flowise } from '~/models/auth'
 import { initValues, loginValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
 import { useQueryLogin } from '~/hook/useLogin'
-import { useAuth } from '~/hook/auth'
-import browserStorage from 'store'
+import useLocalStorageState from '~/hook/useLocalStorageState'
 
 export default function Login() {
+  const [userInfo] = useLocalStorageState<Flowise.IUser>('access_token', {} as Flowise.IUser)
   const methods = useForm({
     mode: 'all',
     defaultValues: initValues,
     resolver: yupResolver(loginValidate)
   })
-  const { signin } = useAuth()
   const navigate = useNavigate()
+  const { mutate: loginAction, data } = useQueryLogin()
+
   useEffect(() => {
-    const user = browserStorage.get('user')
-    if (user?.access_token) {
-      signin && signin(user)
+    if (data?.data.id || userInfo?.access_token) {
       navigate('/')
     }
-  }, [navigate, signin])
+  }, [navigate, userInfo?.access_token, data?.data.id])
 
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods
 
-  const { mutate: loginAction } = useQueryLogin()
 
   const onSubmit = async (userFormLogin: Flowise.UserFormLoginData): Promise<void> => {
-    loginAction(userFormLogin)
+    loginAction(userFormLogin) 
   }
 
   return (
