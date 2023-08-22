@@ -14,6 +14,7 @@ const errorInterceptor = (error: AxiosError<{ errors: string }>): Promise<string
     const statusCode = error.response.status
     switch (statusCode) {
       case 422:
+      case 401:
         // handle validation errors
         Swal.fire({
           title: 'Error !',
@@ -21,10 +22,6 @@ const errorInterceptor = (error: AxiosError<{ errors: string }>): Promise<string
           icon: 'error',
           confirmButtonText: 'Ok'
         })
-        break
-      case 401:
-        localStorage.clear()
-        location.assign('/#/auth/login')
         break
       default:
         // handle other errors

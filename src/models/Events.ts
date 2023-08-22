@@ -10,6 +10,7 @@ export interface EventItem {
   status: string
   banner: string
   createdAt: string
+  link: string
 }
 
 export type Events = EventItem[]

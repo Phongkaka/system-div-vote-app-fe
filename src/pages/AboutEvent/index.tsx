@@ -16,23 +16,21 @@ function AboutEvent() {
         <div className='upcoming__event--page'>
           <Banner img={bannerImg} />
           <div className='name__event__time border-b border-[#ccc] pb-8'>
-            <h2 className='mx-auto mb-2 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-2 block text-center text-3xl font-bold text-pink'>
               投票（決勝）開催中！
             </h2>
-            <span className='block text-center text-2xl font-bold text-[#fc2e9e]'>
+            <span className='block text-center text-2xl font-bold text-pink'>
               2023年08月10日(木) 16:00〜2023年08月16日(水) 19:00
             </span>
             <Link
               to='#'
-              className='mx-auto mt-5 block w-64 rounded-[30px] border border-[#fc2e9e] bg-[#fc2e9e] px-8 py-2 text-center text-sm text-white transition-[0.3s] hover:bg-[#fff] hover:text-[#fc2e9e]'
+              className='mx-auto mt-5 block w-64 rounded-[30px] border border-pink bg-pink px-8 py-2 text-center text-sm text-white transition-[0.3s] hover:bg-[#fff] hover:text-pink'
             >
               投票ページへ
             </Link>
           </div>
           <div className='about__content border-b border-[#ccc] py-8'>
-            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-[#fc2e9e]'>
-              ABOUT
-            </h2>
+            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-pink'>ABOUT</h2>
             <span className='detail-about mb-1 block text-[#473a3a]'>
               こちらはミス浴衣ジェニック2024の投票特設サイトです。
             </span>
@@ -50,7 +48,7 @@ function AboutEvent() {
             </span>
             <Link
               to='#'
-              className='mx-auto mt-5 block w-64 rounded-[30px] border border-[#fc2e9e] bg-[#fc2e9e] px-8 py-2 text-center text-sm text-white transition-[0.3s] hover:bg-[#fff] hover:text-[#fc2e9e]'
+              className='mx-auto mt-5 block w-64 rounded-[30px] border border-pink bg-pink px-8 py-2 text-center text-sm text-white transition-[0.3s] hover:bg-[#fff] hover:text-pink'
             >
               公式ページ
             </Link>
@@ -62,7 +60,7 @@ function AboutEvent() {
             </Link>
           </div>
           <div className='schedule__content border-b border-[#ccc] py-8'>
-            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-pink'>
               スケジュール
             </h2>
             <ScheduleEvent name='候補者開示' time='7月28日(金)18:00' />
@@ -79,7 +77,7 @@ function AboutEvent() {
             />
           </div>
           <div className='game__rules border-b border-[#ccc] py-8'>
-            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-pink'>
               投票ルール
             </h2>
             <span className='rules-main'>
@@ -89,7 +87,7 @@ function AboutEvent() {
             </span>
           </div>
           <div className='test__content border-b border-[#ccc] py-8'>
-            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-pink'>
               審査内容
             </h2>
             <span className='test-content'>
@@ -99,7 +97,7 @@ function AboutEvent() {
             </span>
           </div>
           <div className='reward border-b border-[#ccc] py-8'>
-            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-8 block text-center text-3xl font-bold text-pink'>
               プライズ
             </h2>
             <span className='reward-content'>

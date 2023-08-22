@@ -25,13 +25,13 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
     return (
       <div className='mx-auto mt-7 text-center text-2xl'>
-        <span className='mx-1 text-3xl font-bold italic text-[#fc2e9e]'>{days}</span>
+        <span className='mx-1 text-3xl font-bold italic text-pink'>{days}</span>
         <span>日と</span>
-        <span className='mx-1 text-3xl font-bold italic text-[#fc2e9e]'>{hours % 24}</span>
+        <span className='mx-1 text-3xl font-bold italic text-pink'>{hours % 24}</span>
         <span>時間 </span>
-        <span className='mx-1 text-3xl font-bold italic text-[#fc2e9e]'>{minutes % 60}</span>
+        <span className='mx-1 text-3xl font-bold italic text-pink'>{minutes % 60}</span>
         <span>分 </span>
-        <span className='mx-1 text-3xl font-bold italic text-[#fc2e9e]'>{seconds % 60}</span>
+        <span className='mx-1 text-3xl font-bold italic text-pink'>{seconds % 60}</span>
         <span>秒 </span>
       </div>
     )

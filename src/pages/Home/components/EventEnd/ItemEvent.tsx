@@ -1,10 +1,15 @@
+import { Link } from 'react-router-dom'
+
 interface Props {
   eventImg?: string | undefined
+  linkPage: string | '#'
 }
-const ItemEvent = ({ eventImg }: Props) => {
+const ItemEvent = ({ eventImg, linkPage }: Props) => {
   return (
     <div className='h-fit'>
-      <img src={eventImg} className='h-full w-full object-cover' alt='event' />
+      <Link to={linkPage} target='_blank' rel='noreferrer'>
+        <img src={eventImg} className='h-[150px] w-full object-cover' alt='event' />
+      </Link>
     </div>
   )
 }

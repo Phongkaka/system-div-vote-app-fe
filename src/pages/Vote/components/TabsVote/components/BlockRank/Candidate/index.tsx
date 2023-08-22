@@ -37,10 +37,10 @@ const Candidate = ({
       </div>
       <div className='right__cadidate w-2/3'>
         <p className='name__cadidate mb-4'>
-          <span className='border border-[#fc2e9e] px-4 py-1 text-[#fc2e9e]'>{nameCadidate}</span>
+          <span className='border border-pink px-4 py-1 text-pink'>{nameCadidate}</span>
         </p>
         <div className='rank__cadidate mb-4 flex'>
-          <span className='mr-4 border-y border-[#fc2e9e] px-5 py-1 font-semibold italic text-[#fc2e9e]'>
+          <span className='mr-4 border-y border-pink px-5 py-1 font-semibold italic text-pink'>
             <i className='mr-1'>{numRank}</i>位
           </span>
           <span className='border-y border-[#5a5a5a] px-5 py-1 font-bold text-[#473a3a]'>
@@ -51,7 +51,7 @@ const Candidate = ({
           {nameCadidateDetail} <i className='text-sm'>さん</i>
         </span>
         <div className='group__btn flex'>
-          <button className='mr-3 flex cursor-pointer items-center justify-center border-[2px] p-1 text-[#fc2e9e]'>
+          <button className='mr-3 flex cursor-pointer items-center justify-center border-[2px] p-1 text-pink'>
             <img className='w-[40px]' src={vote} alt='vote icon' />
             <span>投票する</span>
           </button>

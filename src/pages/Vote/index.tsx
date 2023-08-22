@@ -23,17 +23,15 @@ function Vote() {
         <div className='vote--page'>
           <Banner img={BannerVote} />
           <div className='time__vote'>
-            <h2 className='mx-auto mb-2 block text-center text-3xl font-bold text-[#fc2e9e]'>
+            <h2 className='mx-auto mb-2 block text-center text-3xl font-bold text-pink'>
               投票開催中！
             </h2>
-            <span className='block text-center text-2xl font-bold text-[#fc2e9e]'>
+            <span className='block text-center text-2xl font-bold text-pink'>
               2023年08月01日(火) 16:00〜2023年09月30日(土) 19:00
             </span>
-            <div className='countdown_box my-7 border border-[#fc2e9e] p-8'>
+            <div className='countdown_box my-7 border border-pink p-8'>
               <p className='text-center text-2xl'>
-                <span className='border-b border-[#fc2e9e] text-[#fc2e9e]'>
-                  WEB投票終了まであと
-                </span>
+                <span className='border-b border-pink text-pink'>WEB投票終了まであと</span>
               </p>
               <Countdown targetDate={targetDate} />
             </div>

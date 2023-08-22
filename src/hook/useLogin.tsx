@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import { loading } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
 import { login } from '~/utils/api'
+import { setUserLocalStorage } from '~/utils/userStorage'
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
   const navigate = useNavigate()
@@ -18,7 +19,8 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
       return await login(params)
     },
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        setUserLocalStorage(response)
         setLoading(false)
         navigate('/#')
       },

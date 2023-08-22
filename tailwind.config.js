@@ -5,6 +5,11 @@ export default {
     extend: {
       lineHeight: {
         1.8: '1.8'
+      },
+      colors: {
+        pink: '#fc2e9e',
+        green: '#BDF738',
+        black: '#111111'
       }
     }
   },

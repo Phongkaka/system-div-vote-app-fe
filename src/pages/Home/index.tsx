@@ -1,8 +1,10 @@
 import Events from './components/EventEnd/Events'
 import Carousel from '~/layouts/components/Carousel'
 import Container from '~/layouts/components/Container'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Banner01 from '~/common/assets/images/banner-01.png'
+import Banner02 from '~/common/assets/images/banner-02.png'
+import Banner03 from '~/common/assets/images/banner-03.png'
+
 const dataFake = [
   {
     createdAt: '2023-08-10T03:25:06.132Z',
@@ -14,8 +16,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 1',
     reward_desc: 'reward_desc 1',
     status: '1',
-    banner: 'https://picsum.photos/1920/600',
-    id: '1'
+    banner: Banner01,
+    id: '1',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T22:00:52.387Z',
@@ -27,8 +30,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 2',
     reward_desc: 'reward_desc 2',
     status: '1',
-    banner: 'https://picsum.photos/1920/600',
-    id: '2'
+    banner: Banner01,
+    id: '2',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T13:28:37.528Z',
@@ -40,8 +44,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 3',
     reward_desc: 'reward_desc 3',
     status: '2',
-    banner: 'https://picsum.photos/1920/600',
-    id: '3'
+    banner: Banner03,
+    id: '3',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T16:11:58.154Z',
@@ -53,8 +58,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 4',
     reward_desc: 'reward_desc 4',
     status: '0',
-    banner: 'https://picsum.photos/1920/600',
-    id: '4'
+    banner: Banner02,
+    id: '4',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T16:19:04.675Z',
@@ -66,8 +72,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 5',
     reward_desc: 'reward_desc 5',
     status: '0',
-    banner: 'https://picsum.photos/1920/600',
-    id: '5'
+    banner: Banner01,
+    id: '5',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-10T03:17:13.427Z',
@@ -79,8 +86,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 6',
     reward_desc: 'reward_desc 6',
     status: '1',
-    banner: 'https://picsum.photos/1920/600',
-    id: '6'
+    banner: Banner03,
+    id: '6',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T17:30:30.296Z',
@@ -92,8 +100,9 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 7',
     reward_desc: 'reward_desc 7',
     status: '2',
-    banner: 'https://picsum.photos/1920/600',
-    id: '7'
+    banner: Banner02,
+    id: '7',
+    link: '/vote-page'
   },
   {
     createdAt: '2023-08-09T11:30:18.964Z',
@@ -105,26 +114,22 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 8',
     reward_desc: 'reward_desc 8',
     status: '0',
-    banner: 'https://picsum.photos/1920/600',
-    id: '8'
+    banner: Banner01,
+    id: '8',
+    link: '/vote-page'
   }
 ]
 
 function Home() {
   return (
     <>
-      <Header />
-      <Container>
-        <div className='home--page'>
-          {/*  */}
-          <Carousel status='1' data={dataFake} title='開催予定・開催中のイベント' />
-          <Carousel status='2' data={dataFake} title='最近終了したイベント' />
-          {/*  */}
-
-          <Events></Events>
+      <div className='home--page'>
+        <Carousel numItem={2.5} status='1' data={dataFake} />
+        <div className='mb-[60px]'>
+          <Events topTitle='RECENTLY FINISHED' title='開催予定・開催中のイベント' data={dataFake} />
         </div>
-      </Container>
-      <Footer />
+        <Events topTitle='FINISHED' title='終了したイベント' data={dataFake} />
+      </div>
     </>
   )
 }

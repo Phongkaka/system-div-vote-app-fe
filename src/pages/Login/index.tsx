@@ -1,10 +1,13 @@
+import { useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Flowise } from '~/models/auth'
 import { initValues, loginValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
 import { useQueryLogin } from '~/hook/useLogin'
+import { useAuth } from '~/hook/auth'
+import browserStorage from 'store'
 
 export default function Login() {
   const methods = useForm({
@@ -12,6 +15,16 @@ export default function Login() {
     defaultValues: initValues,
     resolver: yupResolver(loginValidate)
   })
+  const { signin } = useAuth()
+  const navigate = useNavigate()
+  useEffect(() => {
+    const user = browserStorage.get('user')
+    if (user?.access_token) {
+      signin && signin(user)
+      navigate('/')
+    }
+  }, [navigate, signin])
+
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods
 

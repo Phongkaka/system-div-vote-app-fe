@@ -11,13 +11,13 @@ function CadidateEvent() {
         src={cadidateImg}
         alt='cadidate'
       />
-      <p className='m-auto mb-3 w-[100px] border border-[#fc2e9e] p-1 text-center text-xs text-[#fc2e9e]'>
+      <p className='m-auto mb-3 w-[100px] border border-pink p-1 text-center text-xs text-pink'>
         最優秀特別賞
       </p>
       <span className='relative mb-7 block text-center text-2xl'>
         海嶋正人 <i className='absolute bottom-0 text-xs not-italic'>さん</i>
       </span>
-      <span className='m-auto block w-[100px] border-b border-t border-dotted border-[#fc2e9e] text-center text-[#fc2e9e]'>
+      <span className='m-auto block w-[100px] border-b border-t border-dotted border-pink text-center text-pink'>
         2446票
       </span>
       <div className='group__link mt-4 flex justify-center'>

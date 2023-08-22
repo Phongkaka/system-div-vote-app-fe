@@ -23,10 +23,10 @@ export declare namespace Flowise {
   }
 
   interface IUser {
-    user: {
+    data: {
       id: number
       name: string
-      username: string
+      email: string
     }
     access_token: string
   }

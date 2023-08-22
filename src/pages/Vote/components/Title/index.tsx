@@ -6,7 +6,7 @@ interface Props {
 
 const Title = ({ title }: Props) => {
   return (
-    <h2 className='title__vote flex items-center text-center text-3xl font-bold text-[#fc2e9e]'>
+    <h2 className='title__vote flex items-center text-center text-3xl font-bold text-pink'>
       {title}
     </h2>
   )

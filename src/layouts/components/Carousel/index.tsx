@@ -1,36 +1,48 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Item from './item'
-import { Pagination, Autoplay, Navigation } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import { EventItem, Events } from '~/models/Events'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
+import './style.scss'
 
 interface Props {
   title?: string | undefined
   data: Events
   status?: string | undefined
+  numItem: number
 }
 
-function Carousel({ title, data, status }: Props) {
+function Carousel({ title, data, status, numItem }: Props) {
   return (
     <>
       <h3 className='pb-5'>{title}</h3>
       <div className='slider m-auto'>
         <Swiper
-          modules={[Pagination, Navigation, Autoplay]}
-          slidesPerView={1}
+          modules={[Autoplay]}
+          slidesPerView={numItem}
           spaceBetween={30}
           centeredSlides
-          pagination={{
-            clickable: true
-          }}
-          navigation={true}
           loop
           autoplay={{
-            delay: 2000
+            delay: 3000
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 2.5
+            },
+            768: {
+              slidesPerView: 2.75
+            },
+            1080: {
+              slidesPerView: 3.25
+            },
+            1280: {
+              slidesPerView: 3.75
+            }
           }}
           className='mySwiper'
         >
@@ -39,7 +51,9 @@ function Carousel({ title, data, status }: Props) {
               .filter((item) => item.status === status)
               .map((item: EventItem) => (
                 <SwiperSlide key={item.id}>
-                  <Item img={item.banner} />
+                  <div className='carousel-item-wrapper'>
+                    <Item linkPage={item.link} img={item.banner} />
+                  </div>
                 </SwiperSlide>
               ))}
         </Swiper>

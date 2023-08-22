@@ -1,0 +1,8 @@
+export const HOME_PAGE = '/'
+export const EVENT_PAGE = '/event-page'
+export const VOTE_PAGE = '/vote-page'
+export const LOGIN_PAGE = '/login'
+export const REGISTER_PAGE = '/register'
+export const ABOUT_PAGE = '/about-event'
+export const ACCOUNT_PAGE = '/account'
+export const FEEDBACK_PAGE = '/feedback'
