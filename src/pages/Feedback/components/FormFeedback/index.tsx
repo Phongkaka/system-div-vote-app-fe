@@ -20,7 +20,7 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
   const { register, handleSubmit } = methods
 
   const onSubmit = async (data: FeedbackFormData): Promise<void> => {
-    console.log(data)
+    // console.log(data)
   }
 
   return (

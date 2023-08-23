@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { feedback } from './feedback'
+import { phoneRegExp } from '~/utils/helper'
 
 export interface FeedbackReq {
   title?: string
@@ -7,8 +8,6 @@ export interface FeedbackReq {
   phoneNumber?: string
   message?: string
 }
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 export const feedbackValidate: any = yup
   .object({

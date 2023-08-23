@@ -14,6 +14,15 @@ export declare namespace Flowise {
     password?: string
   }
 
+  interface IRegister {
+    email?: string
+    name?: string
+    phone?: string
+    password?: string
+    confirmPassword?: string
+  }
+
+
   interface IUser {
     data: {
       id: number

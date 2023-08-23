@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Flowise } from '~/models/auth'
 import { initValues, loginValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
-import { useQueryLogin } from '~/hook/useLogin'
+import { useQueryLogin } from '~/hook/useAuth'
 import useLocalStorageState from '~/hook/useLocalStorageState'
 
 export default function Login() {

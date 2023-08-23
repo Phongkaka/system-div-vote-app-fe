@@ -13,4 +13,10 @@ const logout = async () => {
   return data
 }
 
-export { login, logout }
+const register = async (params: Flowise.IRegister) => {
+  const data = await http.post('/auth/register', params)
+
+  return data
+}
+
+export { login, logout, register }

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 import { loading } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
-import { login } from '~/utils/api'
+import { login, register } from '~/utils/api'
 import useLocalStorageState from './useLocalStorageState'
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
@@ -43,4 +43,29 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
   )
 }
 
-export { useQueryLogin }
+const useQueryRegister = (): UseMutationResult<AxiosResponse, string, Flowise.IRegister, string> => {
+  const setLoading = useSetRecoilState(loading)
+  return useMutation(
+    async (params: Flowise.IRegister) => {
+      setLoading(true)
+      return await register(params)
+    },
+    {
+      onSuccess: () => {
+        setLoading(false)
+      },
+      onError: () => {
+        setLoading(false)
+        Swal.fire({
+          title: 'Error!',
+          text: 'Registration failed',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+    }
+  )
+}
+
+
+export { useQueryLogin, useQueryRegister }
