@@ -1,15 +1,10 @@
-.swiper-container {
-  width: 100%;
-  margin: 40px 0;
-  padding: 45px 0;
-}
-
 .swiper-slide img {
-  width: 100%;
+  max-width: 100%;
+  transition: all 0.25s ease-out;
+  transform: scale(0.9);
+  transform-origin: center;
 }
 
-.swiper-slide-active {
-  opacity: 1;
-  z-index: 1;
-  transform: scale(1.5);
+.swiper-slide-active img {
+  transform: scale(1.07);
 }

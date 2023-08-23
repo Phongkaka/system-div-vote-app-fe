@@ -86,7 +86,7 @@ const dataFake = [
     vote_rule_desc: 'vote_rule_desc 6',
     reward_desc: 'reward_desc 6',
     status: '1',
-    banner: Banner03,
+    banner: Banner01,
     id: '6',
     link: '/vote-page'
   },
@@ -105,6 +105,34 @@ const dataFake = [
     link: '/vote-page'
   },
   {
+    createdAt: '2023-08-09T17:30:30.296Z',
+    name: 'Gwendolyn Kuphal',
+    slug: 'slug 7',
+    logo: 'logo 7',
+    about_desc: 'about_desc 7',
+    schedule_desc: 'schedule_desc 7',
+    vote_rule_desc: 'vote_rule_desc 7',
+    reward_desc: 'reward_desc 7',
+    status: '2',
+    banner: Banner02,
+    id: '8',
+    link: '/vote-page'
+  },
+  {
+    createdAt: '2023-08-09T17:30:30.296Z',
+    name: 'Gwendolyn Kuphal',
+    slug: 'slug 7',
+    logo: 'logo 7',
+    about_desc: 'about_desc 7',
+    schedule_desc: 'schedule_desc 7',
+    vote_rule_desc: 'vote_rule_desc 7',
+    reward_desc: 'reward_desc 7',
+    status: '0',
+    banner: Banner02,
+    id: '9',
+    link: '/vote-page'
+  },
+  {
     createdAt: '2023-08-09T11:30:18.964Z',
     name: 'Carole Braun',
     slug: 'slug 8',
@@ -113,9 +141,23 @@ const dataFake = [
     schedule_desc: 'schedule_desc 8',
     vote_rule_desc: 'vote_rule_desc 8',
     reward_desc: 'reward_desc 8',
-    status: '0',
+    status: '1',
     banner: Banner01,
-    id: '8',
+    id: '10',
+    link: '/vote-page'
+  },
+  {
+    createdAt: '2023-08-09T11:30:18.964Z',
+    name: 'Carole Braun',
+    slug: 'slug 8',
+    logo: 'logo 8',
+    about_desc: 'about_desc 8',
+    schedule_desc: 'schedule_desc 8',
+    vote_rule_desc: 'vote_rule_desc 8',
+    reward_desc: 'reward_desc 8',
+    status: '1',
+    banner: Banner01,
+    id: '11',
     link: '/vote-page'
   }
 ]
@@ -124,11 +166,16 @@ function Home() {
   return (
     <>
       <div className='home--page'>
-        <Carousel numItem={2.5} status='1' data={dataFake} />
+        <Carousel status='1' data={dataFake} />
         <div className='mb-[60px]'>
-          <Events topTitle='RECENTLY FINISHED' title='開催予定・開催中のイベント' data={dataFake} />
+          <Events
+            topTitle='RECENTLY FINISHED'
+            title='開催予定・開催中のイベント'
+            data={dataFake}
+            status='2'
+          />
         </div>
-        <Events topTitle='FINISHED' title='終了したイベント' data={dataFake} />
+        <Events topTitle='FINISHED' title='終了したイベント' data={dataFake} status='0' />
       </div>
     </>
   )

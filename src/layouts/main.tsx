@@ -6,13 +6,17 @@ import HeaderEvent from '~/components/HeaderEvent'
 import FooterEvent from '~/components/FooterEvent'
 
 const MainLayout = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   const isCustomHeaderFooter = [HOME_PAGE].includes(location.pathname)
 
   return (
     <>
-      {isCustomHeaderFooter ? <Header /> : <HeaderEvent />}
+      {isCustomHeaderFooter ? (
+        <Header />
+      ) : (
+        <HeaderEvent logoImg='https://www.rankingmaster.jp/images/common/logo.svg' />
+      )}
       <Outlet />
       {isCustomHeaderFooter ? <Footer /> : <FooterEvent />}
     </>

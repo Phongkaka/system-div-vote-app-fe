@@ -9,14 +9,6 @@ export declare namespace Flowise {
     name: string
   }
 
-  interface IPost {
-    id: number
-    name: string
-    payment_methods?: ISelectType
-    stock_location?: ISelectType
-    stock_picking_type?: ISelectType
-  }
-
   interface ILogin {
     email?: string
     password?: string

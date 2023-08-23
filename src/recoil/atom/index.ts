@@ -1,14 +1,8 @@
 import { atom } from 'recoil'
-import { Flowise } from '~/models/auth'
 
 export const countState = atom({
   key: 'count',
   default: 0
-})
-
-export const listPosSate = atom({
-  key: 'listPos',
-  default: [] as Flowise.IPost[]
 })
 
 export const loading = atom({
@@ -24,3 +18,8 @@ export const toast = atom({
     show: false
   }
 })
+
+export const isLoggedInState = atom({
+  key: 'isLoggedIn',
+  default: false,
+});

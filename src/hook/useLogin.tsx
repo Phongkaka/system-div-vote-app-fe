@@ -1,5 +1,4 @@
 import { UseMutationResult, useMutation } from 'react-query'
-import { useNavigate } from 'react-router-dom'
 
 import { AxiosResponse } from 'axios'
 import { useSetRecoilState } from 'recoil'

@@ -7,4 +7,10 @@ const login = async (params: Flowise.ILogin) => {
   return data
 }
 
-export { login }
+const logout = async () => {
+  const data = await http.delete('/auth/logout')
+
+  return data
+}
+
+export { login, logout }

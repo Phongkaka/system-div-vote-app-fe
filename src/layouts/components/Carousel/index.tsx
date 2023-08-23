@@ -7,41 +7,42 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import 'swiper/css/autoplay'
+
 import './style.scss'
 
 interface Props {
   title?: string | undefined
   data: Events
   status?: string | undefined
-  numItem: number
 }
 
-function Carousel({ title, data, status, numItem }: Props) {
+function Carousel({ title, data, status }: Props) {
   return (
     <>
       <h3 className='pb-5'>{title}</h3>
       <div className='slider m-auto'>
         <Swiper
           modules={[Autoplay]}
-          slidesPerView={numItem}
+          // slidesPerView={numItem}
           spaceBetween={30}
           centeredSlides
+          centeredSlidesBounds
           loop
           autoplay={{
             delay: 3000
           }}
           breakpoints={{
             640: {
-              slidesPerView: 2.5
+              slidesPerView: 2
             },
             768: {
-              slidesPerView: 2.75
+              slidesPerView: 2.25
             },
             1080: {
-              slidesPerView: 3.25
+              slidesPerView: 2.5
             },
             1280: {
-              slidesPerView: 3.75
+              slidesPerView: 3
             }
           }}
           className='mySwiper'

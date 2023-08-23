@@ -6,16 +6,17 @@ import { Events } from '~/models/Events'
 interface Props {
   topTitle?: string | undefined
   title?: string | undefined
+  status?: string | undefined
   data: Events
 }
 
-const Events = ({ topTitle, title, data }: Props) => {
+const Events = ({ topTitle, title, data, status }: Props) => {
   return (
     <Container>
       <Title topTitle={topTitle} title={title} />
       <div className='grid grid-cols-1 gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3'>
         {data
-          .filter((item) => item.status === '0')
+          .filter((item) => item.status === status)
           .map((item) => (
             <ItemEvent linkPage={item.link} eventImg={item.banner} key={item.id} />
           ))}

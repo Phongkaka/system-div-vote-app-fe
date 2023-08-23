@@ -27,9 +27,8 @@ export default function Login() {
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods
 
-
   const onSubmit = async (userFormLogin: Flowise.UserFormLoginData): Promise<void> => {
-    loginAction(userFormLogin) 
+    loginAction(userFormLogin)
   }
 
   return (

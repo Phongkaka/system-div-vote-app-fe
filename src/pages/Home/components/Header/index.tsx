@@ -1,13 +1,30 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useMutation } from 'react-query'
+import { Link, useNavigate } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { FEEDBACK_PAGE, LOGIN_PAGE, REGISTER_PAGE } from '~/constants/path'
 import Container from '~/layouts/components/Container'
+import { isLoggedInState } from '~/recoil/atom'
+import { logout } from '~/utils/api'
 
 export default function Header() {
   const [navbar, setNavbar] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
+  const navigate = useNavigate()
+  const logoutMutation = useMutation(logout)
 
+  const handleLogout = async () => {
+    try {
+      await logoutMutation.mutateAsync()
+      setIsLoggedIn(false)
+      navigate('/login')
+    } catch (error) {
+      console.error('Logout failed:', error)
+    }
+  }
   return (
     <Container>
-      <nav className='bg-green my-10 w-full rounded-lg shadow'>
+      <nav className='my-10 w-full rounded-lg bg-green shadow'>
         <div className='lg:max-w-8xl mx-auto justify-between px-4 md:flex md:items-center md:px-8'>
           <div>
             <div className='flex items-center justify-between py-3 md:block md:py-3'>
@@ -63,14 +80,22 @@ export default function Header() {
                   <Link to='#'>Term of service</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>Contact</Link>
+                  <Link to={FEEDBACK_PAGE}>Contact</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>Sign Up</Link>
+                  <Link to={REGISTER_PAGE}>Sign Up</Link>
                 </li>
-                <li className='text-black-600 font-bold'>
-                  <Link to='#'>Login</Link>
-                </li>
+                {isLoggedIn ? (
+                  <li className='text-black-600 font-bold'>
+                    <Link to={LOGIN_PAGE}>Login</Link>
+                  </li>
+                ) : (
+                  <li className='text-black-600 font-bold'>
+                    <button type='button' onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
