@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { feedbackValidate, initFeedbackValues } from '~/common/validation/feedback/config'
 import InputForward from '~/components/Input'
 import TextAreaForward from '~/components/TextArea'
+import { useQueryFeedback } from '~/hook/useFeedback'
 import { FeedbackFormData } from '~/models/feedbackFAQ'
 
 interface FormFeedbackProps {
@@ -19,8 +20,10 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods
 
+  const { mutate: feedbackAction } = useQueryFeedback()
+
   const onSubmit = async (data: FeedbackFormData): Promise<void> => {
-    console.log(data)
+    feedbackAction(data)
   }
 
   return (
@@ -57,14 +60,28 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
             </div>
           </div>
           <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='phoneNumber' className='block text-base lg:w-[30%]'>
+            <label htmlFor='email' className='block text-base lg:w-[30%]'>
+              email
+            </label>
+            <div className='flex-grow'>
+              <InputForward
+                {...register('email')}
+                error={!!errors?.email}
+                helperText={errors?.email?.message}
+                type='email'
+                className='input-style-feedback'
+              />
+            </div>
+          </div>
+          <div className='mb-2 items-center justify-between lg:flex'>
+            <label htmlFor='phone_number' className='block text-base lg:w-[30%]'>
               電話番号
             </label>
             <div className='flex-grow'>
               <InputForward
-                {...register('phoneNumber')}
-                error={!!errors?.phoneNumber}
-                helperText={errors?.phoneNumber?.message}
+                {...register('phone_number')}
+                error={!!errors?.phone_number}
+                helperText={errors?.phone_number?.message}
                 className='input-style-feedback'
               />
             </div>
@@ -74,7 +91,7 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               メッセージ本文 (任意)
             </label>
             <div className='flex-grow'>
-              <TextAreaForward {...register('message')} className='input-style-feedback h-32' />
+              <TextAreaForward {...register('content')} className='input-style-feedback h-32' />
             </div>
           </div>
           <div className='mb-2 mt-5 flex items-center justify-center lg:justify-start'>

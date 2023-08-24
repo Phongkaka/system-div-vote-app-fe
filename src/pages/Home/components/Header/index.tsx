@@ -1,22 +1,24 @@
 import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { FEEDBACK_PAGE, LOGIN_PAGE, REGISTER_PAGE } from '~/constants/path'
 import Container from '~/layouts/components/Container'
-import { isLoggedInState } from '~/recoil/atom'
-import { logout } from '~/utils/api'
+import { isLoggedInState, userInfo } from '~/recoil/atom/persistRecoil'
+import { logout } from '~/services/api'
 
 export default function Header() {
   const [navbar, setNavbar] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
   const navigate = useNavigate()
   const logoutMutation = useMutation(logout)
+  const setUserInfo = useSetRecoilState(userInfo)
 
   const handleLogout = async () => {
     try {
       await logoutMutation.mutateAsync()
       setIsLoggedIn(false)
+      setUserInfo({})
       navigate('/login')
     } catch (error) {
       console.error('Logout failed:', error)
@@ -85,7 +87,7 @@ export default function Header() {
                 <li className='text-black-600 font-bold'>
                   <Link to={REGISTER_PAGE}>Sign Up</Link>
                 </li>
-                {isLoggedIn ? (
+                {!isLoggedIn ? (
                   <li className='text-black-600 font-bold'>
                     <Link to={LOGIN_PAGE}>Login</Link>
                   </li>

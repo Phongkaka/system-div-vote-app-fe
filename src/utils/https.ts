@@ -2,9 +2,9 @@ import axios, { InternalAxiosRequestConfig, AxiosError } from 'axios'
 import Swal from 'sweetalert2'
 
 const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-  const { access_token } = JSON.parse(localStorage.getItem('access_token') || '{}')
-  if (access_token && config.headers) {
-    config.headers.Authorization = 'Bearer ' + access_token
+  const { userInfo } = JSON.parse(localStorage.getItem('userInfo') || '{}')
+  if (userInfo && config.headers) {
+    config.headers.Authorization = 'Bearer ' + userInfo.access_token
   }
   return config
 }

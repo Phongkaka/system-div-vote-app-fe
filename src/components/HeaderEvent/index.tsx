@@ -7,7 +7,7 @@ interface Props {
 export default function HeaderEvent({ logoImg }: Props) {
   return (
     <header>
-      <Link to='#' className='ml-10 mt-10 block w-[186px]'>
+      <Link to='#' className='m-5 ml-10 block w-[186px]'>
         <img src={logoImg} alt='logo' />
       </Link>
     </header>

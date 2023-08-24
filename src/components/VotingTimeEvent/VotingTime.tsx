@@ -3,19 +3,17 @@ import Button from '../Button'
 const VotingTime = () => {
   return (
     <div className='flex flex-grow flex-col items-center justify-end lg:w-1/3'>
-      <div className=' flex h-full w-full flex-col justify-end gap-5 xl:gap-10'>
-        <h1 className='font-semibold text-xl xl:text-2xl'>
-          ネクストヒロインプロジェクト
-        </h1>
+      <div className=' flex h-full w-full flex-col justify-end gap-10'>
+        <h1 className='text-xl font-semibold lg:text-2xl'>ネクストヒロインプロジェクト</h1>
         <div className='flex'>
           <div className='flex w-1/3 items-center justify-center rounded-bl-lg rounded-tl-lg bg-black p-4'>
             <h2 className='text-lg text-white'>投票期間</h2>
           </div>
 
           <div className='200 flex flex-grow flex-col items-center rounded-br-lg rounded-tr-lg bg-white p-4'>
-            <p className='text-sm xl:text-lg'>2023/08/01 16:00</p>
+            <p className='text-base lg:text-lg'>2023/08/01 16:00</p>
             <span className='inline-block rotate-90 transform'>〜</span>
-            <p className='text-sm xl:text-lg'>2023/08/01 16:00</p>
+            <p className='text-base lg:text-lg'>2023/08/01 16:00</p>
           </div>
         </div>
         <Button

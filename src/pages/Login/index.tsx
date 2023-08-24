@@ -5,24 +5,25 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Flowise } from '~/models/auth'
 import { initValues, loginValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
-import { useQueryLogin } from '~/hook/useLogin'
-import useLocalStorageState from '~/hook/useLocalStorageState'
+import { useQueryLogin } from '~/hook/useAuth'
+import { isLoggedInState } from '~/recoil/atom/persistRecoil'
+import { useRecoilValue } from 'recoil'
 
 export default function Login() {
-  const [userInfo] = useLocalStorageState<Flowise.IUser>('access_token', {} as Flowise.IUser)
+  const isLoggedIn = useRecoilValue(isLoggedInState)
   const methods = useForm({
     mode: 'all',
     defaultValues: initValues,
     resolver: yupResolver(loginValidate)
   })
   const navigate = useNavigate()
-  const { mutate: loginAction, data } = useQueryLogin()
+  const { mutate: loginAction } = useQueryLogin()
 
   useEffect(() => {
-    if (data?.data.id || userInfo?.access_token) {
+    if (isLoggedIn) {
       navigate('/')
     }
-  }, [navigate, userInfo?.access_token, data?.data.id])
+  }, [navigate, isLoggedIn])
 
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods

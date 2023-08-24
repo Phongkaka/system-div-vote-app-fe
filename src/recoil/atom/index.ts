@@ -18,8 +18,3 @@ export const toast = atom({
     show: false
   }
 })
-
-export const isLoggedInState = atom({
-  key: 'isLoggedIn',
-  default: false,
-});

@@ -9,6 +9,7 @@ export interface AccordionItem {
 export interface FeedbackFormData {
   title?: string
   name?: string
-  phoneNumber?: string
-  message?: string
+  email?: string
+  phone_number?: string
+  content?: string
 }

@@ -4,14 +4,16 @@ import { AxiosResponse } from 'axios'
 import { useSetRecoilState } from 'recoil'
 import Swal from 'sweetalert2'
 
+import { isLoggedInState, userInfo } from '~/recoil/atom/persistRecoil'
 import { loading } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
-import { login } from '~/utils/api'
-import useLocalStorageState from './useLocalStorageState'
+import { login, register } from '~/services/api'
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
-  const [_, setUser] = useLocalStorageState<Flowise.IUser>('access_token', {} as Flowise.IUser)
   const setLoading = useSetRecoilState(loading)
+  const setIsLogged = useSetRecoilState(isLoggedInState)
+  const setUserInfo = useSetRecoilState(userInfo)
+
   return useMutation(
     async (params: Flowise.ILogin) => {
       setLoading(true)
@@ -27,7 +29,8 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
           },
           access_token: response.access_token
         }
-        setUser(infoUser)
+        setUserInfo(infoUser)
+        setIsLogged(true)
         setLoading(false)
       },
       onError: () => {
@@ -43,4 +46,33 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
   )
 }
 
-export { useQueryLogin }
+const useQueryRegister = (): UseMutationResult<
+  AxiosResponse,
+  string,
+  Flowise.IRegister,
+  string
+> => {
+  const setLoading = useSetRecoilState(loading)
+  return useMutation(
+    async (params: Flowise.IRegister) => {
+      setLoading(true)
+      return await register(params)
+    },
+    {
+      onSuccess: () => {
+        setLoading(false)
+      },
+      onError: () => {
+        setLoading(false)
+        Swal.fire({
+          title: 'Error!',
+          text: 'Registration failed',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
+      }
+    }
+  )
+}
+
+export { useQueryLogin, useQueryRegister }
