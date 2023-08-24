@@ -21,7 +21,7 @@ const register = async (params: Flowise.IRegister) => {
   return data
 }
 
-const useFetchEventsQuery = async (
+const fetchEvents = async (
   status: number,
   page: number
 ): Promise<UseQueryResult<AxiosResponse>> => {
@@ -31,8 +31,7 @@ const useFetchEventsQuery = async (
       page: page
     }
   })
-
   return response.data?.data
 }
 
-export { login, logout, register, useFetchEventsQuery }
+export { login, logout, register, fetchEvents }
