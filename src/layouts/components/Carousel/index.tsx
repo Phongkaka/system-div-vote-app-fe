@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Item from './item'
 import { Autoplay } from 'swiper/modules'
-import { EventItem } from '~/models/Events'
+import { EventItem, Events } from '~/models/Events'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -12,7 +12,22 @@ import './style.scss'
 
 interface Props {
   title?: string | undefined
-  data: any
+  data: Events
+}
+
+const breakpoints = {
+  640: {
+    slidesPerView: 2
+  },
+  768: {
+    slidesPerView: 2.25
+  },
+  1080: {
+    slidesPerView: 2.5
+  },
+  1280: {
+    slidesPerView: 3
+  }
 }
 
 function Carousel({ title, data }: Props) {
@@ -24,31 +39,18 @@ function Carousel({ title, data }: Props) {
           modules={[Autoplay]}
           spaceBetween={30}
           centeredSlides
-          centeredSlidesBounds
+          // centeredSlidesBounds
           loop
           autoplay={{
             delay: 3000
           }}
-          breakpoints={{
-            640: {
-              slidesPerView: 2
-            },
-            768: {
-              slidesPerView: 2.25
-            },
-            1080: {
-              slidesPerView: 2.5
-            },
-            1280: {
-              slidesPerView: 3
-            }
-          }}
+          breakpoints={breakpoints}
           className='mySwiper'
         >
           {data?.map((item: EventItem) => (
             <SwiperSlide key={item.id}>
               <div className='carousel-item-wrapper'>
-                <Item linkPage='#' img={item.banner} />
+                <Item linkPage={`/events/${item.slug}`} img={item.banner} />
               </div>
             </SwiperSlide>
           ))}

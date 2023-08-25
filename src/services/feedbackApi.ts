@@ -7,4 +7,10 @@ const feedback = async (params: FeedbackFormData) => {
   return data
 }
 
-export { feedback }
+const fetchFAQ = async () => {
+  const data = await http.get('/faqs')
+
+  return data
+}
+
+export { feedback, fetchFAQ }

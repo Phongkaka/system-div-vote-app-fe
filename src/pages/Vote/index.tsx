@@ -7,6 +7,7 @@ import { TabsVote } from './components/TabsVote'
 import MenuBonus from './components/MenuBonus'
 import Title from './components/Title'
 import ShoppingCart from './components/ShoppingCart'
+import Container from '~/layouts/components/Container'
 
 const targetDate = new Date('2023-12-31T23:59:59')
 
@@ -18,7 +19,7 @@ function Vote() {
   }
 
   return (
-    <>
+    <Container>
       <div>
         <div className='vote--page'>
           <Banner img={BannerVote} />
@@ -64,7 +65,7 @@ function Vote() {
         </button>
       </div>
       {isCartVisible && <ShoppingCart toggleCart={toggleCart} />}
-    </>
+    </Container>
   )
 }
 

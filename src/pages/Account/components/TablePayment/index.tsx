@@ -1,5 +1,13 @@
 import { PaymentType } from '~/models/profile'
 import moment from 'moment'
+import {
+  FAILED_STATUS,
+  FAILED_STATUS_TEXT,
+  PENDING_STATUS,
+  PENDING_STATUS_TEXT,
+  SUCCEEDED_STATUS,
+  SUCCEEDED_STATUS_TEXT
+} from '~/constants/status'
 
 interface TablePaymentProps {
   data: PaymentType[]
@@ -8,6 +16,19 @@ interface TablePaymentProps {
 const TablePayment = ({ data }: TablePaymentProps) => {
   const handleClickRowTable = (item: PaymentType) => {
     console.log(item)
+  }
+
+  const handleGetStatusPayment = (status: number | undefined) => {
+    switch (status) {
+      case PENDING_STATUS:
+        return PENDING_STATUS_TEXT
+      case SUCCEEDED_STATUS:
+        return SUCCEEDED_STATUS_TEXT
+      case FAILED_STATUS:
+        return FAILED_STATUS_TEXT
+      default:
+        break
+    }
   }
 
   return (
@@ -39,7 +60,7 @@ const TablePayment = ({ data }: TablePaymentProps) => {
               <td className='table-style'>{item.id}</td>
               <td className='table-style'>{item.amount}</td>
               <td className='table-style'>{moment(item.created_at).format('MM/DD/YYYY')}</td>
-              <td className='table-style'>{item.status}</td>
+              <td className='table-style'>{handleGetStatusPayment(item.status)}</td>
             </tr>
           ))}
         </tbody>

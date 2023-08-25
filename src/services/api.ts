@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios'
-import { UseQueryResult } from 'react-query'
 import { Flowise } from '~/models/auth'
 import { http } from '~/utils/https'
 
@@ -21,17 +19,15 @@ const register = async (params: Flowise.IRegister) => {
   return data
 }
 
-const fetchEvents = async (
-  status: number,
-  page: number
-): Promise<UseQueryResult<AxiosResponse>> => {
-  const response = await http.get('/events', {
-    params: {
-      status: status,
-      page: page
-    }
-  })
-  return response.data?.data
+const refreshToken = async (params: Flowise.RefreshToken): Promise<Flowise.RefreshTokenRes> => {
+  try {
+    const response: Flowise.RefreshTokenRes = await http.post('/auth/refresh', {
+      refresh_token: params
+    })
+    return response
+  } catch (error) {
+    throw error
+  }
 }
 
-export { login, logout, register, fetchEvents }
+export { login, logout, register, refreshToken }

@@ -30,4 +30,15 @@ export declare namespace Flowise {
     }
     access_token: string
   }
+
+  interface RefreshToken {
+    refresh_token: string
+  }
+
+  interface RefreshTokenRes {
+    token_type: string
+    expires_in: number
+    access_token: string
+    refresh_token: string
+  }
 }

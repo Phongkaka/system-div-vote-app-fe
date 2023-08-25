@@ -7,7 +7,7 @@ interface Props {
 const ItemEvent = ({ eventImg, linkPage }: Props) => {
   return (
     <div className='h-fit'>
-      <Link to={linkPage} target='_blank' rel='noreferrer'>
+      <Link to={linkPage}>
         <img src={eventImg} className='h-[150px] w-full object-cover' alt='event' />
       </Link>
     </div>

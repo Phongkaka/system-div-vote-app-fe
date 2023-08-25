@@ -1,15 +1,13 @@
-import Title from '../../../Title'
 import TabsVoteChild from '../TabsVoteChild'
 import Candidate from './Candidate'
 import cadidateImg from '~/common/assets/images/candidate.jpg'
 
 const BlockRank = () => {
   return (
-    <div className='border-4 border-solid border-blue-500 p-8'>
+    <div className='p-8'>
       <TabsVoteChild />
-      <Title title='ローズ P Ranking' />
-      <ul className='m-auto flex w-3/4 flex-wrap justify-between'>
-        <li className='w-full xl:w-[48%]'>
+      <ul className='m-auto flex flex-wrap justify-between'>
+        <li className='w-full lg:w-[48%]'>
           <Candidate
             cadidateImg={cadidateImg}
             numRank='1'
@@ -18,7 +16,7 @@ const BlockRank = () => {
             nameCadidateDetail='NO.10 杏奈 ♬'
           />
         </li>
-        <li className='w-full xl:w-[48%]'>
+        <li className='w-full lg:w-[48%]'>
           <Candidate
             cadidateImg={cadidateImg}
             numRank='2'
@@ -27,7 +25,7 @@ const BlockRank = () => {
             nameCadidateDetail='NO.4 ジェシー'
           />
         </li>
-        <li className='w-full xl:w-[48%]'>
+        <li className='w-full lg:w-[48%]'>
           <Candidate
             cadidateImg={cadidateImg}
             numRank='6'
@@ -36,7 +34,7 @@ const BlockRank = () => {
             nameCadidateDetail='NO.15 あき'
           />
         </li>
-        <li className='w-full xl:w-[48%]'>
+        <li className='w-full lg:w-[48%]'>
           <Candidate
             cadidateImg={cadidateImg}
             numRank='7'

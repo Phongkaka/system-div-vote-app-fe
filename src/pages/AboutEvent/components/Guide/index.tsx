@@ -8,7 +8,10 @@ const Guide = ({ title, content }: GuideProps) => {
       <h2 className='mb-5 border-l-[3px] border-green pl-4 text-xl font-semibold lg:text-[22px] '>
         {title}
       </h2>
-      <p className='text-sm font-medium lg:text-base'>{content}</p>
+      <div
+        className='text-sm font-medium lg:text-base'
+        dangerouslySetInnerHTML={{ __html: content || '' }}
+      ></div>
     </div>
   )
 }

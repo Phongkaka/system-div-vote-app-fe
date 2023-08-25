@@ -3,14 +3,14 @@ import { Accordion, AccordionHeader, AccordionBody } from '@material-tailwind/re
 import './Accordion.scss'
 import PlusIcon from '~/common/assets/images/plus.svg'
 import MinusIcon from '~/common/assets/images/minus.svg'
-import { AccordionItem } from '~/models/feedbackFAQ'
+import { QuestionsAskedType } from '~/models/feedbackFAQ'
 
 interface DefaultAccordionProps {
-  items: AccordionItem[]
-  title?: string
+  item?: QuestionsAskedType[]
+  name?: string
 }
 
-const DefaultAccordion = ({ items, title }: DefaultAccordionProps) => {
+const DefaultAccordion = ({ item, name }: DefaultAccordionProps) => {
   const [openAccordions, setOpenAccordions] = React.useState<number[]>([])
 
   const isAccordionOpen = (id: number) => openAccordions.includes(id)
@@ -25,22 +25,24 @@ const DefaultAccordion = ({ items, title }: DefaultAccordionProps) => {
 
   return (
     <div className='mb-10'>
-      <h3 className='mb-5 border-l-[3px] border-[#0075be] pl-3 text-lg text-[#0075be]'>{title}</h3>
+      <h3 className='mb-5 border-l-[3px] border-[#0075be] pl-3 text-lg text-[#0075be]'>{name}</h3>
       <div>
-        {items?.map((item) => (
+        {item?.map((question) => (
           <Accordion
             className='accordion border-blue-gray-100 border-b'
-            key={item.id}
-            open={isAccordionOpen(item.id)}
-            icon={<IconAccordion id={item.id} open={isAccordionOpen(item.id)} />}
+            key={question.id}
+            open={isAccordionOpen(question.id)}
+            icon={<IconAccordion id={question.id} open={isAccordionOpen(question.id)} />}
           >
             <AccordionHeader
               className='flex-row-reverse justify-end gap-2 py-2 text-base font-light'
-              onClick={() => toggleAccordion(item.id)}
+              onClick={() => toggleAccordion(question.id)}
             >
-              {item.title}
+              {question.question}
             </AccordionHeader>
-            <AccordionBody className='bg-[#FAFAFA] p-4 text-base'>{item.content}</AccordionBody>
+            <AccordionBody className='bg-[#FAFAFA] p-4 text-base'>
+              <div dangerouslySetInnerHTML={{ __html: question.answer || '' }}></div>
+            </AccordionBody>
           </Accordion>
         ))}
       </div>

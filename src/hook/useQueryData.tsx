@@ -3,20 +3,19 @@ import { useSetRecoilState } from 'recoil'
 import Swal from 'sweetalert2'
 import { resType } from '~/models/response'
 import { loading } from '~/recoil/atom'
-import { purchaseHistory } from '~/services/userApi'
 
-type ApiCallFunction = () => Promise<resType>
+type ApiCallFunction = (...params: []) => Promise<resType>
 
 const useQueryData = (queryKey: string, apiCall: ApiCallFunction) => {
   const setLoading = useSetRecoilState(loading)
 
   return useQuery(
     queryKey,
-    async () => {
+    async (...params: []) => {
       setLoading(true)
 
       try {
-        const response: resType = await apiCall()
+        const response: resType = await apiCall(...params)
 
         if (response.code === 200 && response.success) {
           setLoading(false)
@@ -42,8 +41,4 @@ const useQueryData = (queryKey: string, apiCall: ApiCallFunction) => {
   )
 }
 
-const useQueryPurchaseHistory = () => {
-  return useQueryData('purchaseHistory', purchaseHistory)
-}
-
-export { useQueryPurchaseHistory }
+export default useQueryData

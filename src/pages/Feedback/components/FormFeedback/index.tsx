@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { feedbackValidate, initFeedbackValues } from '~/common/validation/feedback/config'
 import InputForward from '~/components/Input'
 import TextAreaForward from '~/components/TextArea'
-import { useQueryFeedback } from '~/hook/useFeedback'
+import { useQueryFeedback } from '~/hook/useMutation'
 import { FeedbackFormData } from '~/models/feedbackFAQ'
 
 interface FormFeedbackProps {

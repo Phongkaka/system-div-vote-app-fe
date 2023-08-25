@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { initRegisterValues, registerValidate } from '~/common/validation/auth/config'
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputForward from '~/components/Input'
-import { useQueryRegister } from '~/hook/useAuth'
+import { useQueryRegister } from '~/hook/useMutation'
 
 export default function Register() {
   const navigate = useNavigate()

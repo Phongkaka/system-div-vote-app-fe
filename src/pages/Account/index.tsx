@@ -5,11 +5,12 @@ import TablePayment from './components/TablePayment'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { userInfo } from '~/recoil/atom/persistRecoil'
-import { useQueryPurchaseHistory } from '~/hook/useUserApi'
+import useQueryData from '~/hook/useQueryData'
+import { purchaseHistory } from '~/services/userApi'
 
 const Account = () => {
   const userInfoData = useRecoilValue(userInfo)
-  const { data: purchaseHistoryData } = useQueryPurchaseHistory()
+  const { data: purchaseHistoryData } = useQueryData('purchaseHistory', purchaseHistory)
 
   return (
     <Container>
@@ -30,7 +31,7 @@ const Account = () => {
         </div>
         <div className='account-detail flex-grow'>
           <h2 className='mb-5 text-2xl'>アカウントの詳細</h2>
-          <p className='mb-2'>{userInfoData?.data.name}</p>
+          <p className='mb-2'>{userInfoData?.data?.name}</p>
           <p>日本</p>
         </div>
       </div>

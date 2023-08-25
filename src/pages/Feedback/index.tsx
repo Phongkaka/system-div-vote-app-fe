@@ -1,63 +1,13 @@
 import Container from '~/layouts/components/Container'
 import DefaultAccordion from './components/Accordion'
 import FormFeedback from './components/FormFeedback'
-
-const items = [
-  {
-    id: 1,
-    title: 'クレジットカード以外の購入方法を知りたい',
-    content: (
-      <p className='leading-8'>
-        現金での投票券購入はできません。
-        <br />
-        クレジットカードをお持ちでない方は、楽天ペイやLINEPay、デポジット型のバンドルカードやVプリカ等もお試しいただいております。
-        <br />
-        詳細は各種カード会社にご確認ください。
-      </p>
-    )
-  },
-  {
-    id: 2,
-    title: 'クレジットカード以外の購入方法を知りたい',
-    content: (
-      <p className='leading-8'>
-        現金での投票券購入はできません。
-        <br />
-        クレジットカードをお持ちでない方は、楽天ペイやLINEPay、デポジット型のバンドルカードやVプリカ等もお試しいただいております。
-        <br />
-        詳細は各種カード会社にご確認ください。
-      </p>
-    )
-  },
-  {
-    id: 3,
-    title: 'クレジットカード以外の購入方法を知りたい',
-    content: (
-      <p className='leading-8'>
-        現金での投票券購入はできません。
-        <br />
-        クレジットカードをお持ちでない方は、楽天ペイやLINEPay、デポジット型のバンドルカードやVプリカ等もお試しいただいております。
-        <br />
-        詳細は各種カード会社にご確認ください。
-      </p>
-    )
-  },
-  {
-    id: 4,
-    title: 'クレジットカード以外の購入方法を知りたい',
-    content: (
-      <p className='leading-8'>
-        現金での投票券購入はできません。
-        <br />
-        クレジットカードをお持ちでない方は、楽天ペイやLINEPay、デポジット型のバンドルカードやVプリカ等もお試しいただいております。
-        <br />
-        詳細は各種カード会社にご確認ください。
-      </p>
-    )
-  }
-]
+import useQueryData from '~/hook/useQueryData'
+import { fetchFAQ } from '~/services/feedbackApi'
+import { AccordionItem } from '~/models/feedbackFAQ'
 
 const Feedback = () => {
+  const { data: faqData } = useQueryData('FAQ', fetchFAQ)
+
   return (
     <Container>
       <div className='mb-10'>
@@ -69,8 +19,9 @@ const Feedback = () => {
       <h2 className='mb-10 border-b-[2px] border-[#e9538a] pb-2 text-2xl font-light text-[#e9538a]'>
         よくあるご質問（FAQ）
       </h2>
-      <DefaultAccordion items={items} title='支払いや投票券に関して' />
-      <DefaultAccordion items={items} title='その他' />
+      {faqData?.map((item: AccordionItem) => {
+        return <DefaultAccordion item={item?.frequently_asked_questions} name={item.name} />
+      })}
       <h2 className='mb-10 border-b-[2px] border-[#e9538a] pb-2 text-2xl font-light text-[#e9538a]'>
         お問い合わせ
       </h2>

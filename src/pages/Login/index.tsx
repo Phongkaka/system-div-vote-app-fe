@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Flowise } from '~/models/auth'
 import { initValues, loginValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
-import { useQueryLogin } from '~/hook/useAuth'
+import { useQueryLogin } from '~/hook/useMutation'
 import { isLoggedInState } from '~/recoil/atom/persistRecoil'
 import { useRecoilValue } from 'recoil'
 

@@ -1,9 +1,13 @@
-import { ReactElement } from 'react'
-
 export interface AccordionItem {
   id: number
-  title: string
-  content: ReactElement
+  name?: string
+  frequently_asked_questions: QuestionsAskedType[]
+}
+
+export interface QuestionsAskedType {
+  id: number
+  answer?: string
+  question?: string
 }
 
 export interface FeedbackFormData {
