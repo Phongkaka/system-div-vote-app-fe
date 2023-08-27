@@ -4,10 +4,11 @@ import Guide from './components/Guide'
 import { useParams } from 'react-router'
 import { useQuery } from 'react-query'
 import { useFetchEventDetail } from '~/services/eventApi'
+import { EventItem } from '~/models/Events'
 
 function AboutEvent() {
   const { slug } = useParams()
-  const { data: detailEvent } = useQuery<any>(['eventDetail', slug], () =>
+  const { data: detailEvent } = useQuery<EventItem>(['eventDetail', slug], () =>
     useFetchEventDetail(slug || '')
   )
   return (

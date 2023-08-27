@@ -1,5 +1,4 @@
-import { AxiosResponse } from 'axios'
-import { UseQueryResult } from 'react-query'
+import { EventItem } from '~/models/Events'
 import { http } from '~/utils/https'
 
 const fetchEvents = async (status: number, page: number) => {
@@ -13,7 +12,7 @@ const fetchEvents = async (status: number, page: number) => {
   return response
 }
 
-const useFetchEventDetail = async (slug: string): Promise<UseQueryResult<AxiosResponse>> => {
+const useFetchEventDetail = async (slug: string): Promise<EventItem> => {
   const response = await http.get(`/events/${slug}`)
   return response.data
 }

@@ -5,8 +5,10 @@ import voteIc from '~/common/assets/images/ic_vote.png'
 import socialX from '~/common/assets/images/ic_x.png'
 import socialFb from '~/common/assets/images/ic_fb.png'
 import socialIg from '~/common/assets/images/ic_ig.png'
+import { ROUTER } from '~/constants/path'
 
 interface Props {
+  id: number
   numberVote?: string | undefined
   numRank?: string | undefined
   nameCadidate?: string | undefined
@@ -15,6 +17,7 @@ interface Props {
 }
 
 const Candidate = ({
+  id,
   numberVote,
   numRank,
   nameCadidate,
@@ -24,9 +27,9 @@ const Candidate = ({
   return (
     <div className='cadidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
       <div className='left__cadidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
-        <div className='mb-4 w-[122px]'>
+        <Link to={`${ROUTER.CADIDATE}/${id}`} className='mb-4 block w-[122px] cursor-pointer'>
           <img className='w-full rounded-md' src={cadidateImg} alt='cadidate' />
-        </div>
+        </Link>
         <div className='bottom__link flex w-2/3 justify-center'>
           <Link to='#' className='mr-2 block h-10 w-10'>
             <img src={socialX} alt='link icon' />

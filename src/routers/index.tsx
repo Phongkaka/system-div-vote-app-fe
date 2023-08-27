@@ -1,16 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { lazy } from 'react'
 import Feedback from '~/pages/Feedback'
-import {
-  ABOUT_PAGE,
-  ACCOUNT_PAGE,
-  EVENT_PAGE,
-  FEEDBACK_PAGE,
-  HOME_PAGE,
-  LOGIN_PAGE,
-  REGISTER_PAGE,
-  VOTE_PAGE
-} from '~/constants/path'
+import { ROUTER } from '~/constants/path'
 
 const MainLayout = lazy(() => import('~/layouts/main'))
 const Home = lazy(() => import('~/pages/Home'))
@@ -21,6 +12,7 @@ const AboutEvent = lazy(() => import('~/pages/AboutEvent'))
 const VoteResult = lazy(() => import('~/pages/VoteResult'))
 const Vote = lazy(() => import('~/pages/Vote'))
 const Account = lazy(() => import('~/pages/Account'))
+const CandidateDetail = lazy(() => import('~/pages/CadidateDetail'))
 
 const voteResult = false
 
@@ -29,36 +21,40 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: HOME_PAGE,
+        path: ROUTER.HOME_PAGE,
         element: <Home />
       },
       {
-        path: EVENT_PAGE,
+        path: ROUTER.EVENT_PAGE,
         element: <Event />
       },
       {
-        path: VOTE_PAGE,
+        path: ROUTER.VOTE_PAGE,
         element: <Vote />
       },
       {
-        path: LOGIN_PAGE,
+        path: ROUTER.LOGIN_PAGE,
         element: <Login />
       },
       {
-        path: REGISTER_PAGE,
+        path: ROUTER.REGISTER_PAGE,
         element: <Register />
       },
       {
-        path: ABOUT_PAGE,
+        path: ROUTER.ABOUT_PAGE,
         element: voteResult ? <VoteResult /> : <AboutEvent />
       },
       {
-        path: ACCOUNT_PAGE,
+        path: ROUTER.ACCOUNT_PAGE,
         element: <Account />
       },
       {
-        path: FEEDBACK_PAGE,
+        path: ROUTER.FEEDBACK_PAGE,
         element: <Feedback />
+      },
+      {
+        path: ROUTER.CADIDATE_DETAIL,
+        element: <CandidateDetail />
       }
     ]
   }

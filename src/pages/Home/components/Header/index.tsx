@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { FEEDBACK_PAGE, LOGIN_PAGE, REGISTER_PAGE } from '~/constants/path'
+import { ROUTER } from '~/constants/path'
 import Container from '~/layouts/components/Container'
 import { isLoggedInState, userInfo } from '~/recoil/atom/persistRecoil'
 import { logout } from '~/services/api'
@@ -82,14 +82,14 @@ export default function Header() {
                   <Link to='#'>Term of service</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to={FEEDBACK_PAGE}>Contact</Link>
+                  <Link to={ROUTER.FEEDBACK_PAGE}>Contact</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to={REGISTER_PAGE}>Sign Up</Link>
+                  <Link to={ROUTER.REGISTER_PAGE}>Sign Up</Link>
                 </li>
                 {!isLoggedIn ? (
                   <li className='text-black-600 font-bold'>
-                    <Link to={LOGIN_PAGE}>Login</Link>
+                    <Link to={ROUTER.LOGIN_PAGE}>Login</Link>
                   </li>
                 ) : (
                   <li className='text-black-600 font-bold'>

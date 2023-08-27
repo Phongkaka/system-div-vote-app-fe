@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+import { Cadidates } from '~/models/cadidates'
 
 export const countState = atom({
   key: 'count',
@@ -17,4 +18,9 @@ export const toast = atom({
     type: '',
     show: false
   }
+})
+
+export const cadidates = atom({
+  key: 'cadidates',
+  default: [] as Cadidates
 })

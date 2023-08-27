@@ -1,11 +1,16 @@
-export const HOME_PAGE = '/'
-export const EVENT_PAGE = '/event-page'
-export const VOTE_PAGE = '/vote-page'
-export const LOGIN_PAGE = '/login'
-export const REGISTER_PAGE = '/register'
-export const ABOUT_PAGE = '/events/:slug'
-export const ACCOUNT_PAGE = '/account'
-export const FEEDBACK_PAGE = '/feedback'
+export const ROUTER = {
+  HOME_PAGE: '/',
+  EVENT_PAGE: '/event-page',
+  VOTE_PAGE: '/vote-page',
+  LOGIN_PAGE: '/login',
+  REGISTER_PAGE: '/register',
+  ABOUT_PAGE: '/events/:slug',
+  ACCOUNT_PAGE: '/account',
+  FEEDBACK_PAGE: '/feedback',
+  CADIDATE_PAGE: '/candidate',
+  CADIDATE_DETAIL: '/candidate/:id'
+}
+
 //======================
 import Banner01 from '~/common/assets/images/banner-01.png'
 import Banner02 from '~/common/assets/images/banner-02.png'

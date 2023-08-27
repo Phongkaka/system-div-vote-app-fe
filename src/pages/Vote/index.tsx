@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Banner from '~/layouts/components/Banner'
 import BannerVote from '~/common/assets/images/event-01.jpg'
 import Countdown from './components/CountDown'
@@ -8,11 +8,30 @@ import MenuBonus from './components/MenuBonus'
 import Title from './components/Title'
 import ShoppingCart from './components/ShoppingCart'
 import Container from '~/layouts/components/Container'
+import { useQuery } from 'react-query'
+import { fetchCadidates } from '~/services/cadidatesAPI'
+import { Cadidates, ParamCadidate } from '~/models/cadidates'
+import { useSetRecoilState } from 'recoil'
+import { cadidates } from '~/recoil/atom'
 
 const targetDate = new Date('2023-12-31T23:59:59')
 
+const param: ParamCadidate = {
+  filter: {
+    where: {},
+    order: {},
+    limit: 0
+  }
+}
 function Vote() {
   const [isCartVisible, setIsCartVisible] = useState(false)
+  const { data } = useQuery<Cadidates>(['cadidate', param], () => fetchCadidates(param))
+  const setCadidateList = useSetRecoilState(cadidates)
+
+  useEffect(() => {
+    if (!data) return
+    setCadidateList(data)
+  }, [data])
 
   const toggleCart = () => {
     setIsCartVisible(!isCartVisible)
