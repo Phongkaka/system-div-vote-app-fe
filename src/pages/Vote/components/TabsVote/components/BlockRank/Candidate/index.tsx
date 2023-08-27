@@ -27,7 +27,7 @@ const Candidate = ({
   return (
     <div className='cadidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
       <div className='left__cadidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
-        <Link to={`${ROUTER.CADIDATE}/${id}`} className='mb-4 block w-[122px] cursor-pointer'>
+        <Link to={`${ROUTER.CADIDATE_PAGE}/${id}`} className='mb-4 block w-[122px] cursor-pointer'>
           <img className='w-full rounded-md' src={cadidateImg} alt='cadidate' />
         </Link>
         <div className='bottom__link flex w-2/3 justify-center'>
