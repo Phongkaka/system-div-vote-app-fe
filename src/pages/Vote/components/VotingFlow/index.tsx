@@ -1,4 +1,3 @@
-import Title from '../Title'
 import StepFlow from './StepFlow'
 
 const contentStep = `
@@ -19,7 +18,6 @@ const contentStep = `
 const VotingFlow = () => {
   return (
     <div className='vote__flow'>
-      <Title title='投票の流れ' />
       <div className='mx-auto my-[30px] flex justify-between'>
         <StepFlow
           step='1'

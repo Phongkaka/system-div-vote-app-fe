@@ -7,7 +7,7 @@ interface Props {
 
 export default function FooterEvent({ logoImg, bannerImg }: Props) {
   return (
-    <footer>
+    <footer className='mt-20'>
       <Link to='#' className='m-auto block w-[186px]'>
         <img src={logoImg} alt='logo' />
       </Link>

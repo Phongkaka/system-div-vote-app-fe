@@ -22,7 +22,7 @@ export function TabsVote() {
       <TabsHeader
         className='tabs__voting flex justify-around'
         indicatorProps={{
-          className: 'bg-blue-500 text-white z-0'
+          className: 'bg-black text-white z-0'
         }}
       >
         {data.map(({ label, value }) => (

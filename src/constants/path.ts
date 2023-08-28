@@ -1,7 +1,7 @@
 export const ROUTER = {
   HOME_PAGE: '/',
   EVENT_PAGE: '/event-page',
-  VOTE_PAGE: '/vote-page',
+  VOTE_PAGE: '/events/:slug/vote',
   LOGIN_PAGE: '/login',
   REGISTER_PAGE: '/register',
   ABOUT_PAGE: '/events/:slug',

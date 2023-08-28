@@ -11,9 +11,9 @@ const fetchCadidates = async (param: ParamCadidate): Promise<Cadidates> => {
   return response.data
 }
 
-const useFetchCadidateDetail = async (id: string): Promise<CadidateItem> => {
+const fetchCadidateDetail = async (id: string): Promise<CadidateItem> => {
   const response = await http.get(`/candidates/${id}`)
   return response.data
 }
 
-export { fetchCadidates, useFetchCadidateDetail }
+export { fetchCadidates, fetchCadidateDetail }

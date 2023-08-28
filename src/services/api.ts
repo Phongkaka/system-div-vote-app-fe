@@ -20,14 +20,10 @@ const register = async (params: Flowise.IRegister) => {
 }
 
 const refreshToken = async (params: Flowise.RefreshToken): Promise<Flowise.RefreshTokenRes> => {
-  try {
-    const response: Flowise.RefreshTokenRes = await http.post('/auth/refresh', {
-      refresh_token: params
-    })
-    return response
-  } catch (error) {
-    throw error
-  }
+  const response: Flowise.RefreshTokenRes = await http.post('/auth/refresh', {
+    refresh_token: params
+  })
+  return response
 }
 
 export { login, logout, register, refreshToken }

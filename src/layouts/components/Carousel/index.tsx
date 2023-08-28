@@ -39,7 +39,7 @@ function Carousel({ title, data }: Props) {
           modules={[Autoplay]}
           spaceBetween={30}
           centeredSlides
-          // centeredSlidesBounds
+          centeredSlidesBounds
           loop
           autoplay={{
             delay: 3000

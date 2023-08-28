@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+import { EventItem } from '~/models/Events'
 import { Cadidates } from '~/models/cadidates'
 
 export const countState = atom({
@@ -18,6 +19,11 @@ export const toast = atom({
     type: '',
     show: false
   }
+})
+
+export const eventDetail = atom({
+  key: 'EventDetail',
+  default: {} as EventItem
 })
 
 export const cadidates = atom({

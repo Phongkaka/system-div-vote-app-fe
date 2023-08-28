@@ -25,7 +25,7 @@ const DefaultAccordion = ({ item, name }: DefaultAccordionProps) => {
 
   return (
     <div className='mb-10'>
-      <h3 className='mb-5 border-l-[3px] border-[#0075be] pl-3 text-lg text-[#0075be]'>{name}</h3>
+      <h3 className='mb-5 text-lg font-bold'>{name}</h3>
       <div>
         {item?.map((question) => (
           <Accordion
@@ -35,7 +35,7 @@ const DefaultAccordion = ({ item, name }: DefaultAccordionProps) => {
             icon={<IconAccordion id={question.id} open={isAccordionOpen(question.id)} />}
           >
             <AccordionHeader
-              className='flex-row-reverse justify-end gap-2 py-2 text-base font-light'
+              className='gap-2 py-4 text-base font-light'
               onClick={() => toggleAccordion(question.id)}
             >
               {question.question}

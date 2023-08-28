@@ -12,9 +12,15 @@ const fetchEvents = async (status: number, page: number) => {
   return response
 }
 
-const useFetchEventDetail = async (slug: string): Promise<EventItem> => {
+const fetchEventDetail = async (slug: string): Promise<EventItem> => {
   const response = await http.get(`/events/${slug}`)
   return response.data
 }
 
-export { fetchEvents, useFetchEventDetail }
+const fetchPointTypes = async () => {
+  const response = await http.get('/point-types')
+
+  return response
+}
+
+export { fetchEvents, fetchEventDetail, fetchPointTypes }

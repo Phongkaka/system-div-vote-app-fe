@@ -27,13 +27,12 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
   }
 
   return (
-    <div className='lg:px-[20%]'>
-      <h2 className='mb-5 text-center text-2xl font-semibold'>コンタクト</h2>
+    <div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className={className}>
-          <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='title' className='block text-base lg:w-[30%]'>
-              題名（必須）
+          <div className='mb-6 items-center justify-between lg:flex'>
+            <label htmlFor='title' className='mb-4 block text-base font-bold lg:mb-0 lg:w-[30%]'>
+              題名 <span className='require-input'>必須</span>
             </label>
             <div className='flex-grow'>
               <InputForward
@@ -45,9 +44,9 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               />
             </div>
           </div>
-          <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='name' className='block text-base lg:w-[30%]'>
-              お名前（必須）
+          <div className='mb-6 items-center justify-between lg:flex'>
+            <label htmlFor='name' className='mb-4 block text-base font-bold lg:mb-0  lg:w-[30%]'>
+              お名前<span className='require-input'>必須</span>
             </label>
             <div className='flex-grow'>
               <InputForward
@@ -59,9 +58,9 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               />
             </div>
           </div>
-          <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='email' className='block text-base lg:w-[30%]'>
-              email
+          <div className='mb-6 items-center justify-between lg:flex'>
+            <label htmlFor='email' className='mb-4 block text-base font-bold lg:mb-0 lg:w-[30%]'>
+              メールアドレス<span className='require-input'>必須</span>
             </label>
             <div className='flex-grow'>
               <InputForward
@@ -73,8 +72,11 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               />
             </div>
           </div>
-          <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='phone_number' className='block text-base lg:w-[30%]'>
+          <div className='mb-6 items-center justify-between lg:flex'>
+            <label
+              htmlFor='phone_number'
+              className='mb-4 block text-base font-bold lg:mb-0 lg:w-[30%]'
+            >
               電話番号
             </label>
             <div className='flex-grow'>
@@ -86,22 +88,25 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               />
             </div>
           </div>
-          <div className='mb-2 items-center justify-between lg:flex'>
-            <label htmlFor='message' className='block text-base lg:w-[30%]'>
-              メッセージ本文 (任意)
+          <div className='mb-6 justify-between lg:flex'>
+            <label
+              htmlFor='message'
+              className='mb-4 mt-5 block text-base font-bold lg:mb-0 lg:w-[30%]'
+            >
+              メッセージ本文
             </label>
             <div className='flex-grow'>
               <TextAreaForward {...register('content')} className='input-style-feedback h-32' />
             </div>
           </div>
-          <div className='mb-2 mt-5 flex items-center justify-center lg:justify-start'>
+          <div className='mb-6 mt-5 flex items-center justify-center lg:justify-start'>
             <div className='text-base lg:w-[30%]'></div>
             <button
               type='submit'
               disabled={isSubmitting}
-              className='min-w-[200px] rounded-sm bg-[#1DA1F2] px-2 py-4 text-center text-white'
+              className='w-full rounded-lg bg-black px-2 py-2 text-center text-white lg:w-[40%]'
             >
-              送信
+              送信する
             </button>
           </div>
         </form>

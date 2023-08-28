@@ -24,14 +24,14 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     const days = Math.floor(hours / 24)
 
     return (
-      <div className='mx-auto mt-7 text-center text-2xl'>
-        <span className='mx-1 text-3xl font-bold italic text-pink'>{days}</span>
+      <div className='mx-auto text-left text-2xl'>
+        <span className='mx-1 text-3xl font-bold not-italic'>{days}</span>
         <span>日と</span>
-        <span className='mx-1 text-3xl font-bold italic text-pink'>{hours % 24}</span>
+        <span className='mx-1 text-3xl font-bold not-italic'>{hours % 24}</span>
         <span>時間 </span>
-        <span className='mx-1 text-3xl font-bold italic text-pink'>{minutes % 60}</span>
+        <span className='mx-1 text-3xl font-bold not-italic'>{minutes % 60}</span>
         <span>分 </span>
-        <span className='mx-1 text-3xl font-bold italic text-pink'>{seconds % 60}</span>
+        <span className='mx-1 text-3xl font-bold not-italic'>{seconds % 60}</span>
         <span>秒 </span>
       </div>
     )

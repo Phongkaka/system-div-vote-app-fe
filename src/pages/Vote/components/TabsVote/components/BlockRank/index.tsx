@@ -5,7 +5,6 @@ import { cadidates } from '~/recoil/atom'
 
 const BlockRank = () => {
   const cadidateList = useRecoilValue(cadidates)
-  console.log('cadidateList', cadidateList)
 
   return (
     <div className='p-8'>
@@ -15,11 +14,10 @@ const BlockRank = () => {
           cadidateList.map((cadidate) => (
             <li className='w-full lg:w-[48%]' key={cadidate.id}>
               <Candidate
-                id={cadidate.id}
                 cadidateImg={cadidate.avatar}
                 numRank='1'
-                numberVote='170'
-                nameCadidate={cadidate.name}
+                numberVote={cadidate.point}
+                nameCadidate='カサブランカ'
                 nameCadidateDetail={cadidate.name}
               />
             </li>

@@ -12,4 +12,13 @@ export interface EventItem {
   link?: string
 }
 
+export interface PointType {
+  id: number
+  logo: string
+  name: string
+  point_original: number
+  price: number
+  promotion: number
+}
+
 export type Events = EventItem[]

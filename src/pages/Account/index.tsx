@@ -15,24 +15,24 @@ const Account = () => {
   return (
     <Container>
       <div className='mb-[50px]'>
-        <h1 className='mb-2 text-2xl'>アカウント</h1>
+        <h1 className='mb-2 text-2xl font-bold'>アカウント</h1>
         <img className='mr-[10px] inline-block w-[14px]' src={AccountIcon} alt='account' />
         <Link className='text inline-block items-center border-b-[1px] border-black text-sm' to='#'>
           ログアウト
         </Link>
       </div>
-      <div className='flex flex-col-reverse gap-8 lg:flex-row'>
+      <div className='flex flex-col-reverse gap-14 lg:flex-row'>
         <div className='lg:w-3/4'>
-          <h2 className='mb-5 text-2xl'>購入履歴</h2>
+          <h2 className='border-left mb-5 text-2xl text-[22px] font-bold'>購入履歴</h2>
           <div className='mb-10'>
             <Profile />
           </div>
           <TablePayment data={purchaseHistoryData} />
         </div>
         <div className='account-detail flex-grow'>
-          <h2 className='mb-5 text-2xl'>アカウントの詳細</h2>
-          <p className='mb-2'>{userInfoData?.data?.name}</p>
-          <p>日本</p>
+          <h2 className='border-left mb-5 text-[22px] font-bold'>アカウントの詳細</h2>
+          <p className='mb-2 text-lg font-bold'>{userInfoData?.data?.name}</p>
+          <p className='text-lg font-bold'>日本</p>
         </div>
       </div>
     </Container>

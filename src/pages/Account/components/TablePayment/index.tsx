@@ -1,5 +1,6 @@
 import { PaymentType } from '~/models/profile'
 import moment from 'moment'
+import './TablePayment.scss'
 import {
   FAILED_STATUS,
   FAILED_STATUS_TEXT,
@@ -8,6 +9,7 @@ import {
   SUCCEEDED_STATUS,
   SUCCEEDED_STATUS_TEXT
 } from '~/constants/status'
+import { formatNumberWithCommas } from '~/utils/helper'
 
 interface TablePaymentProps {
   data: PaymentType[]
@@ -33,19 +35,19 @@ const TablePayment = ({ data }: TablePaymentProps) => {
 
   return (
     <div className='relative overflow-x-auto'>
-      <table className='min-w-full border-collapse border text-left text-sm text-gray-500'>
-        <thead className='text-center text-sm uppercase'>
-          <tr>
-            <th scope='col' className='table-style w-[5%]'>
+      <table className='payment-table min-w-full border-collapse border text-left text-sm text-gray-500'>
+        <thead className='bg-dark text-center text-sm uppercase lg:text-base'>
+          <tr className='payment-table-header'>
+            <th scope='col' className='table-th-style w-[5%]'>
               ID
             </th>
-            <th scope='col' className='table-style w-[20%]'>
+            <th scope='col' className='table-th-style w-[20%]'>
               単価
             </th>
-            <th scope='col' className='table-style w-[20%]'>
+            <th scope='col' className='table-th-style w-[20%]'>
               購入日
             </th>
-            <th scope='col' className='table-style w-[20%]'>
+            <th scope='col' className='table-th-style w-[20%]'>
               スターテス
             </th>
           </tr>
@@ -54,13 +56,13 @@ const TablePayment = ({ data }: TablePaymentProps) => {
           {data?.map((item: PaymentType) => (
             <tr
               onClick={() => handleClickRowTable(item)}
-              className='cursor-pointer text-center hover:bg-white'
+              className='payment-table-body cursor-pointer text-center text-sm hover:bg-white lg:text-base'
               key={item.id}
             >
-              <td className='table-style'>{item.id}</td>
-              <td className='table-style'>{item.amount}</td>
-              <td className='table-style'>{moment(item.created_at).format('MM/DD/YYYY')}</td>
-              <td className='table-style'>{handleGetStatusPayment(item.status)}</td>
+              <td className='table-td-style'>{item.id}</td>
+              <td className='table-td-style'>{formatNumberWithCommas(item.amount as number)}</td>
+              <td className='table-td-style'>{moment(item.created_at).format('MM/DD/YYYY')}</td>
+              <td className='table-td-style'>{handleGetStatusPayment(item.status)}</td>
             </tr>
           ))}
         </tbody>

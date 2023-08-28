@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { CadidateItem } from '~/models/cadidates'
-import { useFetchCadidateDetail } from '~/services/cadidatesAPI'
+import { fetchCadidateDetail } from '~/services/cadidatesAPI'
 
 const CandidateDetail = () => {
   const params = useParams()
   const idCandidate = params.id
 
   const { data: detailcadidate } = useQuery<CadidateItem>(['cadidateDetail', idCandidate], () =>
-    useFetchCadidateDetail(`${idCandidate}`)
+    fetchCadidateDetail(`${idCandidate}`)
   )
 
   return (
