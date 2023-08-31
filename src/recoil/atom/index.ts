@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { EventItem } from '~/models/Events'
-import { Cadidates } from '~/models/cadidates'
+import { FlowiseCandidate } from '~/models/candidates.ts'
 
 export const countState = atom({
   key: 'count',
@@ -14,11 +14,7 @@ export const loading = atom({
 
 export const toast = atom({
   key: 'toast',
-  default: {
-    message: '',
-    type: '',
-    show: false
-  }
+  default: ''
 })
 
 export const eventDetail = atom({
@@ -26,7 +22,7 @@ export const eventDetail = atom({
   default: {} as EventItem
 })
 
-export const cadidates = atom({
-  key: 'cadidates',
-  default: [] as Cadidates
+export const candidates = atom({
+  key: 'candidates',
+  default: [] as FlowiseCandidate.Candidates
 })

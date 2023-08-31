@@ -42,7 +42,7 @@ function Carousel({ title, data }: Props) {
           centeredSlidesBounds
           loop
           autoplay={{
-            delay: 3000
+            delay: 2000
           }}
           breakpoints={breakpoints}
           className='mySwiper'

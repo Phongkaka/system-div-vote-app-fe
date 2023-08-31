@@ -1,6 +1,6 @@
-import Countdown from '~/pages/Vote/components/CountDown'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
+import Countdown from '~/modules/Vote/CountDown'
 import { eventDetail } from '~/recoil/atom'
 
 interface Props {

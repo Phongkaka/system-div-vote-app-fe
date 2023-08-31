@@ -5,7 +5,7 @@ export const formatNumberWithCommas = (number: number) => {
   if (!isNaN(number)) {
     return '¥' + number.toLocaleString('en-US')
   }
-  return 'null'
+  return 0
 }
 
 export const isCustomHeaderFooter = (location: { pathname: string }, routerPaths: any[]) => {

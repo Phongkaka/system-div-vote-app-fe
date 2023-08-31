@@ -1,3 +1,4 @@
+import { FlowiseCandidate } from '~/models/candidates.ts'
 import { EventItem } from '~/models/Events'
 import { http } from '~/utils/https'
 
@@ -23,4 +24,10 @@ const fetchPointTypes = async () => {
   return response
 }
 
-export { fetchEvents, fetchEventDetail, fetchPointTypes }
+const voteCandidate = async (params: FlowiseCandidate.IVoteCandidate) => {
+  const response = await http.post('/users/me/vote', params)
+
+  return response.data
+}
+
+export { fetchEvents, fetchEventDetail, fetchPointTypes, voteCandidate }

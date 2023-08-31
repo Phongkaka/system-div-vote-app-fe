@@ -4,7 +4,7 @@
 
 @layer components {
   .table-th-style {
-    @apply border border-[#D9D9D9] px-1 text-white sm:px-5 py-2;
+    @apply border border-[#D9D9D9] px-1 py-2 text-white sm:px-5;
   }
   .table-td-style {
     @apply border border-[#D9D9D9] px-1 py-2 text-black sm:px-5 sm:py-4;

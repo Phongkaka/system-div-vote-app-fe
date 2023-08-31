@@ -7,8 +7,8 @@ export const ROUTER = {
   ABOUT_PAGE: '/events/:slug',
   ACCOUNT_PAGE: '/account',
   FEEDBACK_PAGE: '/feedback',
-  CADIDATE_PAGE: '/candidate',
-  CADIDATE_DETAIL: '/candidate/:id'
+  Candidate_PAGE: '/candidate',
+  Candidate_DETAIL: '/candidate/:id'
 }
 
 //======================

@@ -1,5 +1,4 @@
-import axios, { InternalAxiosRequestConfig, AxiosError } from 'axios'
-import Swal from 'sweetalert2'
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { refreshToken } from '~/services/api'
 
 const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
@@ -15,8 +14,8 @@ const errorInterceptor = async (
 ): Promise<string> => {
   if (error.response) {
     const statusCode = error.response.status
+    console.log(error)
     switch (statusCode) {
-      case 422:
       case 401:
         // handle validation errors
         if (error?.response?.data?.message === 'TOKEN_EXPIRED') {
@@ -37,21 +36,10 @@ const errorInterceptor = async (
               return axios(originalRequest)
             }
           } catch (refreshError) {
-            // Handle refreshToken error
-            Swal.fire({
-              title: 'Error !',
-              text: 'Refresh token failed',
-              icon: 'error',
-              confirmButtonText: 'Ok'
-            })
+            console.log(error)
           }
         } else {
-          Swal.fire({
-            title: 'Error !',
-            text: error?.response?.data?.errors,
-            icon: 'error',
-            confirmButtonText: 'Ok'
-          })
+          console.log(error)
         }
         break
       default:

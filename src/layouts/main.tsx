@@ -1,17 +1,23 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import Header from '~/pages/Home/components/Header'
-import Footer from '~/pages/Home/components/Footer'
-import HeaderEvent from '~/components/HeaderEvent'
-import FooterEvent from '~/components/FooterEvent'
+import Footer from '~/layouts/components/Footer'
 import { ROUTER } from '~/constants/path'
 import { eventDetail } from '~/recoil/atom'
 import { useRecoilValue } from 'recoil'
+import Header from './components/Header'
+import HeaderEvent from './components/HeaderEvent'
+import FooterEvent from './components/FooterEvent'
 
 const MainLayout = () => {
   const location = useLocation()
   const event = useRecoilValue(eventDetail)
 
-  const isCustomHeaderFooter = [ROUTER.HOME_PAGE].includes(location.pathname)
+  const isCustomHeaderFooter = [
+    ROUTER.HOME_PAGE,
+    ROUTER.LOGIN_PAGE,
+    ROUTER.REGISTER_PAGE,
+    ROUTER.ACCOUNT_PAGE,
+    ROUTER.FEEDBACK_PAGE
+  ].includes(location.pathname)
 
   return (
     <>

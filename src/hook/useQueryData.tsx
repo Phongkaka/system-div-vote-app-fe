@@ -22,7 +22,7 @@ const useQueryData = (queryKey: string, apiCall: ApiCallFunction) => {
           return response.data || []
         }
 
-        throw new Error('Request was not successful')
+        return new Error('Request was not successful')
       } catch (error) {
         setLoading(false)
         throw new Error('Failed to fetch data')
@@ -35,7 +35,7 @@ const useQueryData = (queryKey: string, apiCall: ApiCallFunction) => {
           text: 'Failed to fetch data',
           icon: 'error',
           confirmButtonText: 'Ok'
-        })
+        }).then((r) => console.log(r))
       }
     }
   )

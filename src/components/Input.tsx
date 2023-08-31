@@ -16,7 +16,9 @@ const InputForward = forwardRef(
           ref={ref}
           className={
             `${props?.className}` +
-            `${props?.error ? ' border-red-700' : ' border-zinc-200'} form-control`
+            `${
+              props?.error ? ' border-red-700' : ' border-2 border-solid border-black'
+            } form-control`
           }
           onChange={props?.onChange}
           onBlur={props?.onBlur}

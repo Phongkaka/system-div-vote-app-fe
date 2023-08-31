@@ -6,4 +6,10 @@ const purchaseHistory = async () => {
   return data
 }
 
-export { purchaseHistory }
+const FetchUseMe = async () => {
+  const data = await http.get('/users/me')
+
+  return data
+}
+
+export { purchaseHistory, FetchUseMe }

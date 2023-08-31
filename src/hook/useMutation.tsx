@@ -4,17 +4,22 @@ import { AxiosResponse } from 'axios'
 import { useSetRecoilState } from 'recoil'
 import Swal from 'sweetalert2'
 
-import { isLoggedInState, userInfo } from '~/recoil/atom/persistRecoil'
-import { loading } from '~/recoil/atom'
+import { isLoggedInState, userInfo } from '~/recoil/atom/auth'
+import { loading, toast } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
 import { login, register } from '~/services/api'
 import { FeedbackFormData } from '~/models/feedbackFAQ'
 import { feedback } from '~/services/feedbackApi'
+import { voteCandidate } from '~/services/eventApi'
+
+const msgError = `メールアドレスまたはパスワードに誤りがあります。
+もう一度入力してください。`
 
 const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogin, string> => {
   const setLoading = useSetRecoilState(loading)
   const setIsLogged = useSetRecoilState(isLoggedInState)
   const setUserInfo = useSetRecoilState(userInfo)
+  const setStateToast = useSetRecoilState(toast)
 
   return useMutation(
     async (params: Flowise.ILogin) => {
@@ -39,12 +44,7 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
       },
       onError: () => {
         setLoading(false)
-        Swal.fire({
-          title: 'Error !',
-          text: 'Password or email not correct',
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
+        setStateToast(msgError)
       }
     }
   )
@@ -98,4 +98,8 @@ const useQueryFeedback = (): UseMutationResult<AxiosResponse, string, FeedbackFo
   return useCustomMutation(feedback, 'Feedback success', 'Feedback failed')
 }
 
-export { useQueryLogin, useQueryRegister, useQueryFeedback }
+const useMutationVote = (): UseMutationResult<AxiosResponse, string, any, string> => {
+  return useCustomMutation(voteCandidate, 'Voting successful!', 'Vote failed')
+}
+
+export { useQueryLogin, useQueryRegister, useQueryFeedback, useMutationVote }

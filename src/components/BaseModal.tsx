@@ -1,9 +1,14 @@
+import React from 'react'
+import { ReactComponent as CloseIcon } from '~/common/assets/images/close.svg'
+
 interface ModalProps {
   isOpen: boolean
   onClose?: () => void
   children: React.ReactNode
   classWrapper?: string
-  showIcon?: boolean
+  textBtn?: string
+  isBtnTwo?: boolean
+  disableButton?: boolean
 }
 
 const BaseModal: React.FC<ModalProps> = ({
@@ -11,7 +16,9 @@ const BaseModal: React.FC<ModalProps> = ({
   onClose,
   children,
   classWrapper,
-  showIcon = true
+  textBtn,
+  isBtnTwo,
+  disableButton
 }) => {
   const closeModal = () => {
     onClose?.()
@@ -20,18 +27,34 @@ const BaseModal: React.FC<ModalProps> = ({
   return (
     <>
       {isOpen && (
-        <div className='fixed inset-0 z-50 flex items-center justify-center'>
+        <div className='fixed inset-0 z-[9999] flex items-center justify-center'>
           <div className='absolute inset-0 bg-gray-500 opacity-75'></div>
           <div className={`w-100 relative rounded-xl bg-white ${classWrapper}`}>
-            {showIcon && (
-              <button
-                className='absolute right-2 top-2 text-gray-600 hover:text-gray-800'
-                onClick={closeModal}
-              >
-                x
-              </button>
+            {disableButton && (
+              <div className='flex justify-end'>
+                <CloseIcon className='cursor-pointer' onClick={closeModal} />
+              </div>
             )}
             {children}
+            <div className='flex justify-center'>
+              {isBtnTwo && (
+                <button
+                  className='mr-5 block h-[48px] w-[200px] rounded-lg border font-bold text-black'
+                  onClick={closeModal}
+                >
+                  閉じる
+                </button>
+              )}
+
+              {!disableButton && (
+                <button
+                  className='block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
+                  onClick={closeModal}
+                >
+                  {textBtn || '閉じる'}
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

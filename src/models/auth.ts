@@ -41,4 +41,12 @@ export declare namespace Flowise {
     access_token: string
     refresh_token: string
   }
+
+  interface IUserMe {
+    id: number
+    name: string
+    email: string
+    phone_number: string
+    point: number
+  }
 }
