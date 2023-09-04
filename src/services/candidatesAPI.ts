@@ -18,4 +18,18 @@ const fetchSupporters = async (id: number): Promise<FlowiseCandidate.ISupporterR
   return response.data
 }
 
-export { fetchCandidateDetail, fetchCandidateSearch, fetchSupporters }
+const fetchCandidates = async (pageParam = 1): Promise<any> => {
+  const response = await http.get('/candidates', {
+    params: {
+      filter: {
+        order: {
+          point: 'desc'
+        }
+      },
+      page: pageParam
+    }
+  })
+  return response
+}
+
+export { fetchCandidateDetail, fetchCandidateSearch, fetchSupporters, fetchCandidates }

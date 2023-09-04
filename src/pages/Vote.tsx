@@ -39,16 +39,16 @@ function Vote() {
   const setTotalPrice = useSetRecoilState(totalState)
   // fetch api Point types
   const { data: listBonus } = useQueryData('pointTypes', () => fetchPointTypes())
-  const { data } = useQuery<FlowiseCandidate.Candidates>(['candidate', param], () =>
-    fetchCandidateSearch(param)
-  )
-  const setCandidateList = useSetRecoilState(candidates)
+  // const { data } = useQuery<FlowiseCandidate.Candidates>(['candidate', param], () =>
+  //   fetchCandidateSearch(param)
+  // )
+  // const setCandidateList = useSetRecoilState(candidates)
   const event = useEventDetails({ slug })
 
-  useEffect(() => {
-    if (!data) return
-    setCandidateList(data)
-  }, [data, setCandidateList])
+  // useEffect(() => {
+  //   if (!data) return
+  //   setCandidateList(data)
+  // }, [data, setCandidateList])
 
   useEffect(() => {
     const newTotalPrice = calculateTotalPrice(cartProducts)

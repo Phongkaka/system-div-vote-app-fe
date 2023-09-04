@@ -24,5 +24,5 @@ export const eventDetail = atom({
 
 export const candidates = atom({
   key: 'candidates',
-  default: [] as FlowiseCandidate.Candidates
+  default: [] as any
 })
