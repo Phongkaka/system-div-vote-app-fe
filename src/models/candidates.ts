@@ -1,6 +1,7 @@
 export declare namespace FlowiseCandidate {
   interface ICandidateItem {
     id: number
+    top: number
     avatar: string
     name: string
     point: number
@@ -36,7 +37,6 @@ export declare namespace FlowiseCandidate {
         like?: string
       }
     }
-    order?: any
     limit?: number
   }
 

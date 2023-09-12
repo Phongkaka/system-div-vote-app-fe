@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import Countdown from '~/modules/Vote/CountDown'
@@ -6,12 +7,28 @@ import { eventDetail } from '~/recoil/atom'
 interface Props {
   isCountDown?: boolean
   targetDate?: Date
+  start_time?: Date
+  end_time?: Date
 }
 
-const targetDateDefault = new Date('2023-12-31T23:59:59')
-
-const VotingTime = ({ isCountDown, targetDate }: Props) => {
+const VotingTime = ({ isCountDown, start_time, end_time }: Props) => {
   const event = useRecoilValue(eventDetail)
+
+  const formatTime = (inputDate: Date | undefined) => {
+    if (inputDate) {
+      const formattedDate = moment(inputDate, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD HH:mm')
+      return formattedDate
+    }
+    return 'MM/DD/YYYY'
+  }
+
+  const targetDateCountDown = (end_time: Date | undefined) => {
+    if (end_time) {
+      return new Date(end_time)
+    }
+    return undefined
+  }
+
   return (
     <div className='flex flex-grow flex-col items-center justify-end lg:w-1/3'>
       <div className=' flex h-full w-full flex-col justify-end gap-10'>
@@ -22,9 +39,9 @@ const VotingTime = ({ isCountDown, targetDate }: Props) => {
           </div>
 
           <div className='200 flex flex-grow flex-col items-center rounded-br-lg rounded-tr-lg bg-white p-4'>
-            <p className='text-base lg:text-lg'>2023/08/01 16:00</p>
+            <p className='text-base lg:text-lg'>{formatTime(start_time)}</p>
             <span className='inline-block rotate-90 transform'>〜</span>
-            <p className='text-base lg:text-lg'>2023/08/01 16:00</p>
+            <p className='text-base lg:text-lg'>{formatTime(end_time)}</p>
           </div>
         </div>
         {isCountDown ? (
@@ -32,7 +49,7 @@ const VotingTime = ({ isCountDown, targetDate }: Props) => {
             <h3 className='mb-4 rounded-lg bg-dark px-4 py-1 text-lg font-bold text-white'>
               WEB投票終了まであと
             </h3>
-            <Countdown targetDate={targetDate || targetDateDefault} />
+            <Countdown targetDate={targetDateCountDown(end_time) || new Date()} />
           </div>
         ) : (
           <Link

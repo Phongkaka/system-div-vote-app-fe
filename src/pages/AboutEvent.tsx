@@ -23,14 +23,18 @@ function AboutEvent() {
   return (
     <Container>
       <div className='upcoming__event--page'>
-        <VotingTimeEvent banner={event?.banner} />
+        <VotingTimeEvent
+          banner={event?.banner}
+          start_time={event.start_time}
+          end_time={event.end_time}
+        />
         <div className='mb-10 grid gap-5 lg:grid-cols-2 lg:gap-10 lg:border-b-[2px] lg:border-gray-200 lg:pb-10'>
-          <Guide title='概要' content={event?.about_desc} />
-          <Guide title='スケジュール' content={event?.schedule_desc} />
+          <Guide title='概要' content={event?.about_desc} id='overview' />
+          <Guide title='スケジュール' content={event?.schedule_desc} id='schedule' />
         </div>
         <div className='grid  gap-5 lg:grid-cols-2 lg:gap-10'>
-          <Guide title='投票ルール' content={event?.vote_rule_desc} />
-          <Guide title='賞品' content={event?.reward_desc} />
+          <Guide title='投票ルール' content={event?.vote_rule_desc} id='rule' />
+          <Guide title='賞品' content={event?.reward_desc} id={'reward'} />
         </div>
       </div>
     </Container>

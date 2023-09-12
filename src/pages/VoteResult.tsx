@@ -1,14 +1,24 @@
-import bannerImg from '~/common/assets/images/event-02.jpg'
-import Banner from '~/layouts/components/Banner'
-import CandidateEvent from '~/modules/VoteResult/CandidateEvent'
+import { useRecoilValue } from 'recoil'
+import VotingTimeEvent from '~/components/VotingTimeEvent'
+import Container from '~/layouts/components/Container'
+import { FlowiseCandidate } from '~/models/candidates'
+import Candidate from '~/modules/Vote/TabsVote/components/BlockRank/Candidate'
 import InforResult from '~/modules/VoteResult/InforResult'
 import Title from '~/modules/VoteResult/Title'
+import { eventDetail } from '~/recoil/atom'
 
 function AboutEvent() {
+  const event = useRecoilValue(eventDetail)
   return (
-    <>
+    <Container>
       <div className='upcoming__event--page'>
-        <Banner img={bannerImg} />
+        <div className='time__vote'>
+          <VotingTimeEvent
+            banner={event?.banner}
+            start_time={event.start_time}
+            end_time={event.end_time}
+          />
+        </div>
         <div className='border-b border-[#ccc] pb-8'>
           <Title title='投票結果発表' />
           <p className='mx-auto my-auto w-11/12 leading-1.8 xl:w-[1024px]'>
@@ -21,48 +31,30 @@ function AboutEvent() {
           </p>
         </div>
         <div className='border-b border-[#ccc] pb-8 pt-12'>
-          <Title title='ミスモデルプレス' />
-          <ul className='m-auto mt-12 grid w-10/12 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-          </ul>
-        </div>
-        <div className='border-b border-[#ccc] pb-8 pt-12'>
-          <Title title='ミス 部門' />
-          <ul className='m-auto mt-12 grid w-10/12 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-            <li className='flex justify-center'>
-              <CandidateEvent />
-            </li>
-          </ul>
+          {event?.rank_types?.map((itemRankType: any, index) => (
+            <div key={index}>
+              <Title title={event.name} />
+              <ul className='m-auto mt-5 flex flex-wrap justify-between'>
+                {itemRankType?.candidates?.map((item: FlowiseCandidate.ICandidateItem) => (
+                  <li className='relative w-full lg:w-[48%]' key={item.id}>
+                    <Candidate
+                      id={item.id}
+                      social_links={item.social_links}
+                      candidateImg={item.avatar}
+                      numRank={item.top}
+                      numberVote={item.point}
+                      nameCandidate={item.name}
+                      nameCandidateDetail={item.name}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         <InforResult />
       </div>
-    </>
+    </Container>
   )
 }
 

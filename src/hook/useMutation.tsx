@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 import { isLoggedInState, userInfo } from '~/recoil/atom/auth'
 import { loading, toast } from '~/recoil/atom'
 import { Flowise } from '~/models/auth'
-import { login, register } from '~/services/api'
+import { forgotPassword, login, register, resetPassword } from '~/services/api'
 import { FeedbackFormData } from '~/models/feedbackFAQ'
 import { feedback } from '~/services/feedbackApi'
 import { voteCandidate } from '~/services/eventApi'
@@ -53,7 +53,8 @@ const useQueryLogin = (): UseMutationResult<AxiosResponse, string, Flowise.ILogi
 const useCustomMutation = <T, P>(
   mutationFn: (params: P) => Promise<T>,
   successMessage: string,
-  errorMessage: string
+  errorMessage: string,
+  isNotSwal?: boolean
 ): UseMutationResult<T, string, P, string> => {
   const setLoading = useSetRecoilState(loading)
 
@@ -65,7 +66,7 @@ const useCustomMutation = <T, P>(
     {
       onSuccess: () => {
         Swal.fire({
-          title: 'Success',
+          title: '成功',
           text: successMessage,
           icon: 'success',
           confirmButtonText: 'Ok'
@@ -74,12 +75,14 @@ const useCustomMutation = <T, P>(
       },
       onError: () => {
         setLoading(false)
-        Swal.fire({
-          title: 'Error!',
-          text: errorMessage,
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
+        if (!isNotSwal) {
+          Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          })
+        }
       }
     }
   )
@@ -91,15 +94,48 @@ const useQueryRegister = (): UseMutationResult<
   Flowise.IRegister,
   string
 > => {
-  return useCustomMutation(register, 'Registration success', 'Registration failed')
+  return useCustomMutation(register, '登録完了', '登録に失敗しました')
+}
+
+const useQueryForgotPassword = (): UseMutationResult<
+  AxiosResponse,
+  string,
+  Flowise.IForGotPassWordData,
+  string
+> => {
+  return useCustomMutation(
+    forgotPassword,
+    '電子メールリセットパスワードを正常に送信してください！',
+    'メールの送信に失敗しました'
+  )
+}
+
+const useQueryResetPassword = (): UseMutationResult<
+  AxiosResponse,
+  string,
+  Flowise.IResetPasswordData,
+  string
+> => {
+  return useCustomMutation(
+    resetPassword,
+    'パスワードの成功をリセットします',
+    'パスワードのリセットに失敗しました'
+  )
 }
 
 const useQueryFeedback = (): UseMutationResult<AxiosResponse, string, FeedbackFormData, string> => {
-  return useCustomMutation(feedback, 'Feedback success', 'Feedback failed')
+  return useCustomMutation(feedback, 'フィードバックの成功', 'フィードバックに失敗しました')
 }
 
 const useMutationVote = (): UseMutationResult<AxiosResponse, string, any, string> => {
-  return useCustomMutation(voteCandidate, 'Voting successful!', 'Vote failed')
+  return useCustomMutation(voteCandidate, '投票成功しました！', '投票に失敗しました', true)
 }
 
-export { useQueryLogin, useQueryRegister, useQueryFeedback, useMutationVote }
+export {
+  useQueryLogin,
+  useQueryRegister,
+  useQueryFeedback,
+  useMutationVote,
+  useQueryResetPassword,
+  useQueryForgotPassword
+}

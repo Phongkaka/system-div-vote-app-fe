@@ -73,7 +73,7 @@ export default function Login() {
               placeholder={''}
             />
           </div>
-          <Link to='/foret-password' className='text-sm text-dark underline'>
+          <Link to='/forgot-password' className='text-sm text-dark underline'>
             パスワードを忘れた方
           </Link>
           <div className='my-7'>

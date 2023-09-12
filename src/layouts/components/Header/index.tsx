@@ -35,7 +35,7 @@ export default function Header() {
     }
   }
   return (
-    <Container>
+    <Container className='w-[90%]'>
       <nav className='my-10 w-full rounded-lg bg-green shadow'>
         <div className='lg:max-w-8xl mx-auto justify-between px-4 md:flex md:items-center md:px-8'>
           <div>
@@ -76,29 +76,29 @@ export default function Header() {
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>Term of service</Link>
+                  <Link to='#'>サービス期間</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to={ROUTER.FEEDBACK_PAGE}>Contact</Link>
+                  <Link to={ROUTER.FEEDBACK_PAGE}>接触</Link>
                 </li>
 
                 {!isLoggedIn ? (
                   <>
-                    <li className='text-black-600 block font-bold md:hidden'>
-                      <Link to={ROUTER.REGISTER_PAGE}>Sign Up</Link>
+                    <li className='text-black-600 block font-bold'>
+                      <Link to={ROUTER.REGISTER_PAGE}>サインアップ</Link>
                     </li>
-                    <li className='text-black-600 block font-bold md:hidden'>
-                      <Link to={ROUTER.LOGIN_PAGE}>Login</Link>
+                    <li className='text-black-600 block font-bold'>
+                      <Link to={ROUTER.LOGIN_PAGE}>ログイン</Link>
                     </li>
                   </>
                 ) : (
                   <>
                     <li className='text-black-600 block font-bold md:hidden'>
-                      <Link to={ROUTER.ACCOUNT_PAGE}>Profile</Link>
+                      <Link to={ROUTER.ACCOUNT_PAGE}>プロフィール</Link>
                     </li>
                     <li className='text-black-600 block font-bold md:hidden'>
                       <button type='button' onClick={handleLogout}>
-                        Logout
+                        ログアウト
                       </button>
                     </li>
                     <li className='text-black-600 hidden font-bold md:block'>
@@ -123,14 +123,14 @@ export default function Header() {
                               className='flex w-full items-center px-4 font-light hover:text-green'
                               to={ROUTER.ACCOUNT_PAGE}
                             >
-                              Profile
+                              プロフィール
                             </Link>
                             <button
                               className='flex w-full items-center px-4 font-light hover:text-green'
                               type='button'
                               onClick={handleLogout}
                             >
-                              Logout
+                              ログアウト
                             </button>
                           </div>
                         )}

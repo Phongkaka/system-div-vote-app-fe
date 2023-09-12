@@ -18,15 +18,21 @@ const fetchSupporters = async (id: number): Promise<FlowiseCandidate.ISupporterR
   return response.data
 }
 
-const fetchCandidates = async (pageParam = 1): Promise<any> => {
+const fetchCandidates = async (
+  limit: number | string,
+  rank_type_id: number | null
+): Promise<any> => {
   const response = await http.get('/candidates', {
     params: {
       filter: {
         order: {
           point: 'desc'
-        }
-      },
-      page: pageParam
+        },
+        where: {
+          rank_type_id
+        },
+        limit: limit
+      }
     }
   })
   return response

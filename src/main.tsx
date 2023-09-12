@@ -1,4 +1,3 @@
-import React from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
@@ -21,15 +20,13 @@ const queryClient = new QueryClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App>
-            <AppRouter />
-          </App>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </RecoilRoot>
-  </React.StrictMode>
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App>
+          <AppRouter />
+        </App>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </RecoilRoot>
 )

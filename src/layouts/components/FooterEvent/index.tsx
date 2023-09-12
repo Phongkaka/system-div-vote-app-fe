@@ -17,9 +17,7 @@ export default function FooterEvent({ logoImg, bannerImg }: Props) {
       <Link className='my-5 block pb-1 text-center text-sm text-[#473A3A]' to='#'>
         利用規約
       </Link>
-      <p className='bg-[#E3E3E3] text-center text-xs'>
-        Copyright 2022 KYOTO COLLECTION×Ranking Master
-      </p>
+      <p className='bg-[#E3E3E3] text-center text-xs'>Copyright 2023 Vote App</p>
     </footer>
   )
 }

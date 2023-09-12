@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 import { refreshToken } from '~/services/api'
+import Swal from 'sweetalert2'
 
 const authInterceptor = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
   const { userInfo } = JSON.parse(localStorage.getItem('userInfo') || '{}')
@@ -14,7 +15,6 @@ const errorInterceptor = async (
 ): Promise<string> => {
   if (error.response) {
     const statusCode = error.response.status
-    console.log(error)
     switch (statusCode) {
       case 401:
         // handle validation errors
@@ -41,6 +41,14 @@ const errorInterceptor = async (
         } else {
           console.log(error)
         }
+        break
+      case 429:
+        Swal.fire({
+          title: 'Error !',
+          text: error?.response?.data?.errors,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })
         break
       default:
         // handle other errors

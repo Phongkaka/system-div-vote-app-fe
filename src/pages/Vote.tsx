@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
 import Container from '~/layouts/components/Container'
-import { useQuery } from 'react-query'
-import { fetchCandidateSearch } from '~/services/candidatesAPI.ts'
-import { FlowiseCandidate } from '~/models/candidates.ts'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { candidates } from '~/recoil/atom'
+import { eventDetail } from '~/recoil/atom'
 import VotingTimeEvent from '~/components/VotingTimeEvent'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useEventDetails from '~/hook/useEventDetails'
 import useQueryData from '~/hook/useQueryData'
 import { fetchPointTypes } from '~/services/eventApi'
@@ -19,14 +16,8 @@ import TabsVote from '~/modules/Vote/TabsVote'
 import Title from '~/modules/Home/Title'
 import MenuBonus from '~/modules/Vote/MenuBonus'
 import ShoppingCart from '~/modules/Vote/ShoppingCart'
-
-const param: FlowiseCandidate.ICandidateSearch = {
-  filter: {
-    where: {},
-    order: { point: 'desc' },
-    limit: 0
-  }
-}
+import { paymentPaid } from '~/services/payment'
+import { DialogSuccess } from '~/components/Dialog'
 
 const calculateTotalPrice = (products: Product[]): number => {
   return products.reduce((total, product) => total + product.price * product.quantity, 0)
@@ -34,21 +25,24 @@ const calculateTotalPrice = (products: Product[]): number => {
 
 function Vote() {
   const { slug } = useParams()
+  const search = window.location.search
+  const params = new URLSearchParams(search)
+  const session_id = params.get('session_id')
   const [isCartVisible, setIsCartVisible] = useState(false)
   const [cartProducts, setCartProducts] = useRecoilState(cartState)
+  const [isShowDialogSuccess, setIsShowDialogSuccess] = useState(false)
   const setTotalPrice = useSetRecoilState(totalState)
+  const navigate = useNavigate()
   // fetch api Point types
   const { data: listBonus } = useQueryData('pointTypes', () => fetchPointTypes())
-  // const { data } = useQuery<FlowiseCandidate.Candidates>(['candidate', param], () =>
-  //   fetchCandidateSearch(param)
-  // )
-  // const setCandidateList = useSetRecoilState(candidates)
-  const event = useEventDetails({ slug })
 
-  // useEffect(() => {
-  //   if (!data) return
-  //   setCandidateList(data)
-  // }, [data, setCandidateList])
+  const event = useEventDetails({ slug })
+  const setEventDetail = useSetRecoilState(eventDetail)
+
+  useEffect(() => {
+    if (!event) return
+    setEventDetail(event)
+  }, [event, setEventDetail])
 
   useEffect(() => {
     const newTotalPrice = calculateTotalPrice(cartProducts)
@@ -76,12 +70,34 @@ function Vote() {
     }
   }
 
+  useEffect(() => {
+    if (session_id) {
+      const fetchPaymentPaid = async () => {
+        const data = await paymentPaid(session_id)
+        if (data) {
+          setIsShowDialogSuccess(true)
+        }
+      }
+      fetchPaymentPaid()
+    }
+  }, [session_id])
+
+  const handleCloseModalSuccess = () => {
+    setIsShowDialogSuccess(false)
+    navigate(`/events/${slug}/vote`)
+  }
+
   return (
     <Container>
       <div>
         <div className='vote--page'>
           <div className='time__vote'>
-            <VotingTimeEvent banner={event?.banner} isCountDown />
+            <VotingTimeEvent
+              banner={event?.banner}
+              isCountDown
+              start_time={event.start_time}
+              end_time={event.end_time}
+            />
           </div>
           <VotingFlow />
           <TabsVote />
@@ -114,6 +130,7 @@ function Vote() {
         )}
       </div>
       {isCartVisible && <ShoppingCart toggleCart={toggleCart} />}
+      <DialogSuccess isOpen={isShowDialogSuccess} setClose={handleCloseModalSuccess} />
     </Container>
   )
 }

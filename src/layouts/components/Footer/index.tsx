@@ -34,9 +34,7 @@ const Footer = () => {
             </Link>
           </li>
         </ul>
-        <p className='pt-14 text-xs text-white text-opacity-50'>
-          ©FAIR NEXT INNOVATION 2020-2022.
-        </p>
+        <p className='pt-14 text-xs text-white text-opacity-50'>Copyright 2023 Vote App</p>
       </Container>
     </footer>
   )

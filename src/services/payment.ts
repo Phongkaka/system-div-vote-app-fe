@@ -6,4 +6,9 @@ const checkoutSessionPayment = async (param: ICheckOutSession): Promise<ICheckOu
   return response.data
 }
 
-export { checkoutSessionPayment }
+const paymentPaid = async (session_id: string | null): Promise<ICheckOutSession> => {
+  const response = await http.get(`/payments/paid/${session_id}`)
+  return response.data
+}
+
+export { checkoutSessionPayment, paymentPaid }

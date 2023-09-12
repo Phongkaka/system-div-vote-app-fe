@@ -2,25 +2,22 @@ import Carousel from '~/layouts/components/Carousel'
 import { fetchEvents } from '~/services/eventApi'
 import useQueryData from '~/hook/useQueryData'
 import Events from '~/modules/Home/EventEnd/Events'
+import { TEXT } from '~/constants/path'
 
 function Home() {
-  const { data: status0 } = useQueryData('status0', () => fetchEvents(0, 1))
-  const { data: status1 } = useQueryData('status1', () => fetchEvents(1, 1))
-  const { data: status2 } = useQueryData('status2', () => fetchEvents(2, 1))
+  const { data: comingSoon } = useQueryData('status0', () => fetchEvents(TEXT.ALL, 0))
+  const { data: progress } = useQueryData('status1', () => fetchEvents(TEXT.ALL, 1))
+  const { data: finished } = useQueryData('status2', () => fetchEvents(TEXT.ALL, 2))
 
   return (
     <div className='home--page'>
-      {status0 && <Carousel data={status1?.data} />}
-      {status2 && (
+      {comingSoon && <Carousel data={comingSoon} />}
+      {progress && (
         <div className='mb-[60px]'>
-          <Events
-            topTitle='RECENTLY FINISHED'
-            title='開催予定・開催中のイベント'
-            data={status2?.data}
-          />
+          <Events topTitle='進行中' title='開催予定・開催中のイベント' data={progress} />
         </div>
       )}
-      {status0 && <Events topTitle='FINISHED' title='終了したイベント' data={status0?.data} />}
+      {finished && <Events topTitle='終了した' title='終了したイベント' data={finished} />}
     </div>
   )
 }

@@ -1,15 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
-import BaseModal from '~/components/BaseModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import Container from '~/layouts/components/Container'
 import crownIcSecond from '~/common/assets/images/ic_02.png'
 import crownIcThirst from '~/common/assets/images/ic_03.png'
 import crownIc from '~/common/assets/images/ic_crown.png'
 import voteIc from '~/common/assets/images/ic_vote.png'
 import { FlowiseCandidate } from '~/models/candidates'
 import { fetchSupporters } from '~/services/candidatesAPI'
-import Loading from '~/components/Loading'
 import { FetchUseMe } from '~/services/userApi'
 import { userInfo } from '~/recoil/atom/auth'
 import { useRecoilValue } from 'recoil'
@@ -20,15 +17,19 @@ import InputForward from '~/components/Input'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { initVoteValues, voteValidate } from '~/common/validation/vote/config'
 import { useMutationVote } from '~/hook/useMutation'
+import { ReactComponent as LoadingIcon } from '~/common/assets/images/loading.svg'
+import { DialogVoteError } from '~/components/Dialog'
+import Modal from '~/components/Modal'
 
 interface Props {
   id?: number
   numberVote?: number
-  numRank?: string | undefined
+  numRank: number
   nameCandidate?: string | undefined
   nameCandidateDetail?: string | undefined
   candidateImg?: string | undefined
   social_links?: FlowiseCandidate.ISocialLink[]
+  refreshCandidate?: () => void
 }
 
 const Candidate = ({
@@ -38,13 +39,15 @@ const Candidate = ({
   nameCandidate,
   candidateImg,
   nameCandidateDetail,
-  social_links
+  social_links,
+  refreshCandidate
 }: Props) => {
   const user = useRecoilValue(userInfo)
   const isAuthenticated = !!user?.access_token
   const [modalSupporterOpen, setModalSupporterOpen] = useState(false)
   const navigate = useNavigate()
   const [voteModalOpen, setVoteModalOpen] = useState(false)
+  const [isOpenModalErrorVote, setIsOpenModalErrorVote] = useState(false)
 
   const [listSupporters, setListSupporters] = useState<FlowiseCandidate.ISupporterResponse | null>(
     null
@@ -52,7 +55,7 @@ const Candidate = ({
   const [useMe, setUserMe] = useState<Flowise.IUserMe | null>(null)
 
   const [loadingSupporters, setLoadingSupporters] = useState(false) // Control loading state
-  const { mutate: voteAction, isSuccess } = useMutationVote()
+  const { mutate: voteAction, isSuccess, isError } = useMutationVote()
 
   const methods = useForm({
     mode: 'all',
@@ -74,7 +77,7 @@ const Candidate = ({
   const handleShowSupporters = async () => {
     openModal()
 
-    if (listSupporters || loadingSupporters || id === undefined) {
+    if (loadingSupporters || id === undefined) {
       return
     }
 
@@ -106,23 +109,28 @@ const Candidate = ({
     }
   }
 
-  const onSubmitVote = async (data: { number_points: number }) => {
-    await voteAction({
+  const onSubmitVote = (data: { number_points: number }) => {
+    voteAction({
       number_points: data.number_points,
       candidate_id: id
     })
+  }
+
+  useEffect(() => {
     if (isSuccess) {
       setVoteModalOpen(false)
+      refreshCandidate && refreshCandidate()
     }
-  }
+    if (isError) {
+      setIsOpenModalErrorVote(true)
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, isError])
 
   return (
     <>
       <div className='candidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
         <div className='left__candidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
-          {/* <Link to={`${ROUTER.Candidate_PAGE}/${id}`} className='mb-4 block w-[122px] cursor-pointer'>
-          <img className='w-full rounded-md' src={candidateImg} alt='candidate' />
-        </Link> */}
           <div className='mb-4 block w-[122px]'>
             <img className='w-full rounded-md' src={candidateImg} alt='candidate' />
           </div>
@@ -168,58 +176,51 @@ const Candidate = ({
         </div>
       </div>
 
-      <BaseModal isOpen={modalSupporterOpen} onClose={closeModal} classWrapper='p-[50px]'>
-        <Container>
-          <div className='flex flex-wrap justify-center'>
-            <h3 className='mb-10 text-[22px] font-bold text-black'>
-              ダミーお名前 <i className='mr-4 text-sm not-italic'>さん</i> サポーターTOP10
-            </h3>
-            <ul className='top__supporter mb-10 flex w-full flex-wrap justify-center'>
-              {loadingSupporters ? (
-                <Loading />
-              ) : (
-                listSupporters?.map((item: FlowiseCandidate.ISupporters, index: number) => {
-                  const crownIcons = [crownIc, crownIcSecond, crownIcThirst]
+      <Modal isOpen={modalSupporterOpen} onClose={closeModal} classWrapper='w-full lg:w-[1024px]'>
+        <div className='flex flex-wrap justify-center'>
+          <h3 className='mb-10 text-lg font-bold text-black lg:text-[22px]'>
+            ダミーお名前 <i className='mr-4 text-sm not-italic'>さん</i> サポーターTOP3
+          </h3>
+          <ul className='top__supporter mb-10 flex w-full flex-wrap justify-center'>
+            {loadingSupporters ? (
+              <LoadingIcon />
+            ) : (
+              listSupporters?.map((item: FlowiseCandidate.ISupporters, index: number) => {
+                const crownIcons = [crownIc, crownIcSecond, crownIcThirst]
 
-                  return (
-                    <li
-                      key={item.user?.id}
-                      className='mb-5 flex w-full justify-center text-xl font-bold'
-                    >
-                      <div className='flex items-center'>
-                        {index < 3 && (
-                          <img
-                            className='mr-2 h-[15px] w-[18px]'
-                            src={crownIcons[index]}
-                            alt={`top${index + 1}`}
-                          />
-                        )}
+                return (
+                  <li
+                    key={item.user?.id}
+                    className='mb-5 flex w-full justify-center text-xl font-bold'
+                  >
+                    <div className='flex items-center'>
+                      {index < 3 && (
+                        <img
+                          className='mr-2 h-[15px] w-[18px]'
+                          src={crownIcons[index]}
+                          alt={`top${index + 1}`}
+                        />
+                      )}
 
-                        <span>{index === 0 ? '1' : index === 1 ? '2' : '3'}位</span>
-                      </div>
-                      <span className='ml-4'>{item.user?.name} さん</span>
-                    </li>
-                  )
-                })
-              )}
-            </ul>
-          </div>
-        </Container>
-      </BaseModal>
-      <BaseModal
-        disableButton
-        isOpen={voteModalOpen}
-        onClose={() => setVoteModalOpen(false)}
-        classWrapper='p-[50px]'
-      >
+                      <span>{index + 1}位</span>
+                    </div>
+                    <span className='ml-4'>{item.user?.name} さん</span>
+                  </li>
+                )
+              })
+            )}
+          </ul>
+        </div>
+      </Modal>
+      <Modal disableButton isOpen={voteModalOpen} onClose={() => setVoteModalOpen(false)}>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitVote)} className='m-auto flex w-full flex-col'>
             <ul>
               <li>
-                <p className='text-lg font-bold'>name: {useMe?.name}</p>
+                <p className='text-lg font-bold'>名前: {useMe?.name}</p>
               </li>
               <li>
-                <p className='text-lg font-bold'>balance: {useMe?.point}</p>
+                <p className='text-lg font-bold'>バランス: {useMe?.point}</p>
               </li>
             </ul>
             <div className='mb-7 '>
@@ -237,11 +238,15 @@ const Candidate = ({
               type='submit'
               className='block h-[48px] rounded-lg bg-green px-5 font-bold text-black'
             >
-              Vote
+              投票する
             </button>
           </form>
         </FormProvider>
-      </BaseModal>
+      </Modal>
+      <DialogVoteError
+        isOpen={isOpenModalErrorVote}
+        setClose={() => setIsOpenModalErrorVote(false)}
+      />
     </>
   )
 }

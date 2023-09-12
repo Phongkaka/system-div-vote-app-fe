@@ -16,7 +16,9 @@ const MainLayout = () => {
     ROUTER.LOGIN_PAGE,
     ROUTER.REGISTER_PAGE,
     ROUTER.ACCOUNT_PAGE,
-    ROUTER.FEEDBACK_PAGE
+    ROUTER.FEEDBACK_PAGE,
+    ROUTER.FORGOT_PASSWORD,
+    ROUTER.RESET_PASSWORD
   ].includes(location.pathname)
 
   return (

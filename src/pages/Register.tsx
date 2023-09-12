@@ -48,6 +48,19 @@ export default function Register() {
             />
           </div>
           <div className='mb-4'>
+            <label htmlFor='phone' className='block text-sm font-semibold text-gray-800'>
+              phone
+            </label>
+            <InputForward
+              className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
+              {...register('phone')}
+              placeholder={''}
+              error={!!errors?.phone}
+              helperText={errors?.phone?.message}
+              type='text'
+            />
+          </div>
+          <div className='mb-4'>
             <label htmlFor='email' className='block text-sm font-semibold text-gray-800'>
               メールアドレス（確認用）
             </label>
@@ -73,19 +86,6 @@ export default function Register() {
               type='password'
             />
             <span className='text-xs text-dark'>※半角○文字以上</span>
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='phone' className='block text-sm font-semibold text-gray-800'>
-              phone
-            </label>
-            <InputForward
-              className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
-              {...register('phone')}
-              placeholder={''}
-              error={!!errors?.phone}
-              helperText={errors?.phone?.message}
-              type='text'
-            />
           </div>
           <div className='mb-4'>
             <label

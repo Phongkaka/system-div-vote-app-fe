@@ -4,6 +4,15 @@ export declare namespace Flowise {
     password?: string
   }
 
+  interface IForGotPassWordData {
+    email?: string
+  }
+  interface IResetPasswordData {
+    email?: string
+    new_password?: string
+    confirmPassword?: string
+  }
+
   interface ISelectType {
     id: number
     name: string

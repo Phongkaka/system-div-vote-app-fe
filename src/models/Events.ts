@@ -10,6 +10,9 @@ export interface EventItem {
   status?: number
   banner?: string
   link?: string
+  rank_types?: { id: number; name: string }[]
+  start_time?: Date
+  end_time?: Date
 }
 
 export interface PointType {

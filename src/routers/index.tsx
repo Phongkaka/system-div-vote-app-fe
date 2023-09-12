@@ -15,7 +15,8 @@ const VoteResult = lazy(() => import('~/pages/VoteResult'))
 const Vote = lazy(() => import('~/pages/Vote'))
 const Account = lazy(() => import('~/pages/Account'))
 const Feedback = lazy(() => import('~/pages/Feedback'))
-const AllDialog = lazy(() => import('~/pages/Alldialog'))
+const ForgotPassword = lazy(() => import('~/pages/ForgotPassword'))
+const ResetPassword = lazy(() => import('~/pages/ResetPassword'))
 
 const AppRouter = () => {
   const user = useRecoilValue(userInfo)
@@ -31,13 +32,14 @@ const AppRouter = () => {
         <Route path={ROUTER.VOTE_PAGE} element={<Vote />} />
         <Route path={ROUTER.LOGIN_PAGE} element={<Login />} />
         <Route path={ROUTER.REGISTER_PAGE} element={<Register />} />
-        <Route path='all-dialog' element={<AllDialog />} />
         <Route path={ROUTER.ABOUT_PAGE} element={voteResult ? <VoteResult /> : <AboutEvent />} />
         <Route
           path={ROUTER.ACCOUNT_PAGE}
           element={isAuthenticated ? <Account /> : <Navigate to={ROUTER.LOGIN_PAGE} />}
         />
         <Route path={ROUTER.FEEDBACK_PAGE} element={<Feedback />} />
+        <Route path={ROUTER.FORGOT_PASSWORD} element={<ForgotPassword />} />
+        <Route path={ROUTER.RESET_PASSWORD} element={<ResetPassword />} />
       </Route>
     </Routes>
   )

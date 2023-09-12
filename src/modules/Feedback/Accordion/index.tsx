@@ -50,7 +50,7 @@ const DefaultAccordion = ({ item, name }: DefaultAccordionProps) => {
   )
 }
 
-function IconAccordion({ open }: any) {
+function IconAccordion({ open }: { open: boolean; id: number }) {
   return (
     <>
       {open ? (

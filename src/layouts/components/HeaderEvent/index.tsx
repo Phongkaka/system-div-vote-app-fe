@@ -4,7 +4,8 @@ import Container from '~/layouts/components/Container'
 
 import twitterLogo from '~/common/assets/images/tw-logo.png'
 import menuHam from '~/common/assets/images/ic-menu.png'
-import { ROUTER } from '~/constants/path'
+import { useRecoilValue } from 'recoil'
+import { eventDetail } from '~/recoil/atom'
 
 interface Props {
   logoImg?: string | undefined
@@ -12,6 +13,8 @@ interface Props {
 
 export default function HeaderEvent({ logoImg }: Props) {
   const [navbar, setNavbar] = useState(false)
+  const event = useRecoilValue(eventDetail)
+
   return (
     <Container>
       <nav className='my-10 w-full rounded-lg bg-green shadow'>
@@ -54,22 +57,22 @@ export default function HeaderEvent({ logoImg }: Props) {
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>スケジュール</Link>
+                  <a href='#overview'>概要</a>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>投票ルール</Link>
+                  <a href='#schedule'>スケジュール</a>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>プライズ</Link>
+                  <a href='#rule'>投票ルール</a>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to={ROUTER.VOTE_PAGE}>投票ページ</Link>
+                  <a href='#reward'>プライズ</a>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>購入履歴</Link>
+                  <Link to={`/events/${event?.slug}/vote`}>投票ページ</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>お問い合わせ</Link>
+                  <Link to='/feedback'>お問い合わせ</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
                   <Link to='#'>

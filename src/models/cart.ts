@@ -12,4 +12,5 @@ export interface ICheckOutSession {
   }[]
   session_id?: string
   url?: string
+  redirect_url?: string
 }

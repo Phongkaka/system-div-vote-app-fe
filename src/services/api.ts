@@ -19,6 +19,18 @@ const register = async (params: Flowise.IRegister) => {
   return data
 }
 
+const forgotPassword = async (params: Flowise.IForGotPassWordData) => {
+  const data = await http.post('/auth/forgot-password', params)
+
+  return data
+}
+
+const resetPassword = async (params: Flowise.IResetPasswordData) => {
+  const data = await http.post('/auth/reset-password', params)
+
+  return data
+}
+
 const refreshToken = async (params: Flowise.RefreshToken): Promise<Flowise.RefreshTokenRes> => {
   const response: Flowise.RefreshTokenRes = await http.post('/auth/refresh', {
     refresh_token: params
@@ -26,4 +38,4 @@ const refreshToken = async (params: Flowise.RefreshToken): Promise<Flowise.Refre
   return response
 }
 
-export { login, logout, register, refreshToken }
+export { login, logout, register, refreshToken, resetPassword, forgotPassword }

@@ -22,17 +22,17 @@ const useQueryData = (queryKey: string, apiCall: ApiCallFunction) => {
           return response.data || []
         }
 
-        return new Error('Request was not successful')
+        return new Error('リクエストは成功しませんでした')
       } catch (error) {
         setLoading(false)
-        throw new Error('Failed to fetch data')
+        throw new Error('データの取得に失敗しました')
       }
     },
     {
       onError: () => {
         Swal.fire({
           title: 'Error!',
-          text: 'Failed to fetch data',
+          text: 'データの取得に失敗しました',
           icon: 'error',
           confirmButtonText: 'Ok'
         }).then((r) => console.log(r))

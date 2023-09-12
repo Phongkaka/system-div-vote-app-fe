@@ -8,9 +8,10 @@ interface Props {
   product: Product
   quantityChange: (id: number, quantity: number) => void
   removeCart: (id: number) => void
+  handleQuantityChangeInput: (id: number, quantity: number) => void
 }
 
-const CartItem = ({ product, quantityChange, removeCart }: Props) => {
+const CartItem = ({ product, quantityChange, removeCart, handleQuantityChangeInput }: Props) => {
   return (
     <li key={product.id} className='flex flex-col gap-5 py-6'>
       <div className='flex gap-4'>
@@ -39,7 +40,7 @@ const CartItem = ({ product, quantityChange, removeCart }: Props) => {
             className='w-16 appearance-none py-[5px] text-center text-lg outline-none'
             type='number'
             value={product.quantity}
-            onChange={() => {}}
+            onChange={(e) => handleQuantityChangeInput(product.id, e.target.value as any)}
           />
           <button
             className='cursor-pointer rounded-lg bg-black p-3 duration-100 hover:bg-blue-500'

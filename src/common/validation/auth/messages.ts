@@ -1,16 +1,16 @@
 export const messages = {
   required: {
-    email: 'email required',
-    password: 'password required',
-    name: 'name required',
-    phone: 'phone required',
-    confirmPassword: 'confirm password required'
+    email: '電子メールが必要です',
+    password: 'パスワードが必要',
+    name: '名前が必要です',
+    phone: '電話が必要です',
+    confirmPassword: '必要なパスワードを確認してください'
   },
   format: {
-    email: 'format email not correct',
-    phone: 'format phone number not correct',
-    passwordMatch: 'confirm password not match',
-    minLength: 'Minimum of 8 characters',
-    maxLength: 'Up to 12 characters'
+    email: 'フォーマットメールは正しくありません',
+    phone: 'フォーマット電話番号は正しくありません',
+    passwordMatch: 'パスワードが一致しないことを確認してください',
+    minLength: '最低8文字',
+    maxLength: '最大12文字'
   }
 }

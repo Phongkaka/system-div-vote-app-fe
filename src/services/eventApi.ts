@@ -2,11 +2,18 @@ import { FlowiseCandidate } from '~/models/candidates.ts'
 import { EventItem } from '~/models/Events'
 import { http } from '~/utils/https'
 
-const fetchEvents = async (status: number, page: number) => {
+const fetchEvents = async (limit?: number | string, status?: number | null) => {
   const response = await http.get('/events', {
     params: {
-      status: status,
-      page: page
+      filter: {
+        order: {
+          point: 'desc'
+        },
+        where: {
+          status
+        },
+        limit: limit
+      }
     }
   })
 

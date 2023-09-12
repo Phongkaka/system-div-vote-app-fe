@@ -8,7 +8,7 @@ const ItemEvent = ({ eventImg, linkPage }: Props) => {
   return (
     <div className='h-fit'>
       <Link to={linkPage}>
-        <img src={eventImg} className='h-[150px] w-full object-cover' alt='event' />
+        <img src={eventImg} className=' w-full align-top' alt='event' />
       </Link>
     </div>
   )
