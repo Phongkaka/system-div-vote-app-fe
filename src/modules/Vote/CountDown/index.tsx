@@ -6,12 +6,18 @@ interface CountdownProps {
 
 const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   const [timeRemaining, setTimeRemaining] = useState<number>(0)
+  const [eventEnded, setEventEnded] = useState<boolean>(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
       const currentTime = new Date().getTime()
       const difference = targetDate.getTime() - currentTime
       setTimeRemaining(Math.max(0, difference))
+
+      if (difference <= 0) {
+        setEventEnded(true)
+        clearInterval(interval)
+      }
     }, 1000)
 
     return () => clearInterval(interval)
@@ -37,7 +43,15 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     )
   }
 
-  return <div>{formatTime(timeRemaining)}</div>
+  return (
+    <div>
+      {eventEnded ? (
+        <div className='text-2xl'>イベントは終了しました</div>
+      ) : (
+        formatTime(timeRemaining)
+      )}
+    </div>
+  )
 }
 
 export default Countdown

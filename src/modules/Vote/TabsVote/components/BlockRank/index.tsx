@@ -12,21 +12,15 @@ const BlockRank = () => {
   const [candidates, setCandidates] = useState<FlowiseCandidate.ICandidateItem[]>([])
   const event = useRecoilValue(eventDetail)
   const [isLoading, setLoading] = useState<boolean>(false)
-  const [activeTab, setActiveTab] = useState<{ id: number; name: string }>({
-    id: 0,
-    name: ''
-  })
+  const [activeTab, setActiveTab] = useState<number>(0)
 
-  const handleTabClick = async (tabId: number, name: string) => {
+  const handleTabClick = async (tabId: number) => {
     try {
       setLoading(true)
       const response = await fetchCandidates(TEXT.ALL, tabId)
       const newCandidates = response.data
       setCandidates(newCandidates)
-      setActiveTab({
-        id: tabId,
-        name: name
-      })
+      setActiveTab(tabId)
     } catch (error) {
       console.log('error :>> ', error)
     } finally {
@@ -36,7 +30,7 @@ const BlockRank = () => {
 
   const refreshFetchCandidate = async () => {
     try {
-      const response = await fetchCandidates(TEXT.ALL, activeTab.id)
+      const response = await fetchCandidates(TEXT.ALL, activeTab)
       const newCandidates = response.data
       setCandidates(newCandidates)
     } catch (error) {
@@ -46,11 +40,7 @@ const BlockRank = () => {
 
   return (
     <div className='mt-10 [&>div]:pb-9'>
-      <PillTabs
-        tabs={event.rank_types || []}
-        onTabClick={handleTabClick}
-        activeTab={activeTab.id}
-      />
+      <PillTabs tabs={event.rank_types || []} onTabClick={handleTabClick} activeTab={activeTab} />
 
       {isLoading && (
         <div className='mt-10 flex w-full justify-center overflow-hidden'>
@@ -68,7 +58,7 @@ const BlockRank = () => {
                 candidateImg={candidate.avatar}
                 numRank={candidate.top}
                 numberVote={candidate.point}
-                nameCandidate={activeTab.name}
+                nameCandidate={candidate.rank_type?.name}
                 nameCandidateDetail={candidate.name}
               />
             </li>

@@ -6,13 +6,13 @@ interface PillTabs {
     name: string
   }[]
   activeTab: number
-  onTabClick: (id: number, name: string) => void
+  onTabClick: (id: number) => void
 }
 
 const PillTabs = ({ tabs, activeTab, onTabClick }: PillTabs) => {
   useEffect(() => {
     if (tabs && tabs.length > 0) {
-      onTabClick(tabs[0].id, tabs[0].name)
+      onTabClick(tabs[0].id)
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabs])
@@ -24,7 +24,7 @@ const PillTabs = ({ tabs, activeTab, onTabClick }: PillTabs) => {
           <p
             onClick={() => {
               if (activeTab === tab.id) return
-              onTabClick(tab.id, tab.name)
+              onTabClick(tab.id)
             }}
             className={`inline-block rounded-lg px-4 py-3 font-bold ${
               activeTab === tab.id

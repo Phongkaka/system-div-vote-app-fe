@@ -7,11 +7,3 @@ export const formatNumberWithCommas = (number: number) => {
   }
   return 0
 }
-
-export const isCustomHeaderFooter = (location: { pathname: string }, routerPaths: any[]) => {
-  return routerPaths.some((page) => {
-    const regex = new RegExp(`^${page.replace(/:[^\s/]+/g, '[^\\s/]+')}$`)
-    return regex.test(location.pathname)
-  })
-}
-// const customHeaderFooter = isCustomHeaderFooter(location, [ROUTER.HOME_PAGE, ROUTER.ABOUT_PAGE])

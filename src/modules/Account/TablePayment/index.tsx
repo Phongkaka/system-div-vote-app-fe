@@ -72,7 +72,6 @@ const TablePayment = ({ data }: TablePaymentProps) => {
                 <td className='table-td-style'>{handleGetStatusPayment(item.status)}</td>
               </tr>
             ))}
-            ``
           </tbody>
         </table>
       </div>
@@ -86,13 +85,16 @@ const TablePayment = ({ data }: TablePaymentProps) => {
           <table className='payment-table w-full border-collapse border text-left text-sm text-gray-500'>
             <thead className='bg-dark text-center text-sm uppercase lg:text-base'>
               <tr className='payment-table-header'>
-                <th scope='col' className='table-th-style w-[26%]'>
+                <th scope='col' className='table-th-style w-[10%]'>
                   ID
                 </th>
                 <th scope='col' className='table-th-style w-[50%]'>
                   名前
                 </th>
-                <th scope='col' className='table-th-style w-[25%]'>
+                <th scope='col' className='table-th-style w-[20%]'>
+                  単価
+                </th>
+                <th scope='col' className='table-th-style w-[20%]'>
                   量
                 </th>
               </tr>
@@ -105,6 +107,7 @@ const TablePayment = ({ data }: TablePaymentProps) => {
                 >
                   <td className='table-td-style'>{item.point_type?.id}</td>
                   <td className='table-td-style'>{item.point_type?.name}</td>
+                  <td className='table-td-style'>{item.point_type?.price}</td>
                   <td className='table-td-style'>{item.quantity}</td>
                 </tr>
               ))}

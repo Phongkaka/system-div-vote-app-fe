@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useMutation } from 'react-query'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { ROUTER } from '~/constants/path'
 import Container from '~/layouts/components/Container'
@@ -34,8 +34,12 @@ export default function Header() {
       console.error('Logout failed:', error)
     }
   }
+
+  const location = useLocation()
+
+  const isHome = [ROUTER.HOME_PAGE].includes(location.pathname)
   return (
-    <Container className='w-[90%]'>
+    <Container className={isHome ? `w-[90%]` : ''}>
       <nav className='my-10 w-full rounded-lg bg-green shadow'>
         <div className='lg:max-w-8xl mx-auto justify-between px-4 md:flex md:items-center md:px-8'>
           <div>

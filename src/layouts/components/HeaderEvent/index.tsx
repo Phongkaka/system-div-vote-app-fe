@@ -6,6 +6,7 @@ import twitterLogo from '~/common/assets/images/tw-logo.png'
 import menuHam from '~/common/assets/images/ic-menu.png'
 import { useRecoilValue } from 'recoil'
 import { eventDetail } from '~/recoil/atom'
+import { ROUTER } from '~/constants/path'
 
 interface Props {
   logoImg?: string | undefined
@@ -21,7 +22,7 @@ export default function HeaderEvent({ logoImg }: Props) {
         <div className='lg:max-w-8xl mx-auto justify-between px-4 md:flex md:items-center md:px-8'>
           <div>
             <div className='flex items-center justify-between'>
-              <Link to='#' className='block h-[60px] py-[5px]'>
+              <Link to={ROUTER.HOME_PAGE} className='block h-[60px] py-[5px]'>
                 <img className='h-full max-w-[250px]' src={logoImg} alt='logo' />
               </Link>
               <div className='md:hidden'>

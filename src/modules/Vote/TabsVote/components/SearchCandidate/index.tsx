@@ -3,22 +3,11 @@ import { useQuery, useQueryClient } from 'react-query'
 import { fetchCandidateSearch } from '~/services/candidatesAPI'
 import { ReactComponent as SearchIcon } from '~/common/assets/images/search.svg'
 import Candidate from '../BlockRank/Candidate'
-import { useRecoilValue } from 'recoil'
-import { eventDetail } from '~/recoil/atom'
 
 const SearchCandidate = () => {
   const [inputParam, setInputParam] = useState('')
   const queryClient = useQueryClient()
   const queryKey = ['candidates', inputParam]
-  const event = useRecoilValue(eventDetail)
-
-  const getIdByName = (idToFind: number | string): string => {
-    if (event && event.rank_types && event.rank_types.length > 0) {
-      const foundItem = event.rank_types?.find((item: any) => item.id === idToFind)
-      return foundItem ? foundItem.name : ''
-    }
-    return ''
-  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -78,10 +67,11 @@ const SearchCandidate = () => {
             <Candidate
               refreshCandidate={refetch}
               id={candidate.id}
+              social_links={candidate.social_links}
               candidateImg={candidate.avatar}
               numRank={candidate.top}
               numberVote={candidate.point}
-              nameCandidate={getIdByName(candidate.rank_type_id)}
+              nameCandidate={candidate.rank_type?.name}
               nameCandidateDetail={candidate.name}
             />
           </li>

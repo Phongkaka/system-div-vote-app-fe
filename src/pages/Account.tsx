@@ -33,6 +33,7 @@ const Account = () => {
         <div className='account-detail flex-grow'>
           <h2 className='border-left mb-5 text-[22px] font-bold'>アカウントの詳細</h2>
           <p className='mb-2 text-lg font-bold'>{userInfoData?.data?.name}</p>
+          <p className='mb-2 text-lg font-bold'>{userInfoData?.data?.email}</p>
           <p className='text-lg font-bold'>日本</p>
         </div>
       </div>
