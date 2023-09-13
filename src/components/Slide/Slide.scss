@@ -1,0 +1,21 @@
+.item-slider img {
+  height: 314px;
+  width: 100%;
+}
+
+.slick-slide {
+  transform: scale(0.9);
+}
+.slick-slide.slick-center {
+  transform: scale(1);
+}
+
+@media screen and (max-width: 1024px) {
+  .item-slider img {
+    height: auto;
+    width: 100%;
+  }
+  .slick-slide {
+    transform: scale(1);
+  }
+}

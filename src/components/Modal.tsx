@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { ReactComponent as CloseIcon } from '~/common/assets/images/close.svg'
 
 interface ModalProps {
@@ -20,9 +20,43 @@ const Modal = ({
   isBtnTwo,
   disableButton
 }: ModalProps) => {
-  const closeModal = () => {
+  const modalRef = useRef<any>(null)
+
+  const closeModal = useCallback(() => {
     onClose?.()
-  }
+  }, [onClose])
+
+  const handleOutsideClick = useCallback(
+    (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        closeModal()
+      }
+    },
+    [closeModal]
+  )
+
+  const handleEscKeyPress = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeModal()
+      }
+    },
+    [closeModal]
+  )
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleOutsideClick)
+      window.addEventListener('keydown', handleEscKeyPress)
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick)
+      window.removeEventListener('keydown', handleEscKeyPress)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+      window.removeEventListener('keydown', handleEscKeyPress)
+    }
+  }, [isOpen, handleOutsideClick, handleEscKeyPress])
 
   return (
     <>
@@ -37,6 +71,7 @@ const Modal = ({
           <div className='fixed inset-0 z-[999999999] overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
               <div
+                ref={modalRef}
                 className={`
               relative transform overflow-hidden rounded-lg bg-white p-[25px] text-left shadow-xl transition-all sm:p-[50px]
               ${classWrapper}

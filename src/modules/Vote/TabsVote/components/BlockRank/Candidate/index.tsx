@@ -146,7 +146,7 @@ const Candidate = ({
           <p className='name__candidate absolute left-0 top-0 mb-4 rounded-br-lg rounded-tl-lg bg-dark px-2 py-1'>
             <span className='px-4 py-1 text-white'>{nameCandidate}</span>
           </p>
-          <span className='mb-1 block text-xl font-semibold text-black'>
+          <span className='mb-1 block truncate text-xl font-semibold text-black'>
             {nameCandidateDetail} <i className='text-sm not-italic'>さん</i>
           </span>
           <div className='rank__candidate mb-4 flex'>

@@ -49,7 +49,7 @@ const VotingTime = ({ isCountDown, start_time, end_time }: Props) => {
             <h3 className='mb-4 rounded-lg bg-dark px-4 py-1 text-lg font-bold text-white'>
               WEB投票終了まであと
             </h3>
-            <Countdown targetDate={targetDateCountDown(end_time) || new Date()} />
+            <Countdown targetDate={targetDateCountDown(end_time) || undefined} />
           </div>
         ) : (
           <Link

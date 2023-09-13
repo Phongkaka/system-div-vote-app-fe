@@ -14,6 +14,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.2.0",
     "@material-tailwind/react": "^2.1.0",
+    "@types/react-slick": "^0.23.10",
     "axios": "^1.4.0",
     "clsx": "^2.0.0",
     "init": "^0.1.2",
@@ -27,8 +28,10 @@
     "react-infinite-scroll-component": "vj-abishek/react-infinite-scroll-component#mobile",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.14.2",
+    "react-slick": "^0.29.0",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
+    "slick-carousel": "^1.8.1",
     "store": "^2.0.12",
     "sweetalert2": "^11.7.22",
     "swiper": "^10.1.0",

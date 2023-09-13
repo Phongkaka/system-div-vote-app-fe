@@ -6,9 +6,9 @@ interface Props {
 }
 function Item({ img, linkPage }: Props) {
   return (
-    <div className='item-slider mb-10 w-full'>
+    <div className='item-slider mb-10 w-full rounded-lg'>
       <Link to={linkPage} target='_blank' rel='noreferrer'>
-        <img src={img} alt='customer' />
+        <img src={img} alt='customer' className='rounded-lg' />
       </Link>
     </div>
   )

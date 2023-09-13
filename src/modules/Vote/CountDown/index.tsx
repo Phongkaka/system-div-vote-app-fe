@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 interface CountdownProps {
-  targetDate: Date
+  targetDate: Date | undefined
 }
 
-const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
+const Countdown = ({ targetDate }: CountdownProps) => {
   const [timeRemaining, setTimeRemaining] = useState<number>(0)
   const [eventEnded, setEventEnded] = useState<boolean>(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const currentTime = new Date().getTime()
-      const difference = targetDate.getTime() - currentTime
-      setTimeRemaining(Math.max(0, difference))
-
-      if (difference <= 0) {
-        setEventEnded(true)
-        clearInterval(interval)
+      if (targetDate) {
+        const currentTime = new Date().getTime()
+        const difference = targetDate.getTime() - currentTime
+        setTimeRemaining(Math.max(0, difference))
+        if (difference <= 0) {
+          setEventEnded(true)
+          clearInterval(interval)
+        }
       }
     }, 1000)
 
@@ -42,7 +43,9 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
       </div>
     )
   }
-
+  if (!targetDate) {
+    return <div>読み込み中...</div>
+  }
   return (
     <div>
       {eventEnded ? (
