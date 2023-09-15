@@ -4,7 +4,12 @@ import './Slide.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-const Slide = ({ data }: any) => {
+interface Props {
+  data: any
+  isLoading?: boolean
+}
+
+const Slide = ({ data, isLoading }: Props) => {
   const settings = {
     className: 'slider variable-width',
     dots: true,
@@ -17,6 +22,7 @@ const Slide = ({ data }: any) => {
     speed: 500,
     autoplaySpeed: 5000,
     cssEase: 'linear',
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -29,13 +35,23 @@ const Slide = ({ data }: any) => {
     ]
   }
   return (
-    <Slider {...settings}>
-      {data?.map((item: any) => (
-        <div className='carousel-item-wrapper'>
-          <Item linkPage={`/events/${item.slug}`} img={item.banner} />
+    <>
+      {isLoading ? (
+        <div className='flex gap-8'>
+          {[...Array(3)].map((_, index: number) => (
+            <Item.LoadingItem key={index} className={index < 2 ? 'hide-on-mobile' : ''} />
+          ))}
         </div>
-      ))}
-    </Slider>
+      ) : (
+        <Slider {...settings}>
+          {data?.map((item: any) => (
+            <div className='carousel-item-wrapper' key={item.id}>
+              <Item linkPage={`/events/${item.slug}`} img={item.banner} />
+            </div>
+          ))}
+        </Slider>
+      )}
+    </>
   )
 }
 

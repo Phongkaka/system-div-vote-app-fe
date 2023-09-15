@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Container from '~/layouts/components/Container'
 
 import twitterLogo from '~/common/assets/images/tw-logo.png'
@@ -15,6 +15,11 @@ interface Props {
 export default function HeaderEvent({ logoImg }: Props) {
   const [navbar, setNavbar] = useState(false)
   const event = useRecoilValue(eventDetail)
+  const location = useLocation()
+
+  useEffect(() => {
+    setNavbar(false)
+  }, [location.pathname])
 
   return (
     <Container>
@@ -23,7 +28,7 @@ export default function HeaderEvent({ logoImg }: Props) {
           <div>
             <div className='flex items-center justify-between'>
               <Link to={ROUTER.HOME_PAGE} className='block h-[60px] py-[5px]'>
-                <img className='h-full max-w-[250px]' src={logoImg} alt='logo' />
+                {logoImg && <img className='h-full max-w-[250px]' src={logoImg} alt='logo' />}
               </Link>
               <div className='md:hidden'>
                 <button

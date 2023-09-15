@@ -36,7 +36,7 @@ function Vote() {
   // fetch api Point types
   const { data: listBonus } = useQueryData('pointTypes', () => fetchPointTypes())
 
-  const event = useEventDetails({ slug })
+  const [event, isLoadingEvent] = useEventDetails({ slug })
   const setEventDetail = useSetRecoilState(eventDetail)
 
   useEffect(() => {
@@ -92,12 +92,16 @@ function Vote() {
       <div>
         <div className='vote--page'>
           <div className='time__vote'>
-            <VotingTimeEvent
-              banner={event?.banner}
-              isCountDown
-              start_time={event.start_time}
-              end_time={event.end_time}
-            />
+            {isLoadingEvent ? (
+              <VotingTimeEvent.Loading />
+            ) : (
+              <VotingTimeEvent
+                banner={event?.banner}
+                isCountDown
+                start_time={event.start_time}
+                end_time={event.end_time}
+              />
+            )}
           </div>
           <VotingFlow />
           <TabsVote />

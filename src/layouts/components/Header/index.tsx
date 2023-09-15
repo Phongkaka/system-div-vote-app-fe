@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -9,6 +9,7 @@ import { logout } from '~/services/api'
 import menuHam from '~/common/assets/images/ic-menu.png'
 import { ReactComponent as AvatarNoneIcon } from '~/common/assets/images/avatar_none.svg'
 import { cartState, totalState } from '~/recoil/atom/cart'
+import { ReactComponent as LogoutIcon } from '~/common/assets/images/logout_icon.svg'
 
 export default function Header() {
   const [isHovered, setIsHovered] = useState(false)
@@ -38,6 +39,11 @@ export default function Header() {
   const location = useLocation()
 
   const isHome = [ROUTER.HOME_PAGE].includes(location.pathname)
+
+  useEffect(() => {
+    setNavbar(false)
+  }, [location.pathname])
+
   return (
     <Container className={isHome ? `w-[90%]` : ''}>
       <nav className='my-10 w-full rounded-lg bg-green shadow'>
@@ -135,6 +141,7 @@ export default function Header() {
                               onClick={handleLogout}
                             >
                               ログアウト
+                              <LogoutIcon className='ml-5' />
                             </button>
                           </div>
                         )}

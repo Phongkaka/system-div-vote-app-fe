@@ -16,7 +16,7 @@ const SearchCandidate = () => {
     }
   }
 
-  const { data, refetch } = useQuery(
+  const { data, refetch, isLoading } = useQuery(
     queryKey,
     () =>
       fetchCandidateSearch({
@@ -62,20 +62,32 @@ const SearchCandidate = () => {
         </button>
       </form>
       <ul className='grid list-none grid-cols-1 gap-x-10 lg:grid-cols-2'>
-        {data?.map((candidate) => (
-          <li key={candidate.id}>
-            <Candidate
-              refreshCandidate={refetch}
-              id={candidate.id}
-              social_links={candidate.social_links}
-              candidateImg={candidate.avatar}
-              numRank={candidate.top}
-              numberVote={candidate.point}
-              nameCandidate={candidate.rank_type?.name}
-              nameCandidateDetail={candidate.name}
-            />
-          </li>
-        ))}
+        {isLoading ? (
+          <>
+            {[...Array(3)].map((_, index: number) => (
+              <li key={index}>
+                <Candidate.CandidateLoading />
+              </li>
+            ))}
+          </>
+        ) : (
+          <>
+            {data?.map((candidate) => (
+              <li key={candidate.id}>
+                <Candidate
+                  refreshCandidate={refetch}
+                  id={candidate.id}
+                  social_links={candidate.social_links}
+                  candidateImg={candidate.avatar}
+                  numRank={candidate.top}
+                  numberVote={candidate.point}
+                  nameCandidate={candidate.rank_type?.name}
+                  nameCandidateDetail={candidate.name}
+                />
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </div>
   )

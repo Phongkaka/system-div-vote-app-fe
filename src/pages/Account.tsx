@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { userInfo } from '~/recoil/atom/auth'
 import useQueryData from '~/hook/useQueryData'
-import { purchaseHistory } from '~/services/userApi'
+import { FetchUseMe, purchaseHistory } from '~/services/userApi'
 import Profile from '~/modules/Account/Profile'
 import TablePayment from '~/modules/Account/TablePayment'
 
 const Account = () => {
   const userInfoData = useRecoilValue(userInfo)
-  const { data: purchaseHistoryData } = useQueryData('purchaseHistory', purchaseHistory)
+  const { data: purchaseHistoryData, isLoading } = useQueryData('purchaseHistory', purchaseHistory)
+  const { data: userMe } = useQueryData('useMe', FetchUseMe)
+
   return (
     <Container>
       <div className='mb-[50px]'>
@@ -26,14 +28,14 @@ const Account = () => {
           <div className='mb-10'>
             <Profile />
           </div>
-          {purchaseHistoryData && purchaseHistoryData.length > 0 && (
-            <TablePayment data={purchaseHistoryData} />
-          )}
+          {isLoading ? <TablePayment.Loading /> : <TablePayment data={purchaseHistoryData} />}
         </div>
         <div className='account-detail flex-grow'>
           <h2 className='border-left mb-5 text-[22px] font-bold'>アカウントの詳細</h2>
           <p className='mb-2 text-lg font-bold'>{userInfoData?.data?.name}</p>
           <p className='mb-2 text-lg font-bold'>{userInfoData?.data?.email}</p>
+          <span className='mb-2 text-lg font-bold'>ポイント:</span>{' '}
+          <span className='text-lg'> {userMe?.point}</span>
           <p className='text-lg font-bold'>日本</p>
         </div>
       </div>

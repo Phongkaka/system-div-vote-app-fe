@@ -7,6 +7,6 @@ export const voteValidate: any = yup
   })
   .required()
 
-export const initVoteValues: { number_points: number } = {
-  number_points: 0
+export const initVoteValues: { number_points: number | null } = {
+  number_points: null
 }

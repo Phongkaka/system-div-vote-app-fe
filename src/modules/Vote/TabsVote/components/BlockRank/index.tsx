@@ -5,7 +5,6 @@ import { fetchCandidates } from '~/services/candidatesAPI'
 import { eventDetail } from '~/recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { FlowiseCandidate } from '~/models/candidates'
-import { ReactComponent as Loading } from '~/common/assets/images/loading.svg'
 import { TEXT } from '~/constants/path'
 
 const BlockRank = () => {
@@ -42,13 +41,16 @@ const BlockRank = () => {
     <div className='mt-10 [&>div]:pb-9'>
       <PillTabs tabs={event.rank_types || []} onTabClick={handleTabClick} activeTab={activeTab} />
 
-      {isLoading && (
-        <div className='mt-10 flex w-full justify-center overflow-hidden'>
-          <Loading />
-        </div>
-      )}
       <ul className='m-auto mt-5 flex flex-wrap justify-between'>
-        {!isLoading &&
+        {isLoading ? (
+          <>
+            {[...Array(3)].map((_, index: number) => (
+              <li className='relative w-full lg:w-[48%]' key={index}>
+                <Candidate.CandidateLoading />
+              </li>
+            ))}
+          </>
+        ) : (
           candidates?.map((candidate: FlowiseCandidate.ICandidateItem) => (
             <li className='relative w-full lg:w-[48%]' key={candidate.id}>
               <Candidate
@@ -62,7 +64,8 @@ const BlockRank = () => {
                 nameCandidateDetail={candidate.name}
               />
             </li>
-          ))}
+          ))
+        )}
       </ul>
       {candidates && candidates.length === 0 && <div>候補者に噴水しない...</div>}
     </div>

@@ -9,8 +9,10 @@ interface Props {
   slug?: string
 }
 
-const useEventDetails = ({ slug }: Props = {}) => {
-  const { data } = useQuery<EventItem>(['eventDetail', slug], () => fetchEventDetail(slug || ''))
+const useEventDetails = ({ slug }: Props = {}): any => {
+  const { data, isLoading } = useQuery<EventItem>(['eventDetail', slug], () =>
+    fetchEventDetail(slug || '')
+  )
   const setDetailEvent = useSetRecoilState(eventDetail)
   const event = useRecoilValue(eventDetail)
 
@@ -20,7 +22,7 @@ const useEventDetails = ({ slug }: Props = {}) => {
     }
   }, [data, setDetailEvent])
 
-  return event
+  return [event, isLoading]
 }
 
 export default useEventDetails

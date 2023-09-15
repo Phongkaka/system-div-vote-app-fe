@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import VotingTime from './VotingTime'
+import LoadingSkeleton from '../LoadingSkeleton'
 
 interface Props {
   banner?: string | undefined
@@ -28,5 +29,24 @@ function VotingTimeEvent({ banner, isCountDown, targetDate, start_time, end_time
     </div>
   )
 }
+
+function Loading() {
+  return (
+    <div className='mb-10 flex flex-col gap-3 lg:flex-row lg:gap-8'>
+      <div className='flex w-full flex-col items-center justify-end lg:w-[60%]'>
+        <article className='flex w-full flex-col'>
+          <LoadingSkeleton className='h-[150px] w-full lg:h-[300px]' />
+        </article>
+      </div>
+      <div className='flex h-[200px] flex-col justify-between lg:h-[300px] lg:w-[40%]'>
+        <LoadingSkeleton className='h-[30px]' />
+        <LoadingSkeleton className='h-[70px] lg:h-[100px]' />
+        <LoadingSkeleton className='h-[50px] lg:h-[70px]' />
+      </div>
+    </div>
+  )
+}
+
+VotingTimeEvent.Loading = Loading
 
 export default VotingTimeEvent

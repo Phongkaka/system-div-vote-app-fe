@@ -9,7 +9,7 @@ import { eventDetail } from '~/recoil/atom'
 import { useEffect } from 'react'
 import useEventDetails from '~/hook/useEventDetails'
 import Guide from '~/modules/AboutEvent/Guide'
-import { ReactComponent as LoadingIcon } from '~/common/assets/images/loading.svg'
+import AboutEventSkeleton from '~/modules/AboutEvent/AboutEventSkeleton'
 
 function AboutEvent() {
   const { slug } = useParams()
@@ -17,7 +17,7 @@ function AboutEvent() {
     fetchEventDetail(slug || '')
   )
   const setDetailEvent = useSetRecoilState(eventDetail)
-  const event = useEventDetails({ slug })
+  const [event] = useEventDetails({ slug })
 
   useEffect(() => {
     if (!data) return
@@ -27,9 +27,7 @@ function AboutEvent() {
   return (
     <>
       {isLoading ? (
-        <div className='flex min-h-[500px] items-center justify-center'>
-          <LoadingIcon />
-        </div>
+        <AboutEventSkeleton />
       ) : (
         <Container>
           <div className='upcoming__event--page'>

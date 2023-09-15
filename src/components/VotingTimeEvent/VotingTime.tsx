@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import Countdown from '~/modules/Vote/CountDown'
@@ -14,13 +15,15 @@ interface Props {
 const VotingTime = ({ isCountDown, start_time, end_time }: Props) => {
   const event = useRecoilValue(eventDetail)
 
-  const formatTime = (inputDate: Date | undefined) => {
-    if (inputDate) {
-      const formattedDate = moment(inputDate, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD HH:mm')
-      return formattedDate
+  const formatTime = useMemo(() => {
+    return (inputDate: Date | undefined) => {
+      if (inputDate) {
+        const formattedDate = moment(inputDate, 'YYYY-MM-DD HH:mm:ss').format('YYYY/MM/DD HH:mm')
+        return formattedDate
+      }
+      return 'MM/DD/YYYY'
     }
-    return 'MM/DD/YYYY'
-  }
+  }, [])
 
   const targetDateCountDown = (end_time: Date | undefined) => {
     if (end_time) {

@@ -1,4 +1,6 @@
+import clsx from 'clsx'
 import { Link } from 'react-router-dom'
+import LoadingSkeleton from '~/components/LoadingSkeleton'
 
 interface Props {
   img?: string | undefined
@@ -13,5 +15,17 @@ function Item({ img, linkPage }: Props) {
     </div>
   )
 }
+
+function LoadingItem({ className }: { className: string }) {
+  return (
+    <div className={clsx('item-slider mb-10 w-full rounded-lg', className)}>
+      <Link to={''} target='_blank' rel='noreferrer'>
+        <LoadingSkeleton className='loading-img h-[200px] w-full rounded-lg lg:h-[300px]' />
+      </Link>
+    </div>
+  )
+}
+
+Item.LoadingItem = LoadingItem
 
 export default Item

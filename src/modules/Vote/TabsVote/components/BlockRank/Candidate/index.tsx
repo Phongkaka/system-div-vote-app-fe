@@ -20,6 +20,7 @@ import { useMutationVote } from '~/hook/useMutation'
 import { ReactComponent as LoadingIcon } from '~/common/assets/images/loading.svg'
 import { DialogVoteError } from '~/components/Dialog'
 import Modal from '~/components/Modal'
+import LoadingSkeleton from '~/components/LoadingSkeleton'
 
 interface Props {
   id?: number
@@ -109,11 +110,12 @@ const Candidate = ({
     }
   }
 
-  const onSubmitVote = (data: { number_points: number }) => {
+  const onSubmitVote = (data: { number_points: number | null }) => {
     voteAction({
       number_points: data.number_points,
       candidate_id: id
     })
+    methods.reset()
   }
 
   useEffect(() => {
@@ -212,7 +214,7 @@ const Candidate = ({
           </ul>
         </div>
       </Modal>
-      <Modal disableButton isOpen={voteModalOpen} onClose={() => setVoteModalOpen(false)}>
+      <Modal isOpen={voteModalOpen} onClose={() => setVoteModalOpen(false)}>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmitVote)} className='m-auto flex w-full flex-col'>
             <ul>
@@ -229,7 +231,7 @@ const Candidate = ({
                 error={!!errors?.number_points}
                 helperText={errors?.number_points?.message}
                 className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
-                placeholder={'point'}
+                placeholder={'ポイント'}
                 type='number'
               />
             </div>
@@ -250,5 +252,42 @@ const Candidate = ({
     </>
   )
 }
+
+const CandidateLoading = () => {
+  return (
+    <div className='candidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
+      <div className='left__candidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
+        <div className='mb-4 block w-[122px]'>
+          <LoadingSkeleton className='h-[122px] w-full' />
+        </div>
+        <div className='bottom__link flex w-2/3 justify-center'>
+          <LoadingSkeleton className='h-7 w-7' />
+        </div>
+      </div>
+      <div className='right__candidate w-2/3'>
+        <p className='name__candidate absolute left-0 top-0 mb-4 rounded-br-lg rounded-tl-lg px-2 py-1'>
+          <LoadingSkeleton className='h-[20px] w-[100px]' />
+        </p>
+        <span className='mb-1 block truncate text-xl font-semibold text-black'>
+          <LoadingSkeleton className='mb-2 h-[20px] w-[100px]' />
+        </span>
+        <div className='rank__candidate mb-4 flex'>
+          <span className='mr-4 flex items-center font-bold text-black'>
+            <LoadingSkeleton className='h-[20px] w-[40px]' />
+          </span>
+          <span className='flex items-center font-bold text-black'>
+            <LoadingSkeleton className='h-[20px] w-[40px]' />
+          </span>
+        </div>
+        <div className='group__btn flex flex-wrap'>
+          <LoadingSkeleton className='mb-4 h-[40px] w-full' />
+          <LoadingSkeleton className='h-[40px] w-[150px]' />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+Candidate.CandidateLoading = CandidateLoading
 
 export default Candidate

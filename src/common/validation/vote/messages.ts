@@ -1,5 +1,5 @@
 export const voteMessage = {
   required: {
-    number_points: 'point required'
+    number_points: '必要なポイント'
   }
 }

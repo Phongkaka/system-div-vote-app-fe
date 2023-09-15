@@ -9,10 +9,10 @@ export default function FooterEvent({ logoImg, bannerImg }: Props) {
   return (
     <footer className='mt-20'>
       <Link to='#' className='m-auto block w-[186px]'>
-        <img src={logoImg} alt='logo' />
+        {logoImg && <img src={logoImg} alt='logo' />}
       </Link>
       <Link to='#' className='m-auto my-8 block lg:w-[500px]'>
-        <img className='w-full' src={bannerImg} alt='banner' />
+        {bannerImg && <img className='w-full' src={bannerImg} alt='banner' />}
       </Link>
       <Link className='my-5 block pb-1 text-center text-sm text-[#473A3A]' to='#'>
         利用規約

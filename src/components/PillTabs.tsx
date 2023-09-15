@@ -14,7 +14,7 @@ const PillTabs = ({ tabs, activeTab, onTabClick }: PillTabs) => {
     if (tabs && tabs.length > 0) {
       onTabClick(tabs[0].id)
     }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabs])
 
   return (
@@ -26,10 +26,10 @@ const PillTabs = ({ tabs, activeTab, onTabClick }: PillTabs) => {
               if (activeTab === tab.id) return
               onTabClick(tab.id)
             }}
-            className={`inline-block rounded-lg px-4 py-3 font-bold ${
+            className={`inline-block rounded-lg px-4 py-3 font-bold transition duration-300 ${
               activeTab === tab.id
-                ? 'bg-green text-black'
-                : 'bg-white hover:bg-gray-100  hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
+                ? 'transform bg-green text-black'
+                : 'bg-white hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-white'
             }`}
           >
             {tab.name}

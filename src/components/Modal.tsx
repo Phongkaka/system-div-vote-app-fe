@@ -94,7 +94,7 @@ const Modal = ({
                   )}
                   {!disableButton && (
                     <button
-                      className='block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
+                      className='mt-5 block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
                       onClick={closeModal}
                     >
                       {textBtn || '閉じる'}

@@ -12,6 +12,7 @@ import {
 import { formatNumberWithCommas } from '~/utils/helper'
 import Modal from '~/components/Modal'
 import { useState } from 'react'
+import LoadingSkeleton from '~/components/LoadingSkeleton'
 
 interface TablePaymentProps {
   data: PaymentType[]
@@ -76,7 +77,7 @@ const TablePayment = ({ data }: TablePaymentProps) => {
         </table>
       </div>
       <Modal
-        disableButton
+        // disableButton
         isOpen={isOpenModal}
         onClose={() => setOpenModal(false)}
         classWrapper='sm:p-[25px] w-full lg:w-[1024px]'
@@ -118,5 +119,16 @@ const TablePayment = ({ data }: TablePaymentProps) => {
     </>
   )
 }
+
+const Loading = () => {
+  return (
+    <>
+      <LoadingSkeleton className='mb-1 h-[30px] w-full' />
+      <LoadingSkeleton className='h-[200px] w-full' />
+    </>
+  )
+}
+
+TablePayment.Loading = Loading
 
 export default TablePayment
