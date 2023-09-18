@@ -1,5 +1,5 @@
 import Candidate from './Candidate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PillTabs from '~/components/PillTabs'
 import { fetchCandidates } from '~/services/candidatesAPI'
 import { eventDetail } from '~/recoil/atom'
@@ -11,12 +11,23 @@ const BlockRank = () => {
   const [candidates, setCandidates] = useState<FlowiseCandidate.ICandidateItem[]>([])
   const event = useRecoilValue(eventDetail)
   const [isLoading, setLoading] = useState<boolean>(false)
-  const [activeTab, setActiveTab] = useState<number>(0)
+  const [activeTab, setActiveTab] = useState<number>(-1)
+
+  useEffect(() => {
+    if (activeTab < 0 && event.id) {
+      const fetch = async () => {
+        const response = await fetchCandidates(TEXT.ALL, activeTab, event.id)
+        const newCandidates = response.data
+        setCandidates(newCandidates)
+      }
+      fetch()
+    }
+  }, [activeTab, event])
 
   const handleTabClick = async (tabId: number) => {
     try {
       setLoading(true)
-      const response = await fetchCandidates(TEXT.ALL, tabId)
+      const response = await fetchCandidates(TEXT.ALL, tabId, event.id)
       const newCandidates = response.data
       setCandidates(newCandidates)
       setActiveTab(tabId)
@@ -29,7 +40,7 @@ const BlockRank = () => {
 
   const refreshFetchCandidate = async () => {
     try {
-      const response = await fetchCandidates(TEXT.ALL, activeTab)
+      const response = await fetchCandidates(TEXT.ALL, activeTab, event.id)
       const newCandidates = response.data
       setCandidates(newCandidates)
     } catch (error) {
@@ -39,12 +50,18 @@ const BlockRank = () => {
 
   return (
     <div className='mt-10 [&>div]:pb-9'>
-      <PillTabs tabs={event.rank_types || []} onTabClick={handleTabClick} activeTab={activeTab} />
+      <PillTabs
+        showAll
+        tabs={event.rank_types || []}
+        onTabClick={handleTabClick}
+        activeTab={activeTab}
+        eventId={event.id}
+      />
 
       <ul className='m-auto mt-5 flex flex-wrap justify-between'>
         {isLoading ? (
           <>
-            {[...Array(3)].map((_, index: number) => (
+            {[...Array(4)].map((_, index: number) => (
               <li className='relative w-full lg:w-[48%]' key={index}>
                 <Candidate.CandidateLoading />
               </li>

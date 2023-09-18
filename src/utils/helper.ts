@@ -7,3 +7,5 @@ export const formatNumberWithCommas = (number: number) => {
   }
   return 0
 }
+
+export const patternURL = /^\/events\/[a-zA-Z0-9-]+$/

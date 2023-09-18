@@ -42,6 +42,8 @@ export declare namespace FlowiseCandidate {
       name?: {
         like?: string
       }
+      event_id?: number
+      rank_type_id?: number
     }
     limit?: number
   }

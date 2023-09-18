@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 interface PillTabs {
   tabs: {
     id: number
@@ -7,19 +5,16 @@ interface PillTabs {
   }[]
   activeTab: number
   onTabClick: (id: number) => void
+  showAll?: boolean
+  eventId?: number
 }
 
-const PillTabs = ({ tabs, activeTab, onTabClick }: PillTabs) => {
-  useEffect(() => {
-    if (tabs && tabs.length > 0) {
-      onTabClick(tabs[0].id)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tabs])
+const PillTabs = ({ tabs, activeTab, onTabClick, showAll }: PillTabs) => {
+  const updatedTabs = showAll ? [{ id: -1, name: '全て' }, ...tabs] : tabs
 
   return (
     <ul className='flex flex-wrap gap-5 text-center text-base font-medium'>
-      {tabs?.map((tab) => (
+      {updatedTabs?.map((tab) => (
         <li key={tab.id} className='cursor-pointer'>
           <p
             onClick={() => {

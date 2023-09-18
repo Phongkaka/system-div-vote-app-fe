@@ -7,6 +7,7 @@ import menuHam from '~/common/assets/images/ic-menu.png'
 import { useRecoilValue } from 'recoil'
 import { eventDetail } from '~/recoil/atom'
 import { ROUTER } from '~/constants/path'
+import { patternURL } from '~/utils/helper'
 
 interface Props {
   logoImg?: string | undefined
@@ -62,18 +63,40 @@ export default function HeaderEvent({ logoImg }: Props) {
               }`}
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
-                <li className='text-black-600 font-bold'>
-                  <a href='#overview'>概要</a>
-                </li>
-                <li className='text-black-600 font-bold'>
-                  <a href='#schedule'>スケジュール</a>
-                </li>
-                <li className='text-black-600 font-bold'>
-                  <a href='#rule'>投票ルール</a>
-                </li>
-                <li className='text-black-600 font-bold'>
-                  <a href='#reward'>プライズ</a>
-                </li>
+                {/* if page about event will show list */}
+                {patternURL.test(location.pathname) ? (
+                  <>
+                    <li className='text-black-600 font-bold'>
+                      <a href='#overview'>概要</a>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <a href='#schedule'>スケジュール</a>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <a href='#rule'>投票ルール</a>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <a href='#reward'>プライズ</a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    {/* else */}
+                    <li className='text-black-600 font-bold'>
+                      <Link to={`/events/${event?.slug}#overview`}>概要</Link>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <Link to={`/events/${event?.slug}`}>スケジュール</Link>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <Link to={`/events/${event?.slug}`}>投票ルール</Link>
+                    </li>
+                    <li className='text-black-600 font-bold'>
+                      <Link to={`/events/${event?.slug}`}>プライズ</Link>
+                    </li>
+                  </>
+                )}
+
                 <li className='text-black-600 font-bold'>
                   <Link to={`/events/${event?.slug}/vote`}>投票ページ</Link>
                 </li>

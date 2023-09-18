@@ -265,9 +265,9 @@ const CandidateLoading = () => {
         </div>
       </div>
       <div className='right__candidate w-2/3'>
-        <p className='name__candidate absolute left-0 top-0 mb-4 rounded-br-lg rounded-tl-lg px-2 py-1'>
+        <div className='name__candidate absolute left-0 top-0 mb-4 rounded-br-lg rounded-tl-lg px-2 py-1'>
           <LoadingSkeleton className='h-[20px] w-[100px]' />
-        </p>
+        </div>
         <span className='mb-1 block truncate text-xl font-semibold text-black'>
           <LoadingSkeleton className='mb-2 h-[20px] w-[100px]' />
         </span>

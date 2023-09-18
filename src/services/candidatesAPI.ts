@@ -20,21 +20,34 @@ const fetchSupporters = async (id: number): Promise<FlowiseCandidate.ISupporterR
 
 const fetchCandidates = async (
   limit: number | string,
-  rank_type_id: number | null
+  rank_type_id?: number | null,
+  event_id?: number | null
 ): Promise<any> => {
-  const response = await http.get('/candidates', {
-    params: {
-      filter: {
-        order: {
-          point: 'desc'
-        },
-        where: {
-          rank_type_id
-        },
-        limit: limit
-      }
+  let isRankTypeId = true
+  if (rank_type_id && rank_type_id < 0) {
+    isRankTypeId = false
+  }
+
+  const params: any = {
+    filter: {
+      order: {
+        point: 'desc'
+      },
+      where: {
+        event_id: event_id
+      },
+      limit: limit
     }
+  }
+
+  if (isRankTypeId) {
+    params.filter.where.rank_type_id = rank_type_id
+  }
+
+  const response = await http.get('/candidates', {
+    params: params
   })
+
   return response
 }
 

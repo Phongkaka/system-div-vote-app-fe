@@ -64,7 +64,7 @@ const SearchCandidate = () => {
       <ul className='grid list-none grid-cols-1 gap-x-10 lg:grid-cols-2'>
         {isLoading ? (
           <>
-            {[...Array(3)].map((_, index: number) => (
+            {[...Array(4)].map((_, index: number) => (
               <li key={index}>
                 <Candidate.CandidateLoading />
               </li>
