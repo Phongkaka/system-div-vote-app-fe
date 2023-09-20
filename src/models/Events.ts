@@ -13,6 +13,14 @@ export interface EventItem {
   rank_types?: { id: number; name: string }[]
   start_time?: Date
   end_time?: Date
+  event_contents?: EventContents[]
+}
+
+export interface EventContents {
+  content?: string
+  id?: number
+  sort?: number
+  title?: string
 }
 
 export interface PointType {

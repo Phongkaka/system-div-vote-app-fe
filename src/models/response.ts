@@ -3,3 +3,9 @@ export interface resType {
   success?: string
   data?: any
 }
+
+export interface errorType {
+  code?: number
+  success?: string
+  message?: string
+}

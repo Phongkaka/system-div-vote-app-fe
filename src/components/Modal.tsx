@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { ReactComponent as CloseIcon } from '~/common/assets/images/close.svg'
+import { useSpring, animated } from 'react-spring'
 
 interface ModalProps {
   isOpen: boolean
@@ -20,11 +21,24 @@ const Modal = ({
   isBtnTwo,
   disableButton
 }: ModalProps) => {
+  const [isVisible, setIsVisible] = useState(isOpen)
   const modalRef = useRef<any>(null)
 
+  const dialogSpring = useSpring({
+    transform: isVisible ? 'scale(1)' : 'scale(0.7)',
+    opacity: isVisible ? 1 : 0
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true)
+    }
+  }, [isOpen, setIsVisible])
+
   const closeModal = useCallback(() => {
+    setIsVisible(false)
     onClose?.()
-  }, [onClose])
+  }, [onClose, setIsVisible])
 
   const handleOutsideClick = useCallback(
     (e: MouseEvent) => {
@@ -70,38 +84,44 @@ const Modal = ({
           <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'></div>
           <div className='fixed inset-0 z-[999999999] overflow-y-auto'>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
-              <div
-                ref={modalRef}
-                className={`
+              <animated.div
+                style={{
+                  ...dialogSpring,
+                }}
+              >
+                <div
+                  ref={modalRef}
+                  className={`
               relative transform overflow-hidden rounded-lg bg-white p-[25px] text-left shadow-xl transition-all sm:p-[50px]
               ${classWrapper}
               `}
-              >
-                {disableButton && (
-                  <div className='flex justify-end'>
-                    <CloseIcon className='cursor-pointer' onClick={closeModal} />
+                >
+                  {disableButton && (
+                    <div className='flex justify-end'>
+                      <CloseIcon className='cursor-pointer' onClick={closeModal} />
+                    </div>
+                  )}
+                  {children}
+                  <div className='flex justify-center'>
+                    {isBtnTwo && (
+                      <button
+                        className='mr-5 block h-[48px] w-[200px] rounded-lg border font-bold text-black'
+                        onClick={closeModal}
+                      >
+                        閉じる
+                      </button>
+                    )}
+                    {!disableButton && (
+                      <button
+                        className='mt-5 block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
+                        onClick={closeModal}
+                      >
+                        {textBtn || '閉じる'}
+                      </button>
+                    )}
                   </div>
-                )}
-                {children}
-                <div className='flex justify-center'>
-                  {isBtnTwo && (
-                    <button
-                      className='mr-5 block h-[48px] w-[200px] rounded-lg border font-bold text-black'
-                      onClick={closeModal}
-                    >
-                      閉じる
-                    </button>
-                  )}
-                  {!disableButton && (
-                    <button
-                      className='mt-5 block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
-                      onClick={closeModal}
-                    >
-                      {textBtn || '閉じる'}
-                    </button>
-                  )}
                 </div>
-              </div>
+              </animated.div>
             </div>
           </div>
         </div>

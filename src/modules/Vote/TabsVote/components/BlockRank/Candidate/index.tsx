@@ -10,7 +10,7 @@ import { fetchSupporters } from '~/services/candidatesAPI'
 import { FetchUseMe } from '~/services/userApi'
 import { userInfo } from '~/recoil/atom/auth'
 import { useRecoilValue } from 'recoil'
-import { resType } from '~/models/response'
+import { errorType, resType } from '~/models/response'
 import { SUCCESS_CODE } from '~/constants/code'
 import { Flowise } from '~/models/auth'
 import InputForward from '~/components/Input'
@@ -48,6 +48,7 @@ const Candidate = ({
   const [modalSupporterOpen, setModalSupporterOpen] = useState(false)
   const navigate = useNavigate()
   const [voteModalOpen, setVoteModalOpen] = useState(false)
+  const [messageError, setMessageError] = useState<errorType>({})
   const [isOpenModalErrorVote, setIsOpenModalErrorVote] = useState(false)
 
   const [listSupporters, setListSupporters] = useState<FlowiseCandidate.ISupporterResponse | null>(
@@ -56,7 +57,7 @@ const Candidate = ({
   const [useMe, setUserMe] = useState<Flowise.IUserMe | null>(null)
 
   const [loadingSupporters, setLoadingSupporters] = useState(false) // Control loading state
-  const { mutate: voteAction, isSuccess, isError } = useMutationVote()
+  const { mutate: voteAction, isSuccess, isError, error } = useMutationVote()
 
   const methods = useForm({
     mode: 'all',
@@ -123,11 +124,12 @@ const Candidate = ({
       setVoteModalOpen(false)
       refreshCandidate && refreshCandidate()
     }
-    if (isError) {
+    if (isError && error) {
+      setMessageError(error as errorType)
       setIsOpenModalErrorVote(true)
     }
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, isError])
+  }, [isSuccess, isError, error])
 
   return (
     <>
@@ -219,7 +221,10 @@ const Candidate = ({
           <form onSubmit={handleSubmit(onSubmitVote)} className='m-auto flex w-full flex-col'>
             <ul>
               <li>
-                <p className='text-lg font-bold'>名前: {useMe?.name}</p>
+                <p className='text-lg'>
+                  名前: <span className='font-bold'>{nameCandidateDetail}</span>{' '}
+                  <i className='text-sm not-italic'>さん</i>
+                </p>
               </li>
               <li>
                 <p className='text-lg font-bold'>バランス: {useMe?.point}</p>
@@ -248,6 +253,7 @@ const Candidate = ({
       <DialogVoteError
         isOpen={isOpenModalErrorVote}
         setClose={() => setIsOpenModalErrorVote(false)}
+        messageError={messageError?.message}
       />
     </>
   )

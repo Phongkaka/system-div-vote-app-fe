@@ -18,13 +18,13 @@ function Home() {
   return (
     <div className='home--page'>
       <>
-        <Slide isLoading={isAnyLoading} data={comingSoon} />
+        <Slide isLoading={isAnyLoading} data={progress} />
         <div className='mb-[60px]'>
           <Events
             isLoading={isAnyLoading}
             topTitle='進行中'
             title='開催予定・開催中のイベント'
-            data={progress}
+            data={comingSoon}
           />
         </div>
         <Events

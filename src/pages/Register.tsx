@@ -36,7 +36,7 @@ export default function Register() {
           <h1 className='text-center text-lg font-bold text-black'>サインイン</h1>
           <div className='mb-4'>
             <label htmlFor='name' className='block text-sm font-semibold text-gray-800'>
-              メールアドレス
+              名前
             </label>
             <InputForward
               className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
@@ -49,7 +49,7 @@ export default function Register() {
           </div>
           <div className='mb-4'>
             <label htmlFor='phone' className='block text-sm font-semibold text-gray-800'>
-              phone
+              電話
             </label>
             <InputForward
               className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
@@ -62,7 +62,7 @@ export default function Register() {
           </div>
           <div className='mb-4'>
             <label htmlFor='email' className='block text-sm font-semibold text-gray-800'>
-              メールアドレス（確認用）
+              メールアドレス
             </label>
             <InputForward
               className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'

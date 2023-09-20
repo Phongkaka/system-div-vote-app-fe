@@ -10,6 +10,7 @@ interface Props {
   children?: ReactElement
   textBtn?: string
   isBtnTwo?: boolean
+  messageError?: string
 }
 
 const Dialog = ({ setClose, isOpen, children, textBtn, isBtnTwo }: Props) => {
@@ -79,7 +80,7 @@ const DialogVoteError = (props: Props) => {
       <div className='flex flex-wrap justify-center'>
         <img className='mb-3' src={i_error} alt='errorr payment' />
         <h3 className='w-full py-5 text-center text-lg font-bold text-black'>
-          投票に失敗しました。
+          {props?.messageError}
         </h3>
       </div>
     </Dialog>
