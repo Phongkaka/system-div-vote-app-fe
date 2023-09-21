@@ -61,18 +61,22 @@ const TablePayment = ({ data }: TablePaymentProps) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item: PaymentType) => (
-              <tr
-                onClick={() => handleClickRowTable(item)}
-                className='payment-table-body cursor-pointer text-center text-sm hover:bg-white lg:text-base'
-                key={item.id}
-              >
-                <td className='table-td-style'>{item.id}</td>
-                <td className='table-td-style'>{formatNumberWithCommas(item.amount as number)}</td>
-                <td className='table-td-style'>{moment(item.created_at).format('MM/DD/YYYY')}</td>
-                <td className='table-td-style'>{handleGetStatusPayment(item.status)}</td>
-              </tr>
-            ))}
+            {data &&
+              data.length > 0 &&
+              data?.map((item: PaymentType) => (
+                <tr
+                  onClick={() => handleClickRowTable(item)}
+                  className='payment-table-body cursor-pointer text-center text-sm hover:bg-white lg:text-base'
+                  key={item.id}
+                >
+                  <td className='table-td-style'>{item.id}</td>
+                  <td className='table-td-style'>
+                    {formatNumberWithCommas(item.amount as number)}
+                  </td>
+                  <td className='table-td-style'>{moment(item.created_at).format('MM/DD/YYYY')}</td>
+                  <td className='table-td-style'>{handleGetStatusPayment(item.status)}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

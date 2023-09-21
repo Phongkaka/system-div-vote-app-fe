@@ -7,12 +7,19 @@ export declare namespace FlowiseCandidate {
     point: number
     rank_type_id: number
     social_links: ISocialLink[]
+    No?: number
+    candidate_photos: ICandidatePhotos[]
     rank_type?: {
       event_id: number
       id: number
       name: string
       updated_at: Date
     }
+  }
+
+  interface ICandidatePhotos {
+    name?: string
+    id?: string
   }
 
   interface ISupporters {

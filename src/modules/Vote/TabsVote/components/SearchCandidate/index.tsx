@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { useQuery, useQueryClient } from 'react-query'
 import { fetchCandidateSearch } from '~/services/candidatesAPI'
 import { ReactComponent as SearchIcon } from '~/common/assets/images/search.svg'
-import Candidate from '../BlockRank/Candidate'
+import Candidate from '../../../../../components/Candidate'
 
 const SearchCandidate = () => {
   const [inputParam, setInputParam] = useState('')

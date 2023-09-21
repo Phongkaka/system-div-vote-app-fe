@@ -21,16 +21,25 @@ import { ReactComponent as LoadingIcon } from '~/common/assets/images/loading.sv
 import { DialogVoteError } from '~/components/Dialog'
 import Modal from '~/components/Modal'
 import LoadingSkeleton from '~/components/LoadingSkeleton'
+import clsx from 'clsx'
+import { FINISHED_STATUS } from '~/constants/status'
+import Lightbox from 'yet-another-react-lightbox'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import 'yet-another-react-lightbox/styles.css'
+import 'yet-another-react-lightbox/plugins/thumbnails.css'
+import './Candidate.scss'
 
 interface Props {
   id?: number
   numberVote?: number
-  numRank: number
+  numRank?: number
   nameCandidate?: string | undefined
   nameCandidateDetail?: string | undefined
   candidateImg?: string | undefined
   social_links?: FlowiseCandidate.ISocialLink[]
   refreshCandidate?: () => void
+  status?: number
+  candidate_photos?: FlowiseCandidate.ICandidatePhotos[]
 }
 
 const Candidate = ({
@@ -41,7 +50,9 @@ const Candidate = ({
   candidateImg,
   nameCandidateDetail,
   social_links,
-  refreshCandidate
+  refreshCandidate,
+  status,
+  candidate_photos
 }: Props) => {
   const user = useRecoilValue(userInfo)
   const isAuthenticated = !!user?.access_token
@@ -50,6 +61,8 @@ const Candidate = ({
   const [voteModalOpen, setVoteModalOpen] = useState(false)
   const [messageError, setMessageError] = useState<errorType>({})
   const [isOpenModalErrorVote, setIsOpenModalErrorVote] = useState(false)
+  const [openPhotos, setOpenPhotos] = useState(false)
+  const [listPhoto, setListPhoto] = useState<{ src: string }[]>([])
 
   const [listSupporters, setListSupporters] = useState<FlowiseCandidate.ISupporterResponse | null>(
     null
@@ -131,17 +144,35 @@ const Candidate = ({
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError, error])
 
+  const handleClickAvatar = () => {
+    if (candidate_photos && candidate_photos?.length > 0) {
+      setOpenPhotos(true)
+      const slides = candidate_photos.map((item) => ({ src: item.name }))
+      setListPhoto(slides as any)
+    } else {
+      setOpenPhotos(true)
+      const slides = [{ src: candidateImg }]
+      setListPhoto(slides as any)
+    }
+  }
+
   return (
     <>
+      <Lightbox
+        open={openPhotos}
+        close={() => setOpenPhotos(false)}
+        slides={listPhoto}
+        plugins={[Thumbnails]}
+      />
       <div className='candidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
         <div className='left__candidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
-          <div className='mb-4 block w-[122px]'>
+          <div className='mb-4 block w-[122px] cursor-pointer' onClick={handleClickAvatar}>
             <img className='w-full rounded-md' src={candidateImg} alt='candidate' />
           </div>
           <div className='bottom__link flex w-2/3 justify-center'>
             {social_links?.map((social) => (
               <Link key={social.id} target='_blank' to={social.link} className='mr-2 block h-7 w-7'>
-                <img src={social.social_type.logo} alt='link icon' />
+                <img src={social.social_type.logo} />
               </Link>
             ))}
           </div>
@@ -165,8 +196,14 @@ const Candidate = ({
           </div>
           <div className='group__btn flex flex-wrap'>
             <button
+              disabled={status === FINISHED_STATUS}
               onClick={handleClickVote}
-              className='mb-4 flex h-10 w-[271px] cursor-pointer items-center justify-center rounded-[9px] bg-black p-1 text-white'
+              className={clsx(
+                'mb-4 flex h-10 w-[271px] items-center justify-center rounded-[9px] p-1',
+                status === FINISHED_STATUS
+                  ? 'cursor-not-allowed border-[#999999] bg-[#cccccc] text-[#666666]'
+                  : 'cursor-pointer bg-black text-white'
+              )}
             >
               <span className='text-sm font-bold'>投票する</span>
             </button>

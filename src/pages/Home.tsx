@@ -3,14 +3,17 @@ import useQueryData from '~/hook/useQueryData'
 import Events from '~/modules/Home/EventEnd/Events'
 import { TEXT } from '~/constants/path'
 import Slide from '../components/Slide/Slide'
+import { COMINGSOON_STATUS, FINISHED_STATUS, PROGRESS_STATUS } from '~/constants/status'
 
 function Home() {
-  const { data: comingSoon, isLoading } = useQueryData('status0', () => fetchEvents(TEXT.ALL, 0))
+  const { data: comingSoon, isLoading } = useQueryData('status0', () =>
+    fetchEvents(TEXT.ALL, COMINGSOON_STATUS)
+  )
   const { data: progress, isLoading: isLoadingProgress } = useQueryData('status1', () =>
-    fetchEvents(TEXT.ALL, 1)
+    fetchEvents(TEXT.ALL, PROGRESS_STATUS)
   )
   const { data: finished, isLoading: isLoadingFinished } = useQueryData('status2', () =>
-    fetchEvents(TEXT.ALL, 2)
+    fetchEvents(TEXT.ALL, FINISHED_STATUS)
   )
 
   const isAnyLoading = isLoading || isLoadingProgress || isLoadingFinished

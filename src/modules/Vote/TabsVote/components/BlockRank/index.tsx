@@ -1,4 +1,4 @@
-import Candidate from './Candidate'
+import Candidate from '../../../../../components/Candidate'
 import { useEffect, useState } from 'react'
 import PillTabs from '~/components/PillTabs'
 import { fetchCandidates } from '~/services/candidatesAPI'
@@ -71,6 +71,8 @@ const BlockRank = () => {
           candidates?.map((candidate: FlowiseCandidate.ICandidateItem) => (
             <li className='relative w-full lg:w-[48%]' key={candidate.id}>
               <Candidate
+                candidate_photos={candidate.candidate_photos}
+                status={event?.status}
                 refreshCandidate={refreshFetchCandidate}
                 id={candidate.id}
                 social_links={candidate.social_links}

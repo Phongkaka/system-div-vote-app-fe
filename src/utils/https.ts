@@ -18,7 +18,7 @@ const errorInterceptor = async (
     switch (statusCode) {
       case 401:
         // handle validation errors
-        if (error?.response?.data?.message === 'TOKEN_EXPIRED') {
+        if (error?.response?.data?.message === 'トークンの有効期限が切れています') {
           const { userInfo } = JSON.parse(localStorage.getItem('userInfo') || '{}')
           try {
             // Call refreshToken

@@ -86,7 +86,7 @@ const Modal = ({
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
               <animated.div
                 style={{
-                  ...dialogSpring,
+                  ...dialogSpring
                 }}
               >
                 <div
