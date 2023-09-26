@@ -76,11 +76,13 @@ function Vote() {
         const data = await paymentPaid(session_id)
         if (data) {
           setIsShowDialogSuccess(true)
+          setCartProducts([])
+          setTotalPrice(0)
         }
       }
       fetchPaymentPaid()
     }
-  }, [session_id])
+  }, [session_id, setCartProducts, setTotalPrice])
 
   const handleCloseModalSuccess = () => {
     setIsShowDialogSuccess(false)
@@ -126,7 +128,7 @@ function Vote() {
         </div>
         {cartProducts && cartProducts.length > 0 && (
           <button
-            className='fixed bottom-14 right-0 z-50 rounded-lg bg-black p-3'
+            className='button-hover fixed bottom-14 right-0 z-50 rounded-lg bg-black p-3'
             onClick={toggleCart}
           >
             <CartIcon />

@@ -40,7 +40,7 @@ const MenuBonus = ({ id, logo, name, price, promotion, pointOriginal, handleAddT
           </span>
         </div>
         <button
-          className='add-to-card rounded bg-black px-4 py-2 font-bold text-white'
+          className='button-hover add-to-card rounded bg-black px-4 py-2 font-bold text-white'
           onClick={handelClickButton}
         >
           カートへ追加

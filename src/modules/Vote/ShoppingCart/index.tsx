@@ -86,10 +86,8 @@ const ShoppingCart = ({ toggleCart }: Props) => {
   useEffect(() => {
     if (data && data?.url) {
       window.location.href = data?.url
-      setCartProducts([])
-      setTotalPrice(0)
     }
-  }, [data, setCartProducts, setTotalPrice])
+  }, [data])
 
   useEffect(() => {
     if (isError) {

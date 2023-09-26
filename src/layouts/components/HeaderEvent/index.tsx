@@ -63,40 +63,11 @@ export default function HeaderEvent({ logoImg }: Props) {
               }`}
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
-                {/* if page about event will show list */}
-                {patternURL.test(location.pathname) ? (
-                  <>
-                    <li className='text-black-600 font-bold'>
-                      <a href='#overview'>概要</a>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <a href='#schedule'>スケジュール</a>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <a href='#rule'>投票ルール</a>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <a href='#reward'>プライズ</a>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    {/* else */}
-                    <li className='text-black-600 font-bold'>
-                      <Link to={`/events/${event?.slug}#overview`}>概要</Link>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <Link to={`/events/${event?.slug}`}>スケジュール</Link>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <Link to={`/events/${event?.slug}`}>投票ルール</Link>
-                    </li>
-                    <li className='text-black-600 font-bold'>
-                      <Link to={`/events/${event?.slug}`}>プライズ</Link>
-                    </li>
-                  </>
+                {!patternURL.test(location.pathname) && (
+                  <li className='text-black-600 font-bold'>
+                    <Link to={`/events/${event?.slug}`}>イベントについて </Link>
+                  </li>
                 )}
-
                 <li className='text-black-600 font-bold'>
                   <Link to={`/events/${event?.slug}/vote`}>投票ページ</Link>
                 </li>

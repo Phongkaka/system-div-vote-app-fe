@@ -71,6 +71,7 @@ const BlockRank = () => {
           candidates?.map((candidate: FlowiseCandidate.ICandidateItem) => (
             <li className='relative w-full lg:w-[48%]' key={candidate.id}>
               <Candidate
+                minimum_vote={event?.minimum_vote}
                 candidate_photos={candidate.candidate_photos}
                 status={event?.status}
                 refreshCandidate={refreshFetchCandidate}

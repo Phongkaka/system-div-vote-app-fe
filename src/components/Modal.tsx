@@ -105,7 +105,7 @@ const Modal = ({
                   <div className='flex justify-center'>
                     {isBtnTwo && (
                       <button
-                        className='mr-5 block h-[48px] w-[200px] rounded-lg border font-bold text-black'
+                        className='button-hover mr-5 block h-[48px] w-[200px] rounded-lg border font-bold text-black'
                         onClick={closeModal}
                       >
                         閉じる
@@ -113,7 +113,7 @@ const Modal = ({
                     )}
                     {!disableButton && (
                       <button
-                        className='mt-5 block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
+                        className='button-hover mt-5 block h-[48px] w-[200px] rounded-lg bg-black font-bold text-white'
                         onClick={closeModal}
                       >
                         {textBtn || '閉じる'}

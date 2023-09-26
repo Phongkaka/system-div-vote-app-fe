@@ -14,6 +14,8 @@ export interface EventItem {
   start_time?: Date
   end_time?: Date
   event_contents?: EventContents[]
+  minimum_vote?: number
+  result_notification_desc?: string
 }
 
 export interface EventContents {

@@ -3,7 +3,11 @@ import { voteMessage } from './messages'
 
 export const voteValidate: any = yup
   .object({
-    number_points: yup.string().required(voteMessage.required.number_points)
+    number_points: yup
+      .number()
+      .typeError(voteMessage.invalidNumber)
+      .required(voteMessage.required.number_points)
+      .min(1, voteMessage.minPoints) 
   })
   .required()
 

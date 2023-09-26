@@ -40,6 +40,7 @@ interface Props {
   refreshCandidate?: () => void
   status?: number
   candidate_photos?: FlowiseCandidate.ICandidatePhotos[]
+  minimum_vote?: number
 }
 
 const Candidate = ({
@@ -52,7 +53,8 @@ const Candidate = ({
   social_links,
   refreshCandidate,
   status,
-  candidate_photos
+  candidate_photos,
+  minimum_vote
 }: Props) => {
   const user = useRecoilValue(userInfo)
   const isAuthenticated = !!user?.access_token
@@ -155,18 +157,20 @@ const Candidate = ({
       setListPhoto(slides as any)
     }
   }
-
   return (
     <>
       <Lightbox
         open={openPhotos}
         close={() => setOpenPhotos(false)}
         slides={listPhoto}
-        plugins={[Thumbnails]}
+        plugins={candidate_photos && candidate_photos?.length !== 0 ? [Thumbnails] : []}
       />
       <div className='candidate__user relative m-auto my-8 flex justify-between rounded-lg bg-white px-7 pb-8 pt-12'>
         <div className='left__candidate mr-2 flex w-1/3 flex-wrap items-center justify-center'>
-          <div className='mb-4 block w-[122px] cursor-pointer' onClick={handleClickAvatar}>
+          <div
+            className='mb-4 block w-[122px] cursor-pointer hover:opacity-80'
+            onClick={handleClickAvatar}
+          >
             <img className='w-full rounded-md' src={candidateImg} alt='candidate' />
           </div>
           <div className='bottom__link flex w-2/3 justify-center'>
@@ -202,7 +206,7 @@ const Candidate = ({
                 'mb-4 flex h-10 w-[271px] items-center justify-center rounded-[9px] p-1',
                 status === FINISHED_STATUS
                   ? 'cursor-not-allowed border-[#999999] bg-[#cccccc] text-[#666666]'
-                  : 'cursor-pointer bg-black text-white'
+                  : 'button-hover cursor-pointer bg-black text-white'
               )}
             >
               <span className='text-sm font-bold'>投票する</span>
@@ -264,15 +268,20 @@ const Candidate = ({
                 </p>
               </li>
               <li>
-                <p className='text-lg font-bold'>バランス: {useMe?.point}</p>
+                <p className='text-lg'>残りの残高: {useMe?.point ? useMe?.point : 0}</p>
+              </li>
+              <li className='mt-[-3px]'>
+                {minimum_vote && (
+                  <span className='text-xs italic text-pink'>最低投票数: {minimum_vote}</span>
+                )}
               </li>
             </ul>
-            <div className='mb-7 '>
+            <div className='mb-7'>
               <InputForward
                 {...register('number_points')}
                 error={!!errors?.number_points}
                 helperText={errors?.number_points?.message}
-                className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
+                className='mt-1 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
                 placeholder={'ポイント'}
                 type='number'
               />
@@ -280,7 +289,7 @@ const Candidate = ({
             <button
               disabled={isSubmitting}
               type='submit'
-              className='block h-[48px] rounded-lg bg-green px-5 font-bold text-black'
+              className='button-hover block h-[48px] rounded-lg bg-green px-5 font-bold text-black'
             >
               投票する
             </button>
