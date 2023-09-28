@@ -5,6 +5,7 @@ import './Input.scss'
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean
   helperText?: string
+  value?: string | number
 }
 
 const InputForward = forwardRef(
@@ -12,6 +13,7 @@ const InputForward = forwardRef(
     return (
       <Fragment>
         <input
+          value={props?.value}
           type={props?.type}
           ref={ref}
           className={

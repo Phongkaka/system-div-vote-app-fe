@@ -7,7 +7,7 @@ export const voteValidate: any = yup
       .number()
       .typeError(voteMessage.invalidNumber)
       .required(voteMessage.required.number_points)
-      .min(1, voteMessage.minPoints) 
+      .min(1, voteMessage.minPoints)
   })
   .required()
 

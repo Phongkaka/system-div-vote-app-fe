@@ -157,6 +157,13 @@ const Candidate = ({
       setListPhoto(slides as any)
     }
   }
+
+  const [value, setValue] = useState('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value.replace(/[^0-9]/g, '')
+    setValue(newValue)
+  }
   return (
     <>
       <Lightbox
@@ -268,7 +275,7 @@ const Candidate = ({
                 </p>
               </li>
               <li>
-                <p className='text-lg'>残りの残高: {useMe?.point ? useMe?.point : 0}</p>
+                <p className='text-lg'>現在のポイント: {useMe?.point ? useMe?.point : 0}</p>
               </li>
               <li className='mt-[-3px]'>
                 {minimum_vote && (
@@ -283,7 +290,9 @@ const Candidate = ({
                 helperText={errors?.number_points?.message}
                 className='mt-1 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
                 placeholder={'ポイント'}
-                type='number'
+                type='text'
+                value={value}
+                onChange={handleChange}
               />
             </div>
             <button
