@@ -20,20 +20,12 @@ const useEventDetails = ({ slug }: Props = {}): any => {
   useEffect(() => {
     if (data) {
       setDetailEvent(data)
-    }
-  }, [data, setDetailEvent])
-
-  useEffect(() => {
-    if (event && event.start_time) {
-      const currentTime = new Date().getTime()
-      const toggleCountDown = new Date(event.start_time).getTime() > currentTime
-      if (toggleCountDown) {
-        setStartEvent(false)
-      } else {
-        setStartEvent(true)
+      if (data.start_time) {
+        const currentTime = new Date().getTime()
+        setStartEvent(new Date(data.start_time).getTime() > currentTime)
       }
     }
-  }, [event, setStartEvent])
+  }, [data, setDetailEvent, setStartEvent])
 
   return [event, isLoading, isStartEvent]
 }

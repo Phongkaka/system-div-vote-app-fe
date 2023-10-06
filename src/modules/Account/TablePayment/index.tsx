@@ -26,7 +26,7 @@ interface TablePaymentProps {
 }
 
 const columnsPurChase = ['ID', '単価', '購入日', 'ステータス']
-const columnsVote = ['ID', '単価', '購入日', 'ステータス']
+const columnsVote = ['ID', '名前', 'スコア', '購入日']
 
 const TablePayment = ({ dataPurchase, dataVote, tabTable }: TablePaymentProps) => {
   const [isOpenModal, setOpenModal] = useState(false)
