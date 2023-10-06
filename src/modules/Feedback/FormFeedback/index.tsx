@@ -77,7 +77,7 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
               htmlFor='phone_number'
               className='mb-4 block text-base font-bold lg:mb-0 lg:w-[30%]'
             >
-              電話番号
+              電話番号<span className='require-input'>必須</span>
             </label>
             <div className='flex-grow'>
               <InputForward

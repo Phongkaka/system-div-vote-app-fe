@@ -43,10 +43,14 @@ const ShoppingCart = ({ toggleCart }: Props) => {
     }
   }
 
-  const handleQuantityChangeInput = (id: number, quantity: number) => {
+  const handleQuantityChangeInput = (id: number, quantity: any) => {
+    const newValue = quantity.replace(/[^0-9]/g, '')
+    if (+newValue >= 999999) {
+      return
+    }
     if (id) {
       const updatedCart = cartProducts.map((product) =>
-        product.id === id ? { ...product, quantity } : product
+        product.id === id ? { ...product, quantity: +newValue } : product
       )
       setCartProducts(updatedCart)
 

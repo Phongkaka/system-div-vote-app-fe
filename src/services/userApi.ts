@@ -6,10 +6,16 @@ const purchaseHistory = async () => {
   return data
 }
 
+const voteHistory = async () => {
+  const data = await http.get('/users/me/point-vote-history')
+
+  return data
+}
+
 const FetchUseMe = async () => {
   const data = await http.get('/users/me')
 
   return data
 }
 
-export { purchaseHistory, FetchUseMe }
+export { purchaseHistory, FetchUseMe, voteHistory }

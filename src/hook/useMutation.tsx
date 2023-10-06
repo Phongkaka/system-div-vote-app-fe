@@ -77,7 +77,7 @@ const useCustomMutation = <T, P>(
         setLoading(false)
         if (!isNotSwal) {
           Swal.fire({
-            title: 'Error!',
+            title: 'エラー!',
             text: errorMessage,
             icon: 'error',
             confirmButtonText: 'Ok'
@@ -105,8 +105,8 @@ const useQueryForgotPassword = (): UseMutationResult<
 > => {
   return useCustomMutation(
     forgotPassword,
-    '電子メールリセットパスワードを正常に送信してください！',
-    'メールの送信に失敗しました'
+    '送信しました。メールをご確認いただき、パスワードを再設定してください',
+    'メールアドレスが確認できませんでした'
   )
 }
 
@@ -119,12 +119,12 @@ const useQueryResetPassword = (): UseMutationResult<
   return useCustomMutation(
     resetPassword,
     'パスワードの成功をリセットします',
-    'パスワードのリセットに失敗しました'
+    'メールアドレスが確認できませんでした'
   )
 }
 
 const useQueryFeedback = (): UseMutationResult<AxiosResponse, string, FeedbackFormData, string> => {
-  return useCustomMutation(feedback, 'フィードバックの成功', 'フィードバックに失敗しました')
+  return useCustomMutation(feedback, '送信しました', 'フィードバックに失敗しました')
 }
 
 const useMutationVote = (): UseMutationResult<AxiosResponse, string, any, string> => {

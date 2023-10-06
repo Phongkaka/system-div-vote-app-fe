@@ -33,28 +33,30 @@ interface Props {
   id?: number
   numberVote?: number
   numRank?: number
+  rankTypeName?: string | undefined
   nameCandidate?: string | undefined
-  nameCandidateDetail?: string | undefined
   candidateImg?: string | undefined
   social_links?: FlowiseCandidate.ISocialLink[]
   refreshCandidate?: () => void
   status?: number
   candidate_photos?: FlowiseCandidate.ICandidatePhotos[]
   minimum_vote?: number
+  isStartEvent?: boolean
 }
 
 const Candidate = ({
   id,
   numberVote,
   numRank,
-  nameCandidate,
+  rankTypeName,
   candidateImg,
-  nameCandidateDetail,
+  nameCandidate,
   social_links,
   refreshCandidate,
   status,
   candidate_photos,
-  minimum_vote
+  minimum_vote,
+  isStartEvent
 }: Props) => {
   const user = useRecoilValue(userInfo)
   const isAuthenticated = !!user?.access_token
@@ -93,7 +95,6 @@ const Candidate = ({
 
   const handleShowSupporters = async () => {
     openModal()
-
     if (loadingSupporters || id === undefined) {
       return
     }
@@ -164,6 +165,7 @@ const Candidate = ({
     const newValue = e.target.value.replace(/[^0-9]/g, '')
     setValue(newValue)
   }
+
   return (
     <>
       <Lightbox
@@ -190,10 +192,10 @@ const Candidate = ({
         </div>
         <div className='right__candidate w-2/3'>
           <p className='name__candidate absolute left-0 top-0 mb-4 rounded-br-lg rounded-tl-lg bg-dark px-2 py-1'>
-            <span className='px-4 py-1 text-white'>{nameCandidate}</span>
+            <span className='px-4 py-1 text-white'>{rankTypeName}</span>
           </p>
           <span className='mb-1 block truncate text-xl font-semibold text-black'>
-            {nameCandidateDetail} <i className='text-sm not-italic'>さん</i>
+            {nameCandidate} <i className='text-sm not-italic'>さん</i>
           </span>
           <div className='rank__candidate mb-4 flex'>
             <span className='mr-4 flex items-center font-bold text-black'>
@@ -207,11 +209,11 @@ const Candidate = ({
           </div>
           <div className='group__btn flex flex-wrap'>
             <button
-              disabled={status === FINISHED_STATUS}
+              disabled={status === FINISHED_STATUS || !isStartEvent}
               onClick={handleClickVote}
               className={clsx(
-                'mb-4 flex h-10 w-[271px] items-center justify-center rounded-[9px] p-1',
-                status === FINISHED_STATUS
+                'mb-4 mr-2 flex h-10 w-[271px] items-center justify-center rounded-[9px] p-1',
+                status === FINISHED_STATUS || !isStartEvent
                   ? 'cursor-not-allowed border-[#999999] bg-[#cccccc] text-[#666666]'
                   : 'button-hover cursor-pointer bg-black text-white'
               )}
@@ -222,7 +224,7 @@ const Candidate = ({
               onClick={handleShowSupporters}
               className='flex h-[40px] w-[172px] cursor-pointer items-center justify-center rounded-[9px] border-dark bg-[#F2F2F4] p-1 text-black'
             >
-              <span className='text-sm'>サポーターランキング</span>
+              <span className='text-sm'>投票者ランキング</span>
             </button>
           </div>
         </div>
@@ -231,7 +233,8 @@ const Candidate = ({
       <Modal isOpen={modalSupporterOpen} onClose={closeModal} classWrapper='w-full lg:w-[1024px]'>
         <div className='flex flex-wrap justify-center'>
           <h3 className='mb-10 text-lg font-bold text-black lg:text-[22px]'>
-            ダミーお名前 <i className='mr-4 text-sm not-italic'>さん</i> サポーターTOP3
+            {nameCandidate}
+            <i className='mr-4 text-sm not-italic'>さん</i> さんに投票者のTOP3
           </h3>
           <ul className='top__supporter mb-10 flex w-full flex-wrap justify-center'>
             {loadingSupporters ? (
@@ -270,7 +273,7 @@ const Candidate = ({
             <ul>
               <li>
                 <p className='text-lg'>
-                  名前: <span className='font-bold'>{nameCandidateDetail}</span>{' '}
+                  名前: <span className='font-bold'>{nameCandidate}</span>{' '}
                   <i className='text-sm not-italic'>さん</i>
                 </p>
               </li>
@@ -278,7 +281,7 @@ const Candidate = ({
                 <p className='text-lg'>現在のポイント: {useMe?.point ? useMe?.point : 0}</p>
               </li>
               <li className='mt-[-3px]'>
-                {minimum_vote && (
+                {minimum_vote !== 0 && (
                   <span className='text-xs italic text-pink'>最低投票数: {minimum_vote}</span>
                 )}
               </li>
@@ -322,7 +325,7 @@ const CandidateLoading = () => {
           <LoadingSkeleton className='h-[122px] w-full' />
         </div>
         <div className='bottom__link flex w-2/3 justify-center'>
-          <LoadingSkeleton className='h-7 w-7' />
+          <LoadingSkeleton className='h-5 w-7' />
         </div>
       </div>
       <div className='right__candidate w-2/3'>
@@ -330,19 +333,19 @@ const CandidateLoading = () => {
           <LoadingSkeleton className='h-[20px] w-[100px]' />
         </div>
         <span className='mb-1 block truncate text-xl font-semibold text-black'>
-          <LoadingSkeleton className='mb-2 h-[20px] w-[100px]' />
+          <LoadingSkeleton className='mb-2 h-[10px] w-[100px]' />
         </span>
         <div className='rank__candidate mb-4 flex'>
           <span className='mr-4 flex items-center font-bold text-black'>
-            <LoadingSkeleton className='h-[20px] w-[40px]' />
+            <LoadingSkeleton className='h-[10px] w-[40px]' />
           </span>
           <span className='flex items-center font-bold text-black'>
-            <LoadingSkeleton className='h-[20px] w-[40px]' />
+            <LoadingSkeleton className='h-[10px] w-[40px]' />
           </span>
         </div>
         <div className='group__btn flex flex-wrap'>
-          <LoadingSkeleton className='mb-4 h-[40px] w-full' />
-          <LoadingSkeleton className='h-[40px] w-[150px]' />
+          <LoadingSkeleton className='mb-4 h-[30px] w-full' />
+          <LoadingSkeleton className='h-[30px] w-[150px]' />
         </div>
       </div>
     </div>

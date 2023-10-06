@@ -4,9 +4,12 @@ import { initRegisterValues, registerValidate } from '~/common/validation/auth/c
 import { yupResolver } from '@hookform/resolvers/yup'
 import InputForward from '~/components/Input'
 import { useQueryRegister } from '~/hook/useMutation'
+import { useState } from 'react'
 
 export default function Register() {
   const navigate = useNavigate()
+  const [isChecked, setIsChecked] = useState(false)
+  const [showCheckboxError, setShowCheckboxError] = useState(false)
 
   const methods = useForm({
     mode: 'all',
@@ -17,9 +20,12 @@ export default function Register() {
 
   const { errors, isSubmitting } = methods.formState
   const { register, handleSubmit } = methods
-
   const onSubmit = async (userFormRegister: any): Promise<void> => {
-    registerAction(userFormRegister)
+    if (isChecked) {
+      registerAction(userFormRegister)
+    } else {
+      setShowCheckboxError(true)
+    }
   }
 
   if (isSuccess) {
@@ -27,7 +33,7 @@ export default function Register() {
   }
 
   return (
-    <div className='relative flex min-h-screen flex-col justify-center overflow-hidden'>
+    <div className='relative flex flex-col justify-center overflow-hidden p-2'>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -49,7 +55,7 @@ export default function Register() {
           </div>
           <div className='mb-4'>
             <label htmlFor='phone' className='block text-sm font-semibold text-gray-800'>
-              電話
+              電話番号
             </label>
             <InputForward
               className='mt-2 block h-[40px] w-full rounded-[10px] border-2 border-solid border-black px-5'
@@ -85,7 +91,7 @@ export default function Register() {
               helperText={errors?.password?.message}
               type='password'
             />
-            <span className='text-xs text-dark'>※半角○文字以上</span>
+            <span className='text-xs text-dark'>※半角８文字以上を入力してください。</span>
           </div>
           <div className='mb-4'>
             <label
@@ -103,10 +109,25 @@ export default function Register() {
               type='password'
             />
           </div>
+          <div className='mb-4 flex items-center justify-center'>
+            <input
+              onChange={() => setIsChecked(!isChecked)}
+              id='check-require'
+              type='checkbox'
+              className='mr-3 h-[15px] w-[15px]'
+            />
+            <span className='mr-1 cursor-pointer text-blue-600 underline'>利用規約</span>
+            <label htmlFor='check-require' className='block text-sm font-semibold text-gray-800'>
+              に同意します
+            </label>
+          </div>
+          {showCheckboxError && (
+            <p className='text-center text-sm text-[#d9534f]'>利用規約の同意は必須です。</p>
+          )}
           <div className='my-7'>
             <button
-              type='submit'
               disabled={isSubmitting}
+              type='submit'
               className='m-auto block h-[48px] w-[300px] rounded-lg bg-black font-bold text-white'
             >
               登録する

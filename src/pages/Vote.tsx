@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Container from '~/layouts/components/Container'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { eventDetail } from '~/recoil/atom'
 import VotingTimeEvent from '~/components/VotingTimeEvent'
 import { useNavigate, useParams } from 'react-router-dom'
 import useEventDetails from '~/hook/useEventDetails'
@@ -37,16 +36,14 @@ function Vote() {
   const { data: listBonus } = useQueryData('pointTypes', () => fetchPointTypes())
 
   const [event, isLoadingEvent] = useEventDetails({ slug })
-  const setEventDetail = useSetRecoilState(eventDetail)
-
-  useEffect(() => {
-    if (!event) return
-    setEventDetail(event)
-  }, [event, setEventDetail])
 
   useEffect(() => {
     const newTotalPrice = calculateTotalPrice(cartProducts)
     setTotalPrice(newTotalPrice)
+    //close modal cart if list cart empty
+    if (cartProducts.length === 0) {
+      setIsCartVisible(false)
+    }
   }, [cartProducts, setTotalPrice])
 
   const toggleCart = () => {
@@ -73,11 +70,15 @@ function Vote() {
   useEffect(() => {
     if (session_id) {
       const fetchPaymentPaid = async () => {
-        const data = await paymentPaid(session_id)
-        if (data) {
-          setIsShowDialogSuccess(true)
-          setCartProducts([])
-          setTotalPrice(0)
+        try {
+          const data = await paymentPaid(session_id)
+          if (data) {
+            setIsShowDialogSuccess(true)
+            setCartProducts([])
+            setTotalPrice(0)
+          }
+        } catch (error) {
+          console.log('error :>> ', error)
         }
       }
       fetchPaymentPaid()

@@ -24,7 +24,7 @@ const Footer = () => {
             </Link>
           </li>
           <li className='mr-5 text-gray-600'>
-            <Link to='#' className='text-white'>
+            <Link to='/feedback' className='text-white'>
               お問い合わせ
             </Link>
           </li>

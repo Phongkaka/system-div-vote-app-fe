@@ -6,6 +6,7 @@ import { eventDetail } from '~/recoil/atom'
 import { useRecoilValue } from 'recoil'
 import { FlowiseCandidate } from '~/models/candidates'
 import { TEXT } from '~/constants/path'
+import LoadingItems from '~/components/LoadingItems/LoadingItems'
 
 const BlockRank = () => {
   const [candidates, setCandidates] = useState<FlowiseCandidate.ICandidateItem[]>([])
@@ -48,6 +49,20 @@ const BlockRank = () => {
     }
   }
 
+  const [isStartEvent, setStartEvent] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (event && event.start_time) {
+      const currentTime = new Date().getTime()
+      const toggleCountDown = new Date(event.start_time).getTime() > currentTime
+      if (toggleCountDown) {
+        setStartEvent(false)
+      } else {
+        setStartEvent(true)
+      }
+    }
+  }, [event, setStartEvent])
+
   return (
     <div className='mt-10 [&>div]:pb-9'>
       <PillTabs
@@ -61,16 +76,20 @@ const BlockRank = () => {
       <ul className='m-auto mt-5 flex flex-wrap justify-between'>
         {isLoading ? (
           <>
-            {[...Array(4)].map((_, index: number) => (
-              <li className='relative w-full lg:w-[48%]' key={index}>
-                <Candidate.CandidateLoading />
-              </li>
-            ))}
+            <LoadingItems
+              count={4}
+              loadingItemComponent={
+                <li className='relative w-full lg:w-[48%]'>
+                  <Candidate.CandidateLoading />
+                </li>
+              }
+            />
           </>
         ) : (
           candidates?.map((candidate: FlowiseCandidate.ICandidateItem) => (
             <li className='relative w-full lg:w-[48%]' key={candidate.id}>
               <Candidate
+                isStartEvent={isStartEvent}
                 minimum_vote={event?.minimum_vote}
                 candidate_photos={candidate.candidate_photos}
                 status={event?.status}
@@ -80,14 +99,14 @@ const BlockRank = () => {
                 candidateImg={candidate.avatar}
                 numRank={candidate.top}
                 numberVote={candidate.point}
-                nameCandidate={candidate.rank_type?.name}
-                nameCandidateDetail={candidate.name}
+                rankTypeName={candidate.rank_type?.name}
+                nameCandidate={candidate.name}
               />
             </li>
           ))
         )}
       </ul>
-      {candidates && candidates.length === 0 && <div>候補者に噴水しない...</div>}
+      {candidates && candidates.length === 0 && <div>候補者を追加しています。</div>}
     </div>
   )
 }

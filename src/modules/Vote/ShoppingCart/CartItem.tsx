@@ -38,7 +38,7 @@ const CartItem = ({ product, quantityChange, removeCart, handleQuantityChangeInp
           </button>
           <input
             className='w-16 appearance-none py-[5px] text-center text-lg outline-none'
-            type='number'
+            type='text'
             value={product.quantity}
             onChange={(e) => handleQuantityChangeInput(product.id, e.target.value as any)}
           />

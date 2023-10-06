@@ -49,7 +49,7 @@ export default function Header() {
       <nav className='my-10 w-full rounded-lg bg-green shadow'>
         <div className='lg:max-w-8xl mx-auto justify-between px-4 md:flex md:items-center md:px-8'>
           <div>
-            <div className='flex items-center justify-between py-3 md:block md:py-3'>
+            <div className='flex h-[50px] items-center justify-between md:block md:h-auto md:py-3'>
               <Link to='/' className='block text-2xl font-bold text-black'>
                 VOTE APP
               </Link>
@@ -89,7 +89,7 @@ export default function Header() {
                   <Link to='#'>サービス期間</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to={ROUTER.FEEDBACK_PAGE}>接触</Link>
+                  <Link to={ROUTER.FEEDBACK_PAGE}>問い合わせ</Link>
                 </li>
 
                 {!isLoggedIn ? (

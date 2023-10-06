@@ -15,3 +15,17 @@ export interface PurchaseDetailsType {
   }
   quantity?: number
 }
+
+export interface VoteHistoryType {
+  id: number
+  total?: number
+  data?: VoteDetailsType[]
+}
+
+export interface VoteDetailsType {
+  id: number
+  candidate: { id: number; name: string }
+  candidate_id?: number
+  created_at?: Date
+  point_vote?: number
+}

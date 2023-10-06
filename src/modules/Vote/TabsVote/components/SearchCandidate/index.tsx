@@ -3,11 +3,18 @@ import { useQuery, useQueryClient } from 'react-query'
 import { fetchCandidateSearch } from '~/services/candidatesAPI'
 import { ReactComponent as SearchIcon } from '~/common/assets/images/search.svg'
 import Candidate from '../../../../../components/Candidate'
+import LoadingItems from '~/components/LoadingItems/LoadingItems'
+import useEventDetails from '~/hook/useEventDetails'
+import { useParams } from 'react-router-dom'
 
 const SearchCandidate = () => {
   const [inputParam, setInputParam] = useState('')
   const queryClient = useQueryClient()
   const queryKey = ['candidates', inputParam]
+
+  const { slug } = useParams()
+
+  const { isStartEvent } = useEventDetails({ slug })
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -64,25 +71,29 @@ const SearchCandidate = () => {
       <ul className='grid list-none grid-cols-1 gap-x-10 lg:grid-cols-2'>
         {isLoading ? (
           <>
-            {[...Array(4)].map((_, index: number) => (
-              <li key={index}>
-                <Candidate.CandidateLoading />
-              </li>
-            ))}
+            <LoadingItems
+              count={4}
+              loadingItemComponent={
+                <li>
+                  <Candidate.CandidateLoading />
+                </li>
+              }
+            />
           </>
         ) : (
           <>
             {data?.map((candidate) => (
               <li key={candidate.id}>
                 <Candidate
+                  isStartEvent={isStartEvent}
                   refreshCandidate={refetch}
                   id={candidate.id}
                   social_links={candidate.social_links}
                   candidateImg={candidate.avatar}
                   numRank={candidate.top}
                   numberVote={candidate.point}
-                  nameCandidate={candidate.rank_type?.name}
-                  nameCandidateDetail={candidate.name}
+                  rankTypeName={candidate.rank_type?.name}
+                  nameCandidate={candidate.name}
                 />
               </li>
             ))}

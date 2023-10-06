@@ -11,7 +11,7 @@ const ItemEvent = ({ eventImg, linkPage }: Props) => {
       <Link to={linkPage}>
         <img
           src={eventImg}
-          className='w-full rounded-lg border align-top lg:max-h-[230px]'
+          className='w-full rounded-lg border object-cover align-top lg:max-h-[230px]'
           alt='event'
         />
       </Link>

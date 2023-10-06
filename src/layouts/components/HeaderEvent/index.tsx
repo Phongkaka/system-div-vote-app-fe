@@ -75,7 +75,7 @@ export default function HeaderEvent({ logoImg }: Props) {
                   <Link to='/feedback'>お問い合わせ</Link>
                 </li>
                 <li className='text-black-600 font-bold'>
-                  <Link to='#'>
+                  <Link to='/'>
                     <img src={twitterLogo} alt='tw logo' />
                   </Link>
                 </li>

@@ -35,7 +35,7 @@ export default function Login() {
   }
 
   return (
-    <div className='relative flex min-h-screen flex-col justify-center overflow-hidden'>
+    <div className='relative flex flex-col justify-center overflow-hidden p-2'>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

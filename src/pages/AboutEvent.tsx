@@ -1,28 +1,14 @@
 import VotingTimeEvent from '~/components/VotingTimeEvent'
 import Container from '~/layouts/components/Container'
 import { useParams } from 'react-router'
-import { useQuery } from 'react-query'
-import { fetchEventDetail } from '~/services/eventApi'
-import { EventContents, EventItem } from '~/models/Events'
-import { useSetRecoilState } from 'recoil'
-import { eventDetail } from '~/recoil/atom'
-import { useEffect } from 'react'
+import { EventContents } from '~/models/Events'
 import useEventDetails from '~/hook/useEventDetails'
 import Guide from '~/modules/AboutEvent/Guide'
 import AboutEventSkeleton from '~/modules/AboutEvent/AboutEventSkeleton'
 
 function AboutEvent() {
   const { slug } = useParams()
-  const { data, isLoading } = useQuery<EventItem>(['eventDetail', slug], () =>
-    fetchEventDetail(slug || '')
-  )
-  const setDetailEvent = useSetRecoilState(eventDetail)
-  const [event] = useEventDetails({ slug })
-
-  useEffect(() => {
-    if (!data) return
-    setDetailEvent(data)
-  }, [data, setDetailEvent])
+  const [event, isLoading] = useEventDetails({ slug })
 
   return (
     <>
@@ -35,6 +21,7 @@ function AboutEvent() {
               banner={event?.banner}
               start_time={event.start_time}
               end_time={event.end_time}
+              name={event.name}
             />
             <div className='mb-10 grid gap-5 lg:grid-cols-2 lg:gap-x-10 lg:gap-y-16 lg:border-b-[2px] lg:border-none lg:pb-10'>
               {event?.event_contents?.map((item: EventContents) => (

@@ -8,8 +8,8 @@ interface Props {
 }
 function Item({ img, linkPage }: Props) {
   return (
-    <div className='item-slider mb-10 w-full rounded-lg'>
-      <Link to={linkPage} target='_blank' rel='noreferrer'>
+    <div className='item-slider w-full rounded-lg'>
+      <Link to={linkPage}>
         <img src={img} alt='customer' className='rounded-lg' />
       </Link>
     </div>
@@ -18,8 +18,8 @@ function Item({ img, linkPage }: Props) {
 
 function LoadingItem({ className }: { className: string }) {
   return (
-    <div className={clsx('item-slider mb-10 w-full rounded-lg', className)}>
-      <Link to={''} target='_blank' rel='noreferrer'>
+    <div className={clsx('item-slider w-full rounded-lg', className)}>
+      <Link to={''}>
         <LoadingSkeleton className='loading-img h-[200px] w-full rounded-lg lg:h-[300px]' />
       </Link>
     </div>

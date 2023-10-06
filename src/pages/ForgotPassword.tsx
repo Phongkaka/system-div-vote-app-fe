@@ -4,6 +4,7 @@ import { Flowise } from '~/models/auth'
 import { initForgotValues, forgotValidate } from '~/common/validation/auth/config'
 import InputForward from '~/components/Input'
 import { useQueryForgotPassword } from '~/hook/useMutation'
+import { useEffect } from 'react'
 
 export default function ForgotPassword() {
   const methods = useForm({
@@ -12,16 +13,33 @@ export default function ForgotPassword() {
     resolver: yupResolver(forgotValidate)
   })
 
-  const { mutate: forgotPasswordAction } = useQueryForgotPassword()
+  const { mutate: forgotPasswordAction, error } = useQueryForgotPassword()
 
   const { errors, isSubmitting } = methods.formState
-  const { register, handleSubmit } = methods
+  const { register, handleSubmit, setError } = methods
 
   const onSubmit = async (userFormForGotPassWord: Flowise.IForGotPassWordData): Promise<void> => {
     forgotPasswordAction(userFormForGotPassWord)
   }
+
+  useEffect(() => {
+    if (error) {
+      const customError = typeof error === 'string' ? { message: error } : error
+      let messageNotFound = ''
+
+      if (customError.message === 'User not found') {
+        messageNotFound = 'メールアドレスが確認できませんでした'
+        if (messageNotFound)
+          setError('email', {
+            type: 'manual',
+            message: messageNotFound
+          })
+      }
+    }
+  }, [error, setError])
+
   return (
-    <div className='relative flex min-h-screen flex-col justify-center overflow-hidden'>
+    <div className='relative flex h-[50vh] flex-col justify-center overflow-hidden p-2'>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -47,7 +65,7 @@ export default function ForgotPassword() {
               disabled={isSubmitting}
               className='m-auto block h-[48px] w-[300px] rounded-lg bg-black font-bold text-white'
             >
-              あなたのパスワードをリセット
+              再設定用のメールを送信する。
             </button>
           </div>
         </form>

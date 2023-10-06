@@ -1,16 +1,16 @@
 export const messages = {
   required: {
-    email: '電子メールが必要です',
+    email: 'メールアドレスが必要です',
     password: 'パスワードが必要',
     name: '名前が必要です',
     phone: '電話が必要です',
-    confirmPassword: '必要なパスワードを確認してください'
+    confirmPassword: 'パスワードが一致していません。'
   },
   format: {
-    email: 'フォーマットメールは正しくありません',
-    phone: 'フォーマット電話番号は正しくありません',
-    passwordMatch: 'パスワードが一致しないことを確認してください',
-    minLength: '最低8文字',
+    email: '正しいメールアドレスを入力してください。',
+    phone: '正しい電話番号を入力してください。',
+    passwordMatch: 'パスワードが一致していません。',
+    minLength: '半角８文字以上が必要です。',
     maxLength: '最大12文字'
   }
 }

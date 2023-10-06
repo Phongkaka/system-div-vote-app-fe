@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import i_Vote from '~/common/assets/images/i_success_bonus.png'
+import i_Vote from '~/common/assets/images/i_success_bonus2.png'
 import ic_thanks from '~/common/assets/images/ic_tks.png'
 import i_error from '~/common/assets/images/i_error.png'
 import Modal from '../Modal'

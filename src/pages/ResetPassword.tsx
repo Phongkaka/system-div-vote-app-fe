@@ -38,13 +38,13 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className='relative flex min-h-screen flex-col justify-center overflow-hidden'>
+    <div className='relative flex flex-col justify-center overflow-hidden p-2'>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className='m-auto w-full rounded-xl bg-white p-10 shadow-md lg:max-w-[480px]'
         >
-          <h1 className='text-center text-lg font-bold text-black'>Reset Password</h1>
+          <h1 className='text-center text-lg font-bold text-black'>パスワード再設定</h1>
           <div className='mb-4'>
             <label htmlFor='email' className='block text-sm text-black'>
               メールアドレス
@@ -93,7 +93,7 @@ export default function ResetPassword() {
               disabled={isSubmitting}
               className='m-auto block h-[48px] w-[300px] rounded-lg bg-black font-bold text-white'
             >
-              あなたのパスワードをリセット
+              パスワードを再設定する
             </button>
           </div>
         </form>
