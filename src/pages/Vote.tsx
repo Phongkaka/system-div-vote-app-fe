@@ -17,6 +17,7 @@ import MenuBonus from '~/modules/Vote/MenuBonus'
 import ShoppingCart from '~/modules/Vote/ShoppingCart'
 import { paymentPaid } from '~/services/payment'
 import { DialogSuccess } from '~/components/Dialog'
+import { Helmet } from 'react-helmet'
 
 const calculateTotalPrice = (products: Product[]): number => {
   return products.reduce((total, product) => total + product.price * product.quantity, 0)
@@ -92,6 +93,9 @@ function Vote() {
 
   return (
     <Container>
+      <Helmet>
+        <title>{event?.name}</title>
+      </Helmet>
       <div>
         <div className='vote--page'>
           <div className='time__vote'>

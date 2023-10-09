@@ -9,6 +9,7 @@ import { useQueryLogin } from '~/hook/useMutation'
 import { isLoggedInState } from '~/recoil/atom/auth'
 import { useRecoilValue } from 'recoil'
 import { toast } from '~/recoil/atom'
+import { Helmet } from 'react-helmet'
 
 export default function Login() {
   const stateToast = useRecoilValue(toast)
@@ -36,6 +37,9 @@ export default function Login() {
 
   return (
     <div className='relative flex flex-col justify-center overflow-hidden p-2'>
+      <Helmet>
+        <title>ログイン</title>
+      </Helmet>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

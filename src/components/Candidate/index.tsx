@@ -234,7 +234,7 @@ const Candidate = ({
         <div className='flex flex-wrap justify-center'>
           <h3 className='mb-10 text-lg font-bold text-black lg:text-[22px]'>
             {nameCandidate}
-            <i className='mr-4 text-sm not-italic'>さん</i> に投票者のTOP3
+            <span className='ml-4'>さんに投票者のTOP3</span>
           </h3>
           <ul className='top__supporter mb-10 flex w-full flex-wrap justify-center'>
             {loadingSupporters ? (

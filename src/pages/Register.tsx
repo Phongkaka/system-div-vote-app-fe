@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import InputForward from '~/components/Input'
 import { useQueryRegister } from '~/hook/useMutation'
 import { useState } from 'react'
+import { Helmet } from 'react-helmet'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -34,6 +35,9 @@ export default function Register() {
 
   return (
     <div className='relative flex flex-col justify-center overflow-hidden p-2'>
+      <Helmet>
+        <title>登録する</title>
+      </Helmet>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

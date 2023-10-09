@@ -7,6 +7,7 @@ import Title from '~/modules/VoteResult/Title'
 import useEventDetails from '~/hook/useEventDetails'
 import { useParams } from 'react-router-dom'
 import AboutEventSkeleton from '~/modules/AboutEvent/AboutEventSkeleton'
+import { Helmet } from 'react-helmet'
 
 function AboutEvent() {
   const { slug } = useParams()
@@ -15,6 +16,9 @@ function AboutEvent() {
 
   return (
     <>
+      <Helmet>
+        <title>{event?.name}</title>
+      </Helmet>
       {isLoading ? (
         <AboutEventSkeleton />
       ) : (

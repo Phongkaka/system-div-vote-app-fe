@@ -5,6 +5,7 @@ import { EventContents } from '~/models/Events'
 import useEventDetails from '~/hook/useEventDetails'
 import Guide from '~/modules/AboutEvent/Guide'
 import AboutEventSkeleton from '~/modules/AboutEvent/AboutEventSkeleton'
+import { Helmet } from 'react-helmet'
 
 function AboutEvent() {
   const { slug } = useParams()
@@ -12,6 +13,9 @@ function AboutEvent() {
 
   return (
     <>
+      <Helmet>
+        <title>{event?.name}</title>
+      </Helmet>
       {isLoading ? (
         <AboutEventSkeleton />
       ) : (

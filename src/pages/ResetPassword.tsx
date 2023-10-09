@@ -6,6 +6,7 @@ import InputForward from '~/components/Input'
 import { useQueryResetPassword } from '~/hook/useMutation'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 
 export default function ResetPassword() {
   const location = useLocation()
@@ -39,6 +40,9 @@ export default function ResetPassword() {
 
   return (
     <div className='relative flex flex-col justify-center overflow-hidden p-2'>
+      <Helmet>
+        <title>パスワードを再設定する</title>
+      </Helmet>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

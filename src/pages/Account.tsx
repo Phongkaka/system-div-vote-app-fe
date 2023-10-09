@@ -12,6 +12,7 @@ import PillTabs from '~/components/PillTabs'
 import { useMutation } from 'react-query'
 import { logout } from '~/services/api'
 import { cartState, totalState } from '~/recoil/atom/cart'
+import { Helmet } from 'react-helmet'
 
 const tabTables = [
   { id: 0, name: '購入履歴' },
@@ -57,6 +58,9 @@ const Account = () => {
 
   return (
     <Container>
+      <Helmet>
+        <title>アカウント</title>
+      </Helmet>
       <div className='mb-[50px]'>
         <h1 className='mb-2 text-2xl font-bold'>アカウント</h1>
         <img className='mr-[10px] inline-block w-[14px]' src={AccountIcon} alt='account' />

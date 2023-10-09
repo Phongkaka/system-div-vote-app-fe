@@ -5,6 +5,7 @@ import { initForgotValues, forgotValidate } from '~/common/validation/auth/confi
 import InputForward from '~/components/Input'
 import { useQueryForgotPassword } from '~/hook/useMutation'
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 export default function ForgotPassword() {
   const methods = useForm({
@@ -40,6 +41,9 @@ export default function ForgotPassword() {
 
   return (
     <div className='relative flex h-[50vh] flex-col justify-center overflow-hidden p-2'>
+      <Helmet>
+        <title>パスワードをお忘れですか</title>
+      </Helmet>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}

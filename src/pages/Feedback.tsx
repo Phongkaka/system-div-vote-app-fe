@@ -4,12 +4,16 @@ import { fetchFAQ } from '~/services/feedbackApi'
 import { AccordionItem } from '~/models/feedbackFAQ'
 import DefaultAccordion from '~/modules/Feedback/Accordion'
 import FormFeedback from '~/modules/Feedback/FormFeedback'
+import { Helmet } from 'react-helmet'
 
 const Feedback = () => {
   const { data: faqData } = useQueryData('FAQ', fetchFAQ)
 
   return (
     <Container>
+      <Helmet>
+        <title>お問い合わせ</title>
+      </Helmet>
       <div className='mb-10'>
         <h1 className='mb-5 text-2xl font-bold'>よくあるご質問・お問い合わせ</h1>
         <p className='text-base'>

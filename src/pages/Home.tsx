@@ -4,6 +4,7 @@ import Events from '~/modules/Home/EventEnd/Events'
 import { TEXT } from '~/constants/path'
 import Slide from '../components/Slide/Slide'
 import { COMING_SOON_STATUS, FINISHED_STATUS, PROGRESS_STATUS } from '~/constants/status'
+import { Helmet } from 'react-helmet'
 
 function Home() {
   const { data: comingSoon, isLoading: isLoadingComingSoon } = useQueryData('comingSoon', () =>
@@ -20,6 +21,9 @@ function Home() {
 
   return (
     <div className='home--page min-h-[421px]'>
+      <Helmet>
+        <title>家</title>
+      </Helmet>
       <Slide isLoading={isAnyLoading} data={progress} />
       <div className='mb-[60px] mt-10'>
         <Events
