@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { ROUTER } from '~/constants/path'
@@ -20,7 +20,7 @@ export default function Header() {
   const setUserInfo = useSetRecoilState(userInfo)
   const setCartState = useSetRecoilState(cartState)
   const setTotalState = useSetRecoilState(totalState)
-
+  const queryClient = useQueryClient()
   const userInfoData = useRecoilValue(userInfo)
 
   const handleLogout = async () => {
@@ -31,6 +31,7 @@ export default function Header() {
       setCartState([])
       setTotalState(0)
       navigate('/login')
+      queryClient.removeQueries()
     } catch (error) {
       console.error('Logout failed:', error)
     }
@@ -42,6 +43,7 @@ export default function Header() {
 
   useEffect(() => {
     setNavbar(false)
+    setIsHovered(false)
   }, [location.pathname])
 
   return (
@@ -85,19 +87,19 @@ export default function Header() {
               }`}
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
-                <li className='text-black-600 font-bold'>
+                {/* <li className='text-black-600 transform font-bold transition-all duration-300 ease-in-out hover:border-pink md:hover:scale-105 md:hover:border-b'>
                   <Link to='#'>サービス期間</Link>
-                </li>
-                <li className='text-black-600 font-bold'>
+                </li> */}
+                <li className='text-black-600 transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
                   <Link to={ROUTER.FEEDBACK_PAGE}>問い合わせ</Link>
                 </li>
 
                 {!isLoggedIn ? (
                   <>
-                    <li className='text-black-600 block font-bold'>
+                    <li className='text-black-600 block transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
                       <Link to={ROUTER.REGISTER_PAGE}>サインアップ</Link>
                     </li>
-                    <li className='text-black-600 block font-bold'>
+                    <li className='text-black-600 block transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
                       <Link to={ROUTER.LOGIN_PAGE}>ログイン</Link>
                     </li>
                   </>

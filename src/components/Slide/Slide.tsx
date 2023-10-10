@@ -1,5 +1,7 @@
 import Slider from 'react-slick'
 import Item from '~/components/Dialog/item'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import './Slide.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -10,6 +12,9 @@ interface Props {
 }
 
 const Slide = ({ data, isLoading }: Props) => {
+  const navigate = useNavigate()
+  const [isDragging, setIsDragging] = useState(false)
+
   const settings = {
     className: 'slider variable-width',
     dots: true,
@@ -32,8 +37,21 @@ const Slide = ({ data, isLoading }: Props) => {
           centerMode: false
         }
       }
-    ]
+    ],
+    afterChange: () => {
+      setIsDragging(false)
+    },
+    beforeChange: () => {
+      setIsDragging(true)
+    }
   }
+
+  const handleItemClick = (item: any) => {
+    if (!isDragging) {
+      navigate(`/events/${item.slug}`)
+    }
+  }
+
   return (
     <>
       {isLoading ? (
@@ -45,8 +63,12 @@ const Slide = ({ data, isLoading }: Props) => {
       ) : (
         <Slider {...settings}>
           {data?.map((item: any) => (
-            <div className='carousel-item-wrapper' key={item.id}>
-              <Item linkPage={`/events/${item.slug}`} img={item.banner} />
+            <div
+              className='carousel-item-wrapper cursor-pointer'
+              key={item.id}
+              onClick={() => handleItemClick(item)}
+            >
+              <Item img={item.banner} />
             </div>
           ))}
         </Slider>

@@ -64,14 +64,14 @@ export default function HeaderEvent({ logoImg }: Props) {
             >
               <ul className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
                 {!patternURL.test(location.pathname) && (
-                  <li className='text-black-600 font-bold'>
-                    <Link to={`/events/${event?.slug}`}>イベントについて </Link>
+                  <li className='text-black-600 transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
+                    <Link to={`/events/${event?.slug}`}>イベントについて</Link>
                   </li>
                 )}
-                <li className='text-black-600 font-bold'>
+                <li className='text-black-600 transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
                   <Link to={`/events/${event?.slug}/vote`}>投票ページ</Link>
                 </li>
-                <li className='text-black-600 font-bold'>
+                <li className='text-black-600 transform font-bold transition-all duration-300 ease-in-out hover:border-pink hover:text-pink md:hover:scale-105 md:hover:border-b'>
                   <Link to='/feedback'>お問い合わせ</Link>
                 </li>
                 <li className='text-black-600 font-bold'>

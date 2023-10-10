@@ -32,6 +32,16 @@ export default function Register() {
   if (isSuccess) {
     navigate('/login')
   }
+  const [valuePhone, setValuePhone] = useState('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value.replace(/[^0-9]/g, '')
+    if (newValue.length > 11) {
+      newValue = newValue.slice(0, 11)
+    }
+
+    setValuePhone(newValue)
+  }
 
   return (
     <div className='relative flex flex-col justify-center overflow-hidden p-2'>
@@ -68,6 +78,8 @@ export default function Register() {
               error={!!errors?.phone}
               helperText={errors?.phone?.message}
               type='text'
+              onChange={(e) => handleChange(e)}
+              value={valuePhone}
             />
           </div>
           <div className='mb-4'>

@@ -8,7 +8,11 @@ export const feedbackValidate: any = yup
     email: yup.string().email(feedback.format.email).required(feedback.required.email),
     title: yup.string().required(feedback.required.title),
     name: yup.string().required(feedback.required.name),
-    phone_number: yup.string().matches(phoneRegExp, feedback.format.phone_number)
+    phone_number: yup
+      .string()
+      .required(feedback.required.phone)
+      .matches(phoneRegExp, feedback.format.phone_number)
+      .min(10, feedback.format.phone_number)
   })
   .required()
 

@@ -44,7 +44,11 @@ export const registerValidate: any = yup
       .required(messages.required.confirmPassword)
       .oneOf([yup.ref('password')], messages.format.passwordMatch),
     name: yup.string().required(messages.required.name),
-    phone: yup.string().matches(phoneRegExp, messages.format.phone)
+    phone: yup
+      .string()
+      .required(messages.required.phone)
+      .matches(phoneRegExp, messages.format.phone_number)
+      .min(10, messages.format.phone_number)
   })
   .required()
 

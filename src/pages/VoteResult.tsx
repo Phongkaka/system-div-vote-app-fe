@@ -34,9 +34,10 @@ function AboutEvent() {
             </div>
             <div className='border-b border-[#ccc] pb-8'>
               <Title title='投票結果発表' />
-              <p className='mx-auto my-auto w-11/12 leading-1.8 xl:w-[1024px]'>
-                {event?.result_notification_desc}
-              </p>
+              <p
+                className='mx-auto my-auto w-11/12 leading-1.8 xl:w-[1024px]'
+                dangerouslySetInnerHTML={{ __html: event?.result_notification_desc || '' }}
+              ></p>
             </div>
             <div className='border-b border-[#ccc] pb-8 pt-12'>
               {event?.rank_types?.map((itemRankType: any, index: number) => (

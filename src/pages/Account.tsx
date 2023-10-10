@@ -9,7 +9,7 @@ import Profile from '~/modules/Account/Profile'
 import TablePayment from '~/modules/Account/TablePayment'
 import { useState } from 'react'
 import PillTabs from '~/components/PillTabs'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { logout } from '~/services/api'
 import { cartState, totalState } from '~/recoil/atom/cart'
 import { Helmet } from 'react-helmet'
@@ -20,6 +20,7 @@ const tabTables = [
 ]
 
 const Account = () => {
+  const queryClient = useQueryClient()
   const setIsLoggedIn = useSetRecoilState(isLoggedInState)
   const navigate = useNavigate()
   const logoutMutation = useMutation(logout)
@@ -51,6 +52,7 @@ const Account = () => {
       setCartState([])
       setTotalState(0)
       navigate('/login')
+      queryClient.removeQueries()
     } catch (error) {
       console.error('Logout failed:', error)
     }

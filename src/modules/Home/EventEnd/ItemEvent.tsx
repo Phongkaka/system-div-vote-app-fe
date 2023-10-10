@@ -7,7 +7,7 @@ interface Props {
 }
 const ItemEvent = ({ eventImg, linkPage }: Props) => {
   return (
-    <div className='h-fit rounded-lg'>
+    <div className='h-fit rounded-lg hover:opacity-80'>
       <Link to={linkPage}>
         <img
           src={eventImg}

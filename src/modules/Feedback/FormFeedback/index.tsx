@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { feedbackValidate, initFeedbackValues } from '~/common/validation/feedback/config'
 import InputForward from '~/components/Input'
@@ -24,6 +25,17 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
 
   const onSubmit = async (data: FeedbackFormData): Promise<void> => {
     feedbackAction(data)
+  }
+
+  const [valuePhone, setValuePhone] = useState('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let newValue = e.target.value.replace(/[^0-9]/g, '')
+    if (newValue.length > 11) {
+      newValue = newValue.slice(0, 11)
+    }
+
+    setValuePhone(newValue)
   }
 
   return (
@@ -85,6 +97,8 @@ const FormFeedback = ({ className }: FormFeedbackProps) => {
                 error={!!errors?.phone_number}
                 helperText={errors?.phone_number?.message}
                 className='input-style-feedback border-none'
+                value={valuePhone}
+                onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
