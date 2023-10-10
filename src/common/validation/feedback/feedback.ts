@@ -7,6 +7,6 @@ export const feedback = {
   },
   format: {
     phone_number: '電話番号の形式が正しくありません',
-    email: 'メールの形式が正しくありません',
+    email: 'メールの形式が正しくありません'
   }
 }

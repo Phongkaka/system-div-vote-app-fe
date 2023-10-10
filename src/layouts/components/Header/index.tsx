@@ -10,11 +10,13 @@ import menuHam from '~/common/assets/images/ic-menu.png'
 import { ReactComponent as AvatarNoneIcon } from '~/common/assets/images/avatar_none.svg'
 import { cartState, totalState } from '~/recoil/atom/cart'
 import { ReactComponent as LogoutIcon } from '~/common/assets/images/logout_icon.svg'
+import { loading } from '~/recoil/atom'
 
 export default function Header() {
   const [isHovered, setIsHovered] = useState(false)
   const [navbar, setNavbar] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
+  const location = useLocation()
   const navigate = useNavigate()
   const logoutMutation = useMutation(logout)
   const setUserInfo = useSetRecoilState(userInfo)
@@ -22,24 +24,31 @@ export default function Header() {
   const setTotalState = useSetRecoilState(totalState)
   const queryClient = useQueryClient()
   const userInfoData = useRecoilValue(userInfo)
+  const setLoading = useSetRecoilState(loading)
+  const isHome = [ROUTER.HOME_PAGE].includes(location.pathname)
 
-  const handleLogout = async () => {
-    try {
-      await logoutMutation.mutateAsync()
-      setIsLoggedIn(false)
-      setUserInfo({})
-      setCartState([])
-      setTotalState(0)
-      navigate('/login')
-      queryClient.removeQueries()
-    } catch (error) {
-      console.error('Logout failed:', error)
+  const resetDataWhenLogout = () => {
+    setLoading(false)
+    setIsLoggedIn(false)
+    setUserInfo({})
+    setCartState([])
+    setTotalState(0)
+    navigate('/login')
+    if (!isHome) {
+      queryClient.clear()
     }
   }
 
-  const location = useLocation()
-
-  const isHome = [ROUTER.HOME_PAGE].includes(location.pathname)
+  const handleLogout = async () => {
+    setLoading(true)
+    try {
+      await logoutMutation.mutateAsync()
+      resetDataWhenLogout()
+    } catch (error) {
+      resetDataWhenLogout()
+      console.error('Logout failed:', error)
+    }
+  }
 
   useEffect(() => {
     setNavbar(false)
